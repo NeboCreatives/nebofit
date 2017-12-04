@@ -20,7 +20,7 @@ a {
 }
 
 .Button_Login {
-    background-color: rgb(48, 30, 136);
+    border: 1px solid white;
     color: #ffffff;
     width: 120px;
     height: 50px;
