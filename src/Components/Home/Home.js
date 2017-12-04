@@ -10,7 +10,7 @@ class Home extends Component {
 
   render() {
     return (
-        <div className="App">
+        <div className="Home">
         <a href={ 'http://localhost:8080/authorize' }>
           <button>Login</button>
         </a>
