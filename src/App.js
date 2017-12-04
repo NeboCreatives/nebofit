@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 
-class App extends Component {
+//Component Imports
+import Home from './Components/Home/Home'
 
-  getData(){
-    axios.get('/profile.json')
-      .then( res => console.log(res))
-  }
+class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <a href={ 'http://localhost:8080/authorize' }>
-          <button>Login</button>
-        </a>
-        <button onClick={this.getData} >Get data</button>
+        <Home/>
       </div>
     );
   }
