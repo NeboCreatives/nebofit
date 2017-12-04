@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 
+//Component Imports
+import Home from './Components/Home/Home'
+
 class App extends Component {
 
   getData(){
@@ -16,6 +19,7 @@ class App extends Component {
           <button>Login</button>
         </a>
         <button onClick={this.getData} >Get data</button>
+        <Home/>
       </div>
     );
   }
