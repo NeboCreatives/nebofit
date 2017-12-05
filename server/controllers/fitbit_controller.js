@@ -73,7 +73,7 @@ function getWeight(req, res){
 
 function getActivities(req, res) {
     const db = req.app.get('db');
-    for(let i=0; i<4; i++){
+    for(let i=0; i<100; i++){
         let date = moment(req.body.date).subtract(i, 'day').format("YYYY-MM-DD")
         axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
             .then( activityData => {
@@ -97,11 +97,32 @@ function getDistance(distances){
     }
 }
 
+function getNutrition(req, res) {
+    const db = req.app.get('db');
+    for(let i=0; i<100; i++){
+        let date = moment(req.body.date).subtract(i, 'day').format("YYYY-MM-DD")
+        axios.get(`https://api.fitbit.com/1/user/-/foods/log/date/${date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+            .then( nutritionData => {
+                const { summary } = nutritionData.data;
+                db.log_nutrition([
+                    req.params.id,
+                    date,
+                    summary.calories,
+                    summary.carbs,
+                    summary.fat,
+                    summary.protein,
+                    summary.water
+                ])
+            })
+    }
+}
+
 module.exports = {
     getData: (req, res) => {
         //getSleep(req, res);
         //getWeight(req, res);
-        getActivities(req, res);
+        //getActivities(req, res);
+        getNutrition(req, res)
     }
 }
 
