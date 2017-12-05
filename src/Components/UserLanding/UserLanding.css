@@ -1,0 +1,67 @@
+.UserLanding {
+    background-color: #282C31;
+    min-height: 100vh;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    padding-top: 15px;
+}
+
+hr {
+border: 1px solid #999999;
+}
+
+.UserLanding_Metric {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.UserLanding_Metric h2 {
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.UserLanding_Today {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.UserLanding_Date {
+    font-size: 12px;
+    font-weight: 100;
+    margin-top: 3px;
+    color: #999999;
+}
+
+.UserLanding_Chart {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 9px 0 9px 0;
+    position: relative;
+}
+
+.UserLanding_Chart_Details {
+    position: absolute;
+    top: 36%;
+    left: 50;
+    text-align: center;
+    width: 100%;
+}
+
+.UserLanding_Chart_Details p:nth-child(1) {
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.UserLanding_Chart_Details p:nth-child(2) {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 100;
+    color: #999999;
+}
+
+
