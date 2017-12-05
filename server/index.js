@@ -76,7 +76,7 @@ app.get("/callback", function (req, res) {
         req.session.authorized = true;
         req.session.access_token = result.access_token;
         req.session.save();
-        res.redirect("http://localhost:3000/success");
+        res.redirect("http://localhost:3000/UserLanding");
     }).catch(function (error) {
         res.send(error);
     });
