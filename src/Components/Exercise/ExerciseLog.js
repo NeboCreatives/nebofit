@@ -18,11 +18,11 @@ class ExerciseLog extends Component{
     render(){
         const exercises = []
         const exercisesList = this.props.exercises.map((item,index)=>{
-            exercises.push(<MenuItem value={item} key={index} primaryText={item}/>)
+            exercises.push(<MenuItem value={index} key={index} primaryText={item}/>)
         })
         return(
           <div>
-    <DropDownMenu maxHeight={300} value={this.state.value} onChange={this.handleChange}>
+    <DropDownMenu style={{width:"200px"}} maxHeight={300} value={this.state.value} onChange={this.handleChange}>
         {exercises}
       </DropDownMenu>
           </div>  
