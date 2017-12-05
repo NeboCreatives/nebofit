@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route } from "react-router-dom";
 
+
 // ----- Component Imports ----- //
 import Home from './Components/Home/Home'
 import UserLanding from "./Components/UserLanding/UserLanding"
@@ -12,7 +13,7 @@ import Exercise from "./Components/Exercise/Exercise"
 import Weight from "./Components/Weight/Weight"
 import Analysis from "./Components/Analysis/Analysis"
 import Profile from "./Components/Profile/Profile"
-
+import ExerciseLog from "./Components/Exercise/ExerciseLog"
 
 class App extends Component {
 
@@ -25,6 +26,7 @@ class App extends Component {
         <Route path="/Sleep" component={Sleep} />
         <Route path="/Hydration" component={Hydration} />
         <Route path="/Exercise" component={Exercise} />
+        <Route path="/ExerciseLog" component={ExerciseLog}/>
         <Route path="/Weight" component={Weight} />
         <Route path="/Analysis" component={Analysis} />
         <Route path="/Profile" component={Profile} />
