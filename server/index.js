@@ -93,7 +93,7 @@ app.get("/logout", function(req, res) {
 //endpoints
 const baseURL = '/api';
 
-app.post(`${baseURL}/sleep/:id`, fCtrl.getData)
+app.post(`${baseURL}/data/:id`, fCtrl.getData)
 
 
 // launch the server

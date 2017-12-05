@@ -69,13 +69,39 @@ function getWeight(req, res){
                 ])
             }
         })
-    
+}
+
+function getActivities(req, res) {
+    const db = req.app.get('db');
+    for(let i=0; i<4; i++){
+        let date = moment(req.body.date).subtract(i, 'day').format("YYYY-MM-DD")
+        axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+            .then( activityData => {
+                const { summary } = activityData.data;
+                let distance = getDistance(summary.distances)
+                db.log_activity([
+                    req.params.id,
+                    date,
+                    summary.caloriesOut,
+                    summary.steps,
+                    distance
+                ])
+            })
+    }
+}
+
+function getDistance(distances){
+    for(let j=0; j<distances.length; j++){
+        if(distances[j].activity === 'total')
+            return distances[j].distance;
+    }
 }
 
 module.exports = {
     getData: (req, res) => {
         //getSleep(req, res);
-        getWeight(req, res);
+        //getWeight(req, res);
+        getActivities(req, res);
     }
 }
 
