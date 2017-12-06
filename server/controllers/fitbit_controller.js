@@ -90,6 +90,14 @@ function getNutrition(req, res) {
 }
 
 module.exports = {
+    authMe: (req, res) => {
+        if(req.session) {
+            return res.status(200).send(req.session)
+        } else {
+            return res.status(200).send(false)            
+        }
+    },
+
     firstLoginDataRequest: (req, res) => {
         getSleep(req, res);
         getWeight(req, res);

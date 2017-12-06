@@ -6,11 +6,12 @@ const massive = require('massive');
 const session = require("express-session");
 const process = require("process");
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const fCtrl = require('./controllers/fitbit_controller');
 const app = express();
 app.use(bodyParser.json());
-
+app.use(cors());
 
 const CLIENT_ID = '22CFSG';
 const CLIENT_SECRET = 'ffb7405c22f3c71b44ddf53c408f093d';
@@ -49,12 +50,11 @@ app.get("/callback", function (req, res) {
     client.getAccessToken(req.query.code, CALLBACK_URL).then(function (result) {
         axios.get('https://api.fitbit.com/1/user/-/profile.json', {headers: {Authorization: `Bearer ${result.access_token}`}})
             .then( profileData => {
-                console.log('/********************/', profileData)
                 const db = app.get('db');
-
                 db.find_user([profileData.data.user.encodedId])
                     .then(user => {
                         if(!user[0]){
+                            console.log('no user found')
                             db.create_user([
                                 profileData.data.user.firstName,
                                 profileData.data.user.lastName,
@@ -66,20 +66,30 @@ app.get("/callback", function (req, res) {
                                 profileData.data.user.gender,                                
                                 profileData.data.user.timezone,
                                 result.access_token                                
-                            ])
+                            ]).then(returnedData => {
+                                req.session.userData = returnedData;
+                                req.session.authorized = true;
+                                req.session.access_token = result.access_token;
+                                req.session.save();
+                                res.redirect("http://localhost:3000/UserLanding");
+                            })
+                            .catch(err => console.log(err))
+                        } else {
+                            db.update_access_token([result.access_token, user[0].auth_id])
+                                .then(returnedData => {
+                                    req.session.userData = returnedData;
+                                    req.session.authorized = true;
+                                    req.session.access_token = result.access_token;
+                                    req.session.save();
+                                    res.redirect("http://localhost:3000/UserLanding");
+                                })
                         }
                     })
             })
             .catch(error => console.log('error: ', error))
-
         // use the access token to fetch the user's profile information
-        req.session.authorized = true;
-        req.session.access_token = result.access_token;
-        req.session.save();
-        res.redirect("http://localhost:3000/UserLanding");
-    }).catch(function (error) {
-        res.send(error);
-    });
+        
+    }).catch(err => res.status(400).send(err))
 });
 
 app.get("/logout", function(req, res) {
@@ -93,6 +103,7 @@ app.get("/logout", function(req, res) {
 //endpoints
 const baseURL = '/api';
 
+app.get(`${baseURL}/auth/me`, fCtrl.authMe)
 app.post(`${baseURL}/data/:id`, fCtrl.firstLoginDataRequest)
 app.get(`${baseURL}/data/getTodaySleep/:id/:date`, fCtrl.getTodaySleep)
 app.get(`${baseURL}/data/getTodayActivity/:id/:date`, fCtrl.getTodayActivity)
