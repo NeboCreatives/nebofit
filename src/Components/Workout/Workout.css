@@ -1,4 +1,4 @@
-.Weight {
+.Workout {
     background-color: #282C31;
     min-height: 100vh;
     color: #ffffff;
@@ -11,13 +11,13 @@ hr {
     border: 1px solid #999999;
 }
 
-.Weight_Header {
+.Workout_Header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.Weight_Header_Buffer {
+.Workout_Header_Buffer {
     width: 32px;
     margin-right: 18px;
 }
@@ -33,24 +33,24 @@ hr {
     align-items: center;
 }
 
-.fa-balance-scale {
-    color: #AF5ECE;
+.fa-heartbeat {
+    color: #ED7078;
 }
 
-.Weight_Metric {
+.Workout_Metric {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.Weight_Metric h2 {
+.Workout_Metric h2 {
     font-weight: 100;
     font-size: 15px;
     margin-top: 15px;
 }
 
-.Weight_Today {
+.Workout_Today {
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 100;
@@ -58,14 +58,14 @@ hr {
     /*color: #7276E7;*/
 }
 
-.Weight_Date {
+.Workout_Date {
     font-size: 12px;
     font-weight: 100;
     margin-top: 3px;
     color: #999999;
 }
 
-.Weight_Chart {
+.Workout_Chart {
     width: 250px;
     height: 250px;
     border-radius: 50%;
@@ -73,7 +73,7 @@ hr {
     position: relative;
 }
 
-.Weight_Chart_Details {
+.Workout_Chart_Details {
     position: absolute;
     top: 36%;
     left: 50;
@@ -81,12 +81,12 @@ hr {
     width: 100%;
 }
 
-.Weight_Chart_Details p:nth-of-type(1) {
+.Workout_Chart_Details p:nth-of-type(1) {
     font-size: 32px;
     font-weight: 200;
 }
 
-.Weight_Chart_Details p:nth-of-type(2) {
+.Workout_Chart_Details p:nth-of-type(2) {
     font-size: 12px;
     margin-top: 5px;
     font-weight: 100;

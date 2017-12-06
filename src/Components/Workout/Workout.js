@@ -1,37 +1,37 @@
 import React, { Component } from "react";
-import './Weight.css'
+import './Workout.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
-class Weight extends Component {
+class Workout extends Component {
 
 
   render() {
     return (
-      <div className="Weight">
-        <div className="Weight_Header">
+      <div className="Workout">
+        <div className="Workout_Header">
           <div className='Back_Circle'>
             <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
           </div>
           <div>
-          <i class="fa fa-balance-scale" aria-hidden="true"></i>
-            <h1 className="Weight_Today">Weight</h1>
+          <i class="fa fa-heartbeat" aria-hidden="true"></i>
+            <h1 className="Workout_Today">Workout</h1>
           </div>
-          <div className='Weight_Header_Buffer'></div>
+          <div className='Workout_Header_Buffer'></div>
         </div>
-        <div className="Weight_Metrics">
-          <div className="Weight_Metric">
-            <div className="Weight_Weight">
+        <div className="Workout_Metrics">
+          <div className="Workout_Metric">
+            <div className="Workout_Workout">
               <hr />
               <h2>Today</h2>
-              <div className="Weight_Chart">
+              <div className="Workout_Chart">
                 <Circle
                   percent="29"
                   strokeWidth="6"
-                  strokeColor="#AF5ECE"
+                  strokeColor="#ED7078"
                   strokeLinecap="round"
                 />
 
-                <div className="Weight_Chart_Details">
+                <div className="Workout_Chart_Details">
                 </div>
               </div>
             </div>
@@ -41,5 +41,5 @@ class Weight extends Component {
     );
   }
 }
-    
-export default Weight;
+
+export default Workout;
