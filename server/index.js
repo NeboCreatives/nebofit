@@ -93,7 +93,11 @@ app.get("/logout", function(req, res) {
 //endpoints
 const baseURL = '/api';
 
-app.post(`${baseURL}/data/:id`, fCtrl.getData)
+app.post(`${baseURL}/data/:id`, fCtrl.firstLoginDataRequest)
+app.get(`${baseURL}/data/getTodaySleep/:id/:date`, fCtrl.getTodaySleep)
+app.get(`${baseURL}/data/getTodayActivity/:id/:date`, fCtrl.getTodayActivity)
+app.get(`${baseURL}/data/getTodayWeight/:id`, fCtrl.getTodayWeight)
+app.get(`${baseURL}/data/getTodayNutrition/:id/:date`, fCtrl.getTodayNutrition)
 
 
 // launch the server
