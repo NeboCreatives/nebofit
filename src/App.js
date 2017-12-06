@@ -14,6 +14,8 @@ import Weight from "./Components/Weight/Weight"
 import Analysis from "./Components/Analysis/Analysis"
 import Profile from "./Components/Profile/Profile"
 import ExerciseLog from "./Components/Exercise/ExerciseLog"
+import Workout from "./Components/Workout/Workout"
+import Steps from "./Components/Steps/Steps"
 
 class App extends Component {
 
@@ -28,6 +30,8 @@ class App extends Component {
         <Route path="/Exercise" component={Exercise} />
         <Route path="/ExerciseLog" component={ExerciseLog}/>
         <Route path="/Weight" component={Weight} />
+        <Route path="/Workout" component={Workout} />
+        <Route path="/Steps" component={Steps} />
         <Route path="/Analysis" component={Analysis} />
         <Route path="/Profile" component={Profile} />
       </div>
