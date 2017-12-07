@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const initialState = {
+    userData: {
+
+    },
     todayData: {
         todaySleep: {total_minutes: 0},
         todayActivity: {steps: 0},
@@ -13,6 +16,7 @@ const GET_TODAY_SLEEP = 'GET_TODAY_SLEEP';
 const GET_TODAY_ACTIVITY = 'GET_TODAY_ACTIVITY';
 const GET_TODAY_NUTRITION = 'GET_TODAY_NUTRITION';
 const GET_TODAY_WEIGHT = 'GET_TODAY_WEIGHT';
+const SAVE_USER_DATA = 'SAVE_USER_DATA';
 
 export const getTodaySleep = (userID, date) => {
     const data = axios.get(`/api/data/getTodaySleep/${userID}/${date}`)
@@ -41,12 +45,18 @@ export const getTodayNutrition = (userID, date) => {
     }
 }
 
-export const getTodayWeight = (userID, date) => {
+export const getTodayWeight = (userID) => {
     const data = axios.get(`/api/data/getTodayWeight/${userID}`)
         .then(result => result.data)
     return {
         type: GET_TODAY_WEIGHT,
         payload: data
+    }
+}
+export const saveUserData = (userData) => {
+    return {
+        type: SAVE_USER_DATA,
+        payload: userData
     }
 }
 
@@ -61,6 +71,8 @@ export default function databaseReducer(state = initialState, action) {
             return Object.assign({}, state, {todayData: Object.assign({}, state.todayData, {todayNutrition: action.payload[0]})})
         case GET_TODAY_WEIGHT + '_FULFILLED':
             return Object.assign({}, state, {todayData: Object.assign({}, state.todayData, {todayWeight: action.payload[0]})})
+        case SAVE_USER_DATA:
+            return Object.assign({}, state, {userData: action.payload})
         default:
             return state;
     }
