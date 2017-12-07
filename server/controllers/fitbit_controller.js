@@ -4,19 +4,15 @@ const moment = require('moment');
 let userData = {};
 
 //Gets the sleep data from the last 30 days
-function getSleep(req, res){
+function getSleep(accessToken, todayDate, req){
     const db = req.app.get('db');
-    axios.get(`https://api.fitbit.com/1.2/user/-/sleep/list.json?offset=0&limit=30&sort=desc&beforeDate=${req.body.date}`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+    axios.get(`https://api.fitbit.com/1.2/user/-/sleep/list.json?offset=0&limit=30&sort=desc&beforeDate=${todayDate}`, {headers: {Authorization: `Bearer ${accessToken}`}})
         .then( sleepData => {
             const { sleep } = sleepData.data;
             for(let i=0; i<sleep.length; i++){
                 db.log_sleep([
                     req.params.id,
                     sleep[i].minutesAsleep,
-                    sleep[i].levels.summary.deep.minutes,
-                    sleep[i].levels.summary.light.minutes,
-                    sleep[i].levels.summary.rem.minutes,
-                    sleep[i].levels.summary.wake.minutes,
                     sleep[i].efficiency,
                     sleep[i].dateOfSleep
                 ])
@@ -25,11 +21,11 @@ function getSleep(req, res){
 }
 
 //Gets the weight logs for the last 30 days
-function getWeight(req, res){
-    let oneMonth = moment(req.body.date).subtract(1, 'month').format("YYYY-MM-DD")
+function getWeight(accessToken, todayDate, req){
+    let oneMonth = moment(todayDate).subtract(1, 'month').format("YYYY-MM-DD")
     const db = req.app.get('db');
     
-    axios.get(`https://api.fitbit.com/1/user/-/body/log/weight/date/${oneMonth}/${req.body.date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+    axios.get(`https://api.fitbit.com/1/user/-/body/log/weight/date/${oneMonth}/${todayDate}.json`, {headers: {Authorization: `Bearer ${accessToken}`}})
         .then( weightData => {
             const { weight } = weightData.data;
             for(let i=0; i<weight.length; i++){
@@ -43,11 +39,11 @@ function getWeight(req, res){
         })
 }
 
-function getActivities(req, res) {
+function getActivities(accessToken, todayDate, req) {
     const db = req.app.get('db');
     for(let i=0; i<30; i++){
-        let date = moment(req.body.date).subtract(i, 'day').format("YYYY-MM-DD")
-        axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+        let date = moment(todayDate).subtract(i, 'day').format("YYYY-MM-DD")
+        axios.get(`https://api.fitbit.com/1/user/-/activities/date/${date}.json`, {headers: {Authorization: `Bearer ${accessToken}`}})
             .then( activityData => {
                 const { summary } = activityData.data;
                 let distance = getDistance(summary.distances)
@@ -69,11 +65,11 @@ function getDistance(distances){
     }
 }
 
-function getNutrition(req, res) {
+function getNutrition(accessToken, todayDate, req) {
     const db = req.app.get('db');
     for(let i=0; i<30; i++){
-        let date = moment(req.body.date).subtract(i, 'day').format("YYYY-MM-DD")
-        axios.get(`https://api.fitbit.com/1/user/-/foods/log/date/${date}.json`, {headers: {Authorization: `Bearer ${req.body.accessToken}`}})
+        let date = moment(todayDate).subtract(i, 'day').format("YYYY-MM-DD")
+        axios.get(`https://api.fitbit.com/1/user/-/foods/log/date/${date}.json`, {headers: {Authorization: `Bearer ${accessToken}`}})
             .then( nutritionData => {
                 const { summary } = nutritionData.data;
                 db.log_nutrition([
@@ -99,10 +95,15 @@ module.exports = {
     },
 
     firstLoginDataRequest: (req, res) => {
-        getSleep(req, res);
-        getWeight(req, res);
-        getActivities(req, res);
-        getNutrition(req, res)
+        let todayDate = moment().format('YYYY-MM-DD')
+
+        console.log('accessToken ', req.session.access_token)
+        console.log('today date ', todayDate)
+
+        getSleep(req.session.access_token, todayDate, req);
+        getWeight(req.session.access_token, todayDate, req);
+        getActivities(req.session.access_token, todayDate, req);
+        getNutrition(req.session.access_token, todayDate, req)
     },
 
     getTodaySleep: (req, res) => {
