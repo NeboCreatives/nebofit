@@ -18,7 +18,7 @@ class Sleep extends Component {
           </div>
           </Link>
           <div>
-            <i className="fa fa-bed fa-2x" aria-hidden="true"></i>
+          <i className="fa fa-moon-o" aria-hidden="true"></i>
             <h1 className="Sleep_Today">Sleep</h1>
           </div>
           <div className='Sleep_Header_Buffer'></div>
@@ -41,8 +41,11 @@ class Sleep extends Component {
                   <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
                   <p>7.2</p>
                   <p>hrs</p>
-                  <i class="fa fa-sort-desc" aria-hidden="true">  -1</i>
                 </div>
+
+                <div className="Sleep_Goal_Reminder">
+                    <h1>Try to get .6 hrs more sleep tonight</h1>
+                  </div>
 
               </div>
             </div>

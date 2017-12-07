@@ -36,7 +36,13 @@ class Hydration extends Component {
                 />
 
                 <div className="Hydration_Chart_Details">
+                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
+                  <p>7.2</p>
+                  <p>oz</p>
                 </div>
+                <div className="Hydration_Goal_Reminder">
+                    <h1>12oz to go</h1>
+                  </div>
               </div>
             </div>
           </div>

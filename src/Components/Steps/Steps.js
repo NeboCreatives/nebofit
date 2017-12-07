@@ -37,7 +37,13 @@ class Steps extends Component {
                 />
 
                 <div className="Steps_Chart_Details">
+                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
+                  <p>7.2</p>
+                  <p>hrs</p>
                 </div>
+                  <div className="Steps_Goal_Reminder">
+                    <h1>1892 steps to go</h1>
+                  </div>
               </div>
             </div>
           </div>

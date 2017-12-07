@@ -17,6 +17,12 @@ import ExerciseLog from "./Components/Exercise/ExerciseLog"
 import Workout from "./Components/Workout/Workout"
 import Steps from "./Components/Steps/Steps"
 
+
+
+
+
+
+
 class App extends Component {
 
   render() {
