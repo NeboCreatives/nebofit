@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import './Weight.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
+import { Link } from "react-router-dom";
+
+
 class Weight extends Component {
 
 

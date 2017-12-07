@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './Hydration.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
+import { Link } from "react-router-dom";
 
 class Hydration extends Component {
 
