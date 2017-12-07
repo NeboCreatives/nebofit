@@ -37,7 +37,15 @@ class Weight extends Component {
                 />
 
                 <div className="Weight_Chart_Details">
+                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
+                  <p>7.2</p>
+                  <p>hrs</p>
                 </div>
+
+                <div className="Weight_Goal_Reminder">
+                    <h1>You are 10 lbs away from your goal</h1>
+                  </div>
+
               </div>
             </div>
           </div>

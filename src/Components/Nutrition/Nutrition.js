@@ -37,7 +37,13 @@ class Nutrition extends Component {
                 />
 
                 <div className="Nutrition_Chart_Details">
+                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
+                  <p>7.2</p>
+                  <p>Cal</p>
                 </div>
+                <div className="Nutrition_Goal_Reminder">
+                    <h1>543 calories to go</h1>
+                  </div>
               </div>
             </div>
           </div>

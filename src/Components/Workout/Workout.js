@@ -18,7 +18,7 @@ class Workout extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-heartbeat" aria-hidden="true"></i>
+          <i className="fa fa-heartbeat" aria-hidden="true"></i>
             <h1 className="Workout_Today">Workout</h1>
           </div>
           <div className='Workout_Header_Buffer'></div>
@@ -37,7 +37,13 @@ class Workout extends Component {
                 />
 
                 <div className="Workout_Chart_Details">
+                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
+                  <p>7.2</p>
+                  <p>hrs</p>
                 </div>
+                <div className="Workout_Goal_Reminder">
+                    <h1>You are 2 workouts away from your goal</h1>
+                  </div>
               </div>
             </div>
           </div>
