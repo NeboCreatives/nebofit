@@ -73,6 +73,7 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+            {/* To display Calories i used Nutrition route if it needs to be changed just say so and I can change it to calories */}
             <div className="UserLanding_Calories">
               <hr />
               <h2>Calories</h2>
