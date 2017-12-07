@@ -8,6 +8,7 @@ import { Route, Link } from 'react-router-dom';
 import { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData } from '../../ducks/databaseReducer';
 
 
+
 class UserLanding extends Component {
   constructor(props){
     super(props);
