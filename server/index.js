@@ -67,6 +67,7 @@ app.get("/callback", function (req, res) {
                                 profileData.data.user.timezone,
                                 result.access_token                                
                             ]).then(returnedData => {
+                                fCtrl.firstLoginDataRequest;
                                 req.session.userData = returnedData;
                                 req.session.authorized = true;
                                 req.session.access_token = result.access_token;
