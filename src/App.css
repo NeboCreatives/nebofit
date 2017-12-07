@@ -22,4 +22,6 @@ a {
   color: #9999
 }
 
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 

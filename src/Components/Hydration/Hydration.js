@@ -5,9 +5,41 @@ import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 
 class Hydration extends Component {
+  constructor(){
+    super()
 
+this.state = {
+  pulse: null,
+  percent: 0
+}
+
+this.percentAnimation = this.percentAnimation.bind(this)
+
+  }
+  componentDidMount(){
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+ }
+
+ killInterval(){
+    clearInterval(this.state.pulse)
+ }
+
+ percentAnimation(){
+  if (this.state.percent < 72){
+     this.setState({
+       percent: ++this.state.percent
+})
+} else {
+  this.killInterval()
+  console.log(this.state.pulse)
+}
+
+}
 
   render() {
+    console.log(this.state.percent)
     return (
       <div className="Hydration">
         <div className="Hydration_Header">
@@ -17,7 +49,7 @@ class Hydration extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-tint" aria-hidden="true"></i>
+          <i className="fa fa-tint" aria-hidden="true"></i>
             <h1 className="Hydration_Today">Hydration</h1>
           </div>
           <div className='Hydration_Header_Buffer'></div>
@@ -29,8 +61,8 @@ class Hydration extends Component {
               <h2>Today</h2>
               <div className="Hydration_Chart">
                 <Circle
-                  percent="29"
-                  strokeWidth="6"
+                  percent={this.state.percent}
+                  strokeWidth="3"
                   strokeColor="#5FC5D4"
                   strokeLinecap="round"
                 />
