@@ -4,6 +4,7 @@ import moment from "moment";
 import { Circle } from "rc-progress";
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
 import { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData } from '../../ducks/databaseReducer';
 
 
@@ -39,8 +40,10 @@ class UserLanding extends Component {
           <h1 className="UserLanding_Today">Today</h1>
           <h1 className="UserLanding_Date">{date}</h1>
         </div>
+        
         <div className="UserLanding_Metrics">
           <div className="UserLanding_Metric">
+          <Link to="/Sleep">
             <div className="UserLanding_Sleep">
               <hr />
               <h2>Sleep</h2>
@@ -51,12 +54,15 @@ class UserLanding extends Component {
                   strokeColor="#7276E7"
                   strokeLinecap="round"
                 />
+                
                 <div className="UserLanding_Chart_Details">
                   <p>{Math.round((todayData.todaySleep.total_minutes/60)*100)/100}</p>
                   <p>hrs</p>
                 </div>
               </div>
             </div>
+            </Link>
+            <Link to="/Steps">
             <div className="UserLanding_Steps">
               <hr />
               <h2>Steps</h2>
@@ -73,7 +79,9 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+            </Link>
             {/* To display Calories i used Nutrition route if it needs to be changed just say so and I can change it to calories */}
+            <Link to="/Nutrition">
             <div className="UserLanding_Calories">
               <hr />
               <h2>Calories</h2>
@@ -91,6 +99,8 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+            </Link>
+            <Link to="/Hydration">
             <div className="UserLanding_Hydration">
               <hr />
               <h2>Hydration</h2>
@@ -107,6 +117,8 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+            </Link>
+              <Link to="/Weight">
             <div className="UserLanding_Weight">
               <hr />
               <h2>Weight</h2>
@@ -124,6 +136,9 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+              </Link>
+
+              <Link to="/Workout">
             <div className="UserLanding_Workout">
               <hr />
               <h2>Workouts</h2>
@@ -141,6 +156,7 @@ class UserLanding extends Component {
                 </div>
               </div>
             </div>
+            </Link>
           </div>
         </div>
       </div>
