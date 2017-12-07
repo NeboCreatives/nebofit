@@ -13,12 +13,12 @@ class UserLanding extends Component {
   }
 
   componentDidMount = () => {
+    let date = moment().format('YYYY-MM-DD');
     axios.get('/api/auth/me')
       .then(response => {
-        console.log(response.data.userData[0])
-        this.props.getTodaySleep(response.data.userData[0].user_id, '2017-12-04')
-        this.props.getTodayActivity(response.data.userData[0].user_id, '2017-12-04')
-        this.props.getTodayNutrition(response.data.userData[0].user_id, '2017-12-04')
+        this.props.getTodaySleep(response.data.userData[0].user_id, date)
+        this.props.getTodayActivity(response.data.userData[0].user_id, date)
+        this.props.getTodayNutrition(response.data.userData[0].user_id, date)
         this.props.getTodayWeight(response.data.userData[0].user_id)
         this.props.saveUserData(response.data.userData[0])
       })
