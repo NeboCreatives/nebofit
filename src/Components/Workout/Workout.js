@@ -9,9 +9,11 @@ class Workout extends Component {
     return (
       <div className="Workout">
         <div className="Workout_Header">
+        <Link to="/UserLanding">
           <div className='Back_Circle'>
             <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
           </div>
+          </Link>
           <div>
           <i class="fa fa-heartbeat" aria-hidden="true"></i>
             <h1 className="Workout_Today">Workout</h1>
