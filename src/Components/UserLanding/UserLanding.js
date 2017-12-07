@@ -24,7 +24,6 @@ class UserLanding extends Component {
       })
   }
 
-  
   render() {
     const date = moment().format("MMMM DD, YYYY");
 
