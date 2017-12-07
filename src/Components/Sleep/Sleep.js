@@ -11,9 +11,11 @@ class Sleep extends Component {
     return (
       <div className="Sleep">
         <div className="Sleep_Header">
+        <Link to="/UserLanding">
           <div className='Back_Circle'>
             <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{margin: '0px 3px 2px 0'}}></i>
           </div>
+          </Link>
           <div>
             <i className="fa fa-bed fa-2x" aria-hidden="true"></i>
             <h1 className="Sleep_Today">Sleep</h1>

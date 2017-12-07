@@ -9,9 +9,11 @@ class Weight extends Component {
     return (
       <div className="Weight">
         <div className="Weight_Header">
+        <Link to="/UserLanding">
           <div className='Back_Circle'>
             <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
           </div>
+          </Link>
           <div>
           <i class="fa fa-balance-scale" aria-hidden="true"></i>
             <h1 className="Weight_Today">Weight</h1>
