@@ -4,6 +4,9 @@ import moment from 'moment';
 import {Circle} from 'rc-progress';
 import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
+import {connect} from 'react-redux';
+import {getTodaySleep} from '../../ducks/databaseReducer';
+
 
 class Sleep extends Component {
 
@@ -83,7 +86,7 @@ class Sleep extends Component {
 
                 <div className="Sleep_Chart_Details">
                   <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
+                  <p>{Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100}</p>
                   <p>hrs</p>
                 </div>
 
@@ -109,4 +112,12 @@ class Sleep extends Component {
   }
 }
 
-export default Sleep;
+const mapStateToProps = (state) => {
+  const {todayData, userData} = state.databaseReducer
+  return {
+    todayData,
+    userData
+  }
+}
+
+export default connect(mapStateToProps, {getTodaySleep})(Sleep);

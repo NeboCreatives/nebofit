@@ -4,7 +4,8 @@ import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
-
+import {connect} from 'react-redux';
+import {getTodayNutrition} from '../../ducks/databaseReducer';
 
 
 class Hydration extends Component {
@@ -84,7 +85,7 @@ this.percentAnimation = this.percentAnimation.bind(this)
 
                 <div className="Hydration_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
+                  <p>{(Math.round(this.props.todayData.todayNutrition.water*0.033814022558919))}</p>
                   <p>oz</p>
                 </div>
                 <div className="Hydration_Goal_Reminder">
@@ -109,4 +110,12 @@ this.percentAnimation = this.percentAnimation.bind(this)
   }
 }
 
-export default Hydration;
+const mapStateToProps = (state) => {
+  const {todayData, userData} = state.databaseReducer
+  return {
+    todayData,
+    userData
+  }
+}
+
+export default connect(mapStateToProps, {getTodayNutrition})(Hydration);

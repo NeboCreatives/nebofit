@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import './Weight.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import ScaleImg from "../../Assets/weight.png"
-import {Bar} from "react-chartjs-2"
+import {Bar} from "react-chartjs-2";
+import {getTodayWeight} from '../../ducks/databaseReducer';
+
 
 class Weight extends Component {
 
@@ -82,7 +85,7 @@ class Weight extends Component {
 
                 <div className="Weight_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>182</p>
+                  <p>{(Math.round(this.props.todayData.todayWeight.weight*2.20462262185))}</p>
                   <p>lb</p>
                 </div>
 
@@ -107,5 +110,13 @@ class Weight extends Component {
     );
   }
 }
-    
-export default Weight;
+
+const mapStateToProps = (state) => {
+  const { todayData, userData} = state.databaseReducer;
+  return {
+    todayData,
+    userData
+  };
+};
+
+export default connect(mapStateToProps,{getTodayWeight})(Weight);
