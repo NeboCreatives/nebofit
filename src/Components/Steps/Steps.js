@@ -50,7 +50,7 @@ class Steps extends Component {
           </div>
           </Link>
           <div>
-          <img src={StepsImg} alt="steps img"/>
+          <img src={StepsImg} alt="steps img" className="Steps_Img"/>
             <h1 className="Steps_Today">Steps</h1>
           </div>
           <div className='Steps_Header_Buffer'></div>

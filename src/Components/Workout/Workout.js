@@ -7,6 +7,37 @@ import { Link } from "react-router-dom";
 
 class Workout extends Component {
 
+  constructor() {
+    super()
+
+    this.state = {
+      pulse: null,
+      percent: 0
+    }
+    this.percentAnimation = this.percentAnimation.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+  }
+
+  killInterval(){
+    clearInterval(this.state.pulse)
+  }
+
+  percentAnimation(){
+    if(this.state.percent < 65){
+      this.setState({
+        percent: ++this.state.percent
+      })
+    } else {
+      this.killInterval()
+      console.log(this.state.pulse)
+    }
+  }
+
 
   render() {
     return (
@@ -38,8 +69,8 @@ class Workout extends Component {
 
                 <div className="Workout_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
-                  <p>hrs</p>
+                  <p>3</p>
+                  <p>per week</p>
                 </div>
                 <div className="Workout_Goal_Reminder">
                     <h1>You are 2 workouts away from your goal</h1>
