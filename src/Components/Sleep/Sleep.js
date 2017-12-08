@@ -6,6 +6,37 @@ import { Link } from "react-router-dom";
 
 class Sleep extends Component {
 
+  constructor() {
+    super()
+
+    this.state = {
+      pulse: null,
+      percent: 0
+    }
+    this.percentAnimation = this.percentAnimation.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+  }
+
+  killInterval(){
+    clearInterval(this.state.pulse)
+  }
+
+  percentAnimation(){
+    if(this.state.percent < 80){
+      this.setState({
+        percent: ++this.state.percent
+      })
+    } else {
+      this.killInterval()
+      console.log(this.state.pulse)
+    }
+  }
+
 
   render() {
     const date = moment().format('MMMM DD, YYYY');
@@ -31,7 +62,7 @@ class Sleep extends Component {
               <h2>Today</h2>
               <div className="Sleep_Chart">
                 <Circle
-                  percent="29"
+                  percent={this.state.percent}
                   strokeWidth="6"
                   strokeColor="#7276E7"
                   strokeLinecap="round"

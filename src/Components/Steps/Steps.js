@@ -7,6 +7,37 @@ import { Link } from "react-router-dom";
 
 class Steps extends Component {
 
+  constructor() {
+    super()
+
+    this.state = {
+      pulse: null,
+      percent: 0
+    }
+    this.percentAnimation = this.percentAnimation.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+  }
+
+  killInterval(){
+    clearInterval(this.state.pulse)
+  }
+
+  percentAnimation(){
+    if(this.state.percent < 63){
+      this.setState({
+        percent: ++this.state.percent
+      })
+    } else {
+      this.killInterval()
+      console.log(this.state.pulse)
+    }
+  }
+
 
   render() {
     return (
@@ -30,7 +61,7 @@ class Steps extends Component {
               <h2>Today</h2>
               <div className="Steps_Chart">
                 <Circle
-                  percent="29"
+                  percent={this.state.percent}
                   strokeWidth="6"
                   strokeColor="#92C94A"
                   strokeLinecap="round"
