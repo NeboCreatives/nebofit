@@ -55,6 +55,9 @@ class Steps extends Component {
           }
         ]
       }
+
+      let stepsDifference = this.props.userData.goal_steps - this.props.todayData.todayActivity.steps
+
     return (
       <div className="Steps">
         <div className="Steps_Header">
@@ -84,11 +87,11 @@ class Steps extends Component {
 
                 <div className="Steps_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>{this.props.todayData.todayActivity.steps}</p>
+                  <p>{this.props.todayData.todayActivity.steps.toLocaleString()}</p>
                   <p>Steps</p>
                 </div>
                   <div className="Steps_Goal_Reminder">
-                    <h1>1892 steps to go</h1>
+                    <h1>{stepsDifference.toLocaleString()} steps to go</h1>
                     <div className="chart">
                     <Bar
                         data={data}

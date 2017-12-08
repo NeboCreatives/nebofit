@@ -7,7 +7,7 @@ const initialState = {
     todayData: {
         todaySleep: {total_minutes: 0},
         todayActivity: {steps: 0},
-        todayNutrition: {steps: 0},
+        todayNutrition: {calories: 0},
         todayWeight: {weight: 0}
     },
     userLandingFlag: false
