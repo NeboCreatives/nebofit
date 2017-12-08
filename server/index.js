@@ -65,7 +65,9 @@ app.get("/callback", function (req, res) {
                                 profileData.data.user.dateOfBirth,                                
                                 profileData.data.user.gender,                                
                                 profileData.data.user.timezone,
-                                result.access_token                                
+                                result.access_token,
+                                profileData.data.user.weight,
+                                moment().format('YYYY-MM-DD')
                             ]).then(returnedData => {
                                 fCtrl.firstLoginDataRequest;
                                 req.session.userData = returnedData;
@@ -102,14 +104,14 @@ app.get("/logout", function(req, res) {
 
 
 //endpoints
-const baseURL = '/api';
-
-app.get(`${baseURL}/auth/me`, fCtrl.authMe)
-app.post(`${baseURL}/data/:id`, fCtrl.firstLoginDataRequest)
-app.get(`${baseURL}/data/getTodaySleep/:id/:date`, fCtrl.getTodaySleep)
-app.get(`${baseURL}/data/getTodayActivity/:id/:date`, fCtrl.getTodayActivity)
-app.get(`${baseURL}/data/getTodayWeight/:id`, fCtrl.getTodayWeight)
-app.get(`${baseURL}/data/getTodayNutrition/:id/:date`, fCtrl.getTodayNutrition)
+app.get(`/api/auth/me`, fCtrl.authMe)
+app.post(`/api/data/:id`, fCtrl.firstLoginDataRequest)
+app.get(`/api/data/getTodaySleep/:id/:date/:rest`, fCtrl.getTodaySleep)
+app.get(`/api/data/getTodayActivity/:id/:date/:rest`, fCtrl.getTodayActivity)
+app.get(`/api/data/getTodayWeight/:id/:date/:rest`, fCtrl.getTodayWeight)
+app.get(`/api/data/getTodayNutrition/:id/:date/:rest`, fCtrl.getTodayNutrition)
+app.post(`/api/data/getSinceLastLogin/:id/:date/:rest`, fCtrl.getSinceLastLogin)
+app.post(`/api/data/updateLastLogin/:id/:date`, fCtrl.updateLastLogin)
 
 
 // launch the server
