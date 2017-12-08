@@ -66,7 +66,7 @@ export const saveUserData = (userData) => {
 
 export const updateUserLandingFlag = () => {
     return {
-        type: SAVE_USER_DATA,
+        type: UPDATE_USER_LANDING_FLAG,
         payload: true
     }
 }
