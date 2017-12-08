@@ -3,6 +3,7 @@ import './Sleep.css';
 import moment from 'moment';
 import {Circle} from 'rc-progress';
 import { Link } from "react-router-dom";
+import {Bar} from "react-chartjs-2"
 
 class Sleep extends Component {
 
@@ -39,6 +40,18 @@ class Sleep extends Component {
 
 
   render() {
+    let data = {
+      labels: ['Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep'],
+      datasets: [
+        {
+          label: 'Sleep',
+          backgroundColor: 'rgb(114, 118, 231)',
+          borderColor: 'rgb(114, 118, 231)',
+          borderWidth: 1,
+          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+        }
+      ]
+    }
     const date = moment().format('MMMM DD, YYYY');
     return (
       <div className="Sleep">
@@ -77,7 +90,16 @@ class Sleep extends Component {
                 <div className="Sleep_Goal_Reminder">
                     <h1>Try to get .6 hrs more sleep tonight</h1>
                   </div>
-
+                  <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+               </div>
               </div>
             </div>
           </div>

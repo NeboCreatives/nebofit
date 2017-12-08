@@ -4,17 +4,18 @@ import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
-
+import {Bar} from "react-chartjs-2";
 
 class Steps extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       pulse: null,
-      percent: 0
+      percent: 0, 
     }
+
     this.percentAnimation = this.percentAnimation.bind(this)
   }
 
@@ -39,8 +40,19 @@ class Steps extends Component {
     }
   }
 
-
-  render() {
+    render() {
+      let data = {
+        labels: ['Steps', 'Steps', 'Steps', 'Steps', 'Steps', 'Steps', 'Steps'],
+        datasets: [
+          {
+            label: 'Steps',
+            backgroundColor: 'rgb(146, 201, 74)',
+            borderColor: 'rgb(146, 201, 74)',
+            borderWidth: 1,
+            data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+          }
+        ]
+      }
     return (
       <div className="Steps">
         <div className="Steps_Header">
@@ -75,6 +87,16 @@ class Steps extends Component {
                 </div>
                   <div className="Steps_Goal_Reminder">
                     <h1>1892 steps to go</h1>
+                    <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+                    </div>
                   </div>
               </div>
             </div>

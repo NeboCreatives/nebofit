@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import ScaleImg from "../../Assets/weight.png"
-
+import {Bar} from "react-chartjs-2"
 
 class Weight extends Component {
 
@@ -41,6 +41,18 @@ class Weight extends Component {
 
 
   render() {
+    let data = {
+      labels: ['Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight'],
+      datasets: [
+        {
+          label: 'Wieght',
+          backgroundColor: 'rgb(175, 94, 206)',
+          borderColor: 'rgb(175, 94, 206)',
+          borderWidth: 1,
+          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+        }
+      ]
+    }
     return (
       <div className="Weight">
         <div className="Weight_Header">
@@ -77,7 +89,16 @@ class Weight extends Component {
                 <div className="Weight_Goal_Reminder">
                     <h1>You are 10 lbs away from your goal</h1>
                   </div>
-
+                  <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+                </div>
               </div>
             </div>
           </div>
