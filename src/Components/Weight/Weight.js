@@ -50,7 +50,7 @@ class Weight extends Component {
           </div>
           </Link>
           <div>
-          <img src={ScaleImg} alt="scale img"/>
+          <img src={ScaleImg} alt="scale img" className="Scale_Img"/>
             <h1 className="Weight_Today">Weight</h1>
           </div>
           <div className='Weight_Header_Buffer'></div>
