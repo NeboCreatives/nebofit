@@ -46,11 +46,11 @@ class UserLanding extends Component {
     let todayData = this.props.todayData;
     let userData = this.props.userData;
 
-    let goalWeightDifference = Math.abs(userData.goal_starting_weight - userData.goal_weight);
+    let goalWeightDifference = Math.abs(userData.starting_weight - userData.goal_weight);
     let currentWeightDifference = Math.abs(userData.user_weight - userData.goal_weight);
     
     console.log(this.props)
-    
+
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">
@@ -104,7 +104,7 @@ class UserLanding extends Component {
               <h2>Calories</h2>
               <div className="UserLanding_Chart">
                 <Circle
-                  percent={typeof todayData.todayNutrition === 'undefined' ? 0 : ((Math.round((todayData.todayNutrition.calories)*100)/100)/userData.goal_calories)*100}
+                  percent={typeof todayData.todayNutrition === 'undefined' ? 0 : ((todayData.todayNutrition.calories)/2000)*100}
                   strokeWidth="6"
 
                   strokeColor="#F4B036"
@@ -123,13 +123,13 @@ class UserLanding extends Component {
               <h2>Hydration</h2>
               <div className="UserLanding_Chart">
                 <Circle
-                  percent={typeof todayData.todayNutrition === 'undefined' ? 0 : ((Math.round((Math.round((todayData.todayNutrition.water*0.033814)*100)/100)*100)/100)/userData.goal_water)*100}
+                  percent={typeof todayData.todayNutrition === 'undefined' ? 0 : ((Math.round(todayData.todayNutrition.water*0.033814022558919))/userData.goal_hydration)*100}
                   strokeWidth="6"
                   strokeColor="#5FC5D4"
                   strokeLinecap="round"
                 />
                 <div className="UserLanding_Chart_Details">
-                  <p>{typeof todayData.todayNutrition === 'undefined' ? 0 : (Math.round((todayData.todayNutrition.water*0.033814)*100)/100)}</p>
+                  <p>{typeof todayData.todayNutrition === 'undefined' ? 0 : (Math.round(todayData.todayNutrition.water*0.033814022558919))}</p>
                   <p>oz</p>
                 </div>
               </div>
@@ -148,7 +148,7 @@ class UserLanding extends Component {
                   strokeLinecap="round"
                 />
                 <div className="UserLanding_Chart_Details">
-                  <p>{typeof todayData.todayWeight === 'undefined' ? 0 : (Math.round((todayData.todayWeight.weight*2.20462)*100)/100)}</p>
+                  <p>{typeof todayData.todayWeight === 'undefined' ? 0 : (Math.round(todayData.todayWeight.weight*2.20462262185))}</p>
                   <p>lbs</p>
                 </div>
               </div>
