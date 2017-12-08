@@ -68,6 +68,7 @@ app.get("/callback", function (req, res) {
                                 profileData.data.user.timezone,
                                 result.access_token,
                                 profileData.data.user.weight,
+                                profileData.data.user.weight,
                                 moment().format('YYYY-MM-DD')
                             ]).then(returnedData => {
                                 fCtrl.firstLoginDataRequest;

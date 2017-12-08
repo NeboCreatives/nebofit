@@ -1,3 +1,2 @@
 select * from weight
-where user_id = $1
-order by date desc limit 1
+where user_id = $1 and date = $2;

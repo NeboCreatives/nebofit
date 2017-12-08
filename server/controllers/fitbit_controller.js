@@ -40,7 +40,7 @@ function getWeight(req, res, todayDate, rest){
     let oneMonth = moment(todayDate).subtract(1, 'month').format("YYYY-MM-DD")
     axios.get(`https://api.fitbit.com/1/user/-/body/log/weight/date/${oneMonth}/${todayDate}.json`, {headers: {Authorization: `Bearer ${req.session.access_token}`}})
         .then( fitbitWeightData => {
-            db.get_today_weight([req.params.id])
+            db.get_today_weight([req.params.id, todayDate])
                 .then(dbWeightData => {
                     let recentWeight = fitbitWeightData.data.weight[fitbitWeightData.data.weight.length-1];
                     if(dbWeightData.length === 0){
@@ -168,7 +168,7 @@ module.exports = {
     updateLastLogin: (req, res) => {
         const db = req.app.get('db');
         db.update_last_login([req.params.id, req.params.date])
-            .then(result => res.status(200).send(returning))
+            .then(returning => res.status(200).send(returning))
     }
 }
 
