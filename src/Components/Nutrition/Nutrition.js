@@ -3,6 +3,7 @@ import './Nutrition.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import {Bar} from "react-chartjs-2"
 
 
 class Nutrition extends Component {
@@ -39,6 +40,18 @@ class Nutrition extends Component {
   }
 
   render() {
+    let data = {
+      labels: ['Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition'],
+      datasets: [
+        {
+          label: 'Nutrition',
+          backgroundColor: 'rgb(244, 176, 54)',
+          borderColor: 'rgb(244, 176, 54)',
+          borderWidth: 1,
+          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+        }
+      ]
+    }
     return (
       <div className="Nutrition">
         <div className="Nutrition_Header">
@@ -74,6 +87,16 @@ class Nutrition extends Component {
                 <div className="Nutrition_Goal_Reminder">
                     <h1>543 calories to go</h1>
                   </div>
+                  <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+               </div>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import './Workout.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import {Bar} from "react-chartjs-2"
 
 
 class Workout extends Component {
@@ -40,6 +41,18 @@ class Workout extends Component {
 
 
   render() {
+    let data = {
+      labels: ['Workout', 'Workout', 'Workout', 'Workout', 'Workout', 'Workout', 'Workout'],
+      datasets: [
+        {
+          label: 'Workout',
+          backgroundColor: 'rgb(234, 89, 99)',
+          borderColor: 'rgb(234, 89, 99)',
+          borderWidth: 1,
+          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+        }
+      ]
+    }
     return (
       <div className="Workout">
         <div className="Workout_Header">
@@ -75,6 +88,16 @@ class Workout extends Component {
                 <div className="Workout_Goal_Reminder">
                     <h1>You are 2 workouts away from your goal</h1>
                   </div>
+                  <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+               </div>
               </div>
             </div>
           </div>
