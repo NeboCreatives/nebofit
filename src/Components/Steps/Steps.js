@@ -5,6 +5,8 @@ import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
 import {Bar} from "react-chartjs-2";
+import { connect } from 'react-redux';
+import { getTodayActivity } from "../../ducks/databaseReducer";
 
 class Steps extends Component {
 
@@ -82,7 +84,7 @@ class Steps extends Component {
 
                 <div className="Steps_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>248</p>
+                  <p>{this.props.todayData.todayActivity.steps}</p>
                   <p>Steps</p>
                 </div>
                   <div className="Steps_Goal_Reminder">
@@ -107,4 +109,12 @@ class Steps extends Component {
   }
 }
 
-export default Steps;
+const mapStateToProps = (state) => {
+  const { todayData, userData } = state.databaseReducer;
+  return {
+    todayData,
+    userData,
+  };
+};
+
+export default connect(mapStateToProps, {getTodayActivity})(Steps);
