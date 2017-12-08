@@ -5,7 +5,7 @@ import { Circle } from "rc-progress";
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData } from '../../ducks/databaseReducer';
+import { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData, updateUserLandingFlag } from '../../ducks/databaseReducer';
 
 
 
@@ -19,22 +19,24 @@ class UserLanding extends Component {
   }
 
   componentDidMount = () => {
-    let date = moment().format('YYYY-MM-DD');
-    let rest = 'get';
-    axios.get('/api/auth/me')
-      .then(response => {
-        let userID = response.data.userData[0].user_id;
-        this.props.getTodaySleep(userID, date, rest)
-        this.props.getTodayActivity(userID, date, rest)
-        this.props.getTodayNutrition(userID, date, rest)
-        this.props.getTodayWeight(userID, date, rest)
-        this.props.saveUserData(response.data.userData[0])
-        axios.post(`/api/data/getSinceLastLogin/${userID}/${response.data.userData[0].last_login}/post`)
-          .then(result => {
-            axios.post(`/api/data/updateLastLogin/${userID}/${date}`)
-              .then(res => console.log(res))
-          })
-      })
+    if(this.props.userLandingFlag === false) {
+      let date = moment().format('YYYY-MM-DD');
+      let rest = 'get';
+      axios.get('/api/auth/me')
+        .then(response => {
+          let userID = response.data.userData[0].user_id;
+          this.props.getTodaySleep(userID, date, rest)
+          this.props.getTodayActivity(userID, date, rest)
+          this.props.getTodayNutrition(userID, date, rest)
+          this.props.getTodayWeight(userID, date, rest)
+          this.props.saveUserData(response.data.userData[0])
+          axios.post(`/api/data/getSinceLastLogin/${userID}/${response.data.userData[0].last_login}/post`)
+            .then(result => {
+              axios.post(`/api/data/updateLastLogin/${userID}/${date}`)
+                .then(res => console.log(res))
+            })
+        })
+    }
   }
 
   render() {
@@ -179,11 +181,12 @@ class UserLanding extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { todayData, userData } = state.databaseReducer;
+  const { todayData, userData, userLandingFlag } = state.databaseReducer;
   return {
     todayData,
-    userData
+    userData,
+    userLandingFlag
   };
 };
 
-export default connect(mapStateToProps, { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData })(UserLanding);
+export default connect(mapStateToProps, { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, saveUserData, updateUserLandingFlag })(UserLanding);
