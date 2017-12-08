@@ -9,7 +9,8 @@ const initialState = {
         todayActivity: {steps: 0},
         todayNutrition: {steps: 0},
         todayWeight: {weight: 0}
-    }
+    },
+    userLandingFlag: false
 }
 
 const GET_TODAY_SLEEP = 'GET_TODAY_SLEEP';
@@ -17,6 +18,7 @@ const GET_TODAY_ACTIVITY = 'GET_TODAY_ACTIVITY';
 const GET_TODAY_NUTRITION = 'GET_TODAY_NUTRITION';
 const GET_TODAY_WEIGHT = 'GET_TODAY_WEIGHT';
 const SAVE_USER_DATA = 'SAVE_USER_DATA';
+const UPDATE_USER_LANDING_FLAG = 'UPDATE_USER_LANDING_FLAG';
 
 
 export const getTodaySleep = (userID, date, rest) => {
@@ -62,6 +64,13 @@ export const saveUserData = (userData) => {
     }
 }
 
+export const updateUserLandingFlag = () => {
+    return {
+        type: SAVE_USER_DATA,
+        payload: true
+    }
+}
+
 export default function databaseReducer(state = initialState, action) {
     switch (action.type) {
         case GET_TODAY_SLEEP + '_FULFILLED':
@@ -74,6 +83,8 @@ export default function databaseReducer(state = initialState, action) {
             return Object.assign({}, state, {todayData: Object.assign({}, state.todayData, {todayWeight: action.payload[0]})})
         case SAVE_USER_DATA:
             return Object.assign({}, state, {userData: action.payload})
+        case UPDATE_USER_LANDING_FLAG:
+            return Object.assign({}, state, {userLandingFlag: action.payload})
         default:
             return state;
     }

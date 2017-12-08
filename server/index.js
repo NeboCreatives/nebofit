@@ -7,6 +7,7 @@ const session = require("express-session");
 const process = require("process");
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const moment = require('moment');
 
 const fCtrl = require('./controllers/fitbit_controller');
 const app = express();
