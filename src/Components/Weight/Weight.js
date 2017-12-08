@@ -3,6 +3,7 @@ import './Weight.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import ScaleImg from "../../Assets/weight.png"
 
 
 class Weight extends Component {
@@ -49,7 +50,7 @@ class Weight extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-balance-scale" aria-hidden="true"></i>
+          <img src={ScaleImg} alt="scale img"/>
             <h1 className="Weight_Today">Weight</h1>
           </div>
           <div className='Weight_Header_Buffer'></div>
@@ -69,8 +70,8 @@ class Weight extends Component {
 
                 <div className="Weight_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
-                  <p>hrs</p>
+                  <p>182</p>
+                  <p>lb</p>
                 </div>
 
                 <div className="Weight_Goal_Reminder">

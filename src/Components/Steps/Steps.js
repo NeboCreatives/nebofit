@@ -3,6 +3,7 @@ import './Steps.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
 
 
 class Steps extends Component {
@@ -49,7 +50,7 @@ class Steps extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-road" aria-hidden="true"></i>
+          <img src={StepsImg} alt="steps img"/>
             <h1 className="Steps_Today">Steps</h1>
           </div>
           <div className='Steps_Header_Buffer'></div>
@@ -69,8 +70,8 @@ class Steps extends Component {
 
                 <div className="Steps_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
-                  <p>hrs</p>
+                  <p>248</p>
+                  <p>Steps</p>
                 </div>
                   <div className="Steps_Goal_Reminder">
                     <h1>1892 steps to go</h1>
