@@ -36,6 +36,7 @@ class UserLanding extends Component {
                 .then(res => console.log(res))
             })
         })
+        this.props.updateUserLandingFlag();
     }
   }
 
