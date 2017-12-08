@@ -3,9 +3,41 @@ import './Steps.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
 
 
 class Steps extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      pulse: null,
+      percent: 0
+    }
+    this.percentAnimation = this.percentAnimation.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+  }
+
+  killInterval(){
+    clearInterval(this.state.pulse)
+  }
+
+  percentAnimation(){
+    if(this.state.percent < 63){
+      this.setState({
+        percent: ++this.state.percent
+      })
+    } else {
+      this.killInterval()
+      console.log(this.state.pulse)
+    }
+  }
 
 
   render() {
@@ -18,7 +50,7 @@ class Steps extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-road" aria-hidden="true"></i>
+          <img src={StepsImg} alt="steps img"/>
             <h1 className="Steps_Today">Steps</h1>
           </div>
           <div className='Steps_Header_Buffer'></div>
@@ -30,7 +62,7 @@ class Steps extends Component {
               <h2>Today</h2>
               <div className="Steps_Chart">
                 <Circle
-                  percent="29"
+                  percent={this.state.percent}
                   strokeWidth="6"
                   strokeColor="#92C94A"
                   strokeLinecap="round"
@@ -38,8 +70,8 @@ class Steps extends Component {
 
                 <div className="Steps_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
-                  <p>hrs</p>
+                  <p>248</p>
+                  <p>Steps</p>
                 </div>
                   <div className="Steps_Goal_Reminder">
                     <h1>1892 steps to go</h1>

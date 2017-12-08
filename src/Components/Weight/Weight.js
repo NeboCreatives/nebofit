@@ -3,9 +3,41 @@ import './Weight.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import ScaleImg from "../../Assets/weight.png"
 
 
 class Weight extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      pulse: null,
+      percent: 0
+    }
+    this.percentAnimation = this.percentAnimation.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      pulse: setInterval(this.percentAnimation, 12)
+    })
+  }
+
+  killInterval(){
+    clearInterval(this.state.pulse)
+  }
+
+  percentAnimation(){
+    if(this.state.percent < 98){
+      this.setState({
+        percent: ++this.state.percent
+      })
+    } else {
+      this.killInterval()
+      console.log(this.state.pulse)
+    }
+  }
 
 
   render() {
@@ -18,7 +50,7 @@ class Weight extends Component {
           </div>
           </Link>
           <div>
-          <i class="fa fa-balance-scale" aria-hidden="true"></i>
+          <img src={ScaleImg} alt="scale img"/>
             <h1 className="Weight_Today">Weight</h1>
           </div>
           <div className='Weight_Header_Buffer'></div>
@@ -30,7 +62,7 @@ class Weight extends Component {
               <h2>Today</h2>
               <div className="Weight_Chart">
                 <Circle
-                  percent="29"
+                  percent={this.state.percent}
                   strokeWidth="6"
                   strokeColor="#AF5ECE"
                   strokeLinecap="round"
@@ -38,8 +70,8 @@ class Weight extends Component {
 
                 <div className="Weight_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
-                  <p>hrs</p>
+                  <p>182</p>
+                  <p>lb</p>
                 </div>
 
                 <div className="Weight_Goal_Reminder">
