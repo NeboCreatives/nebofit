@@ -3,6 +3,9 @@ import './Hydration.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
+import {Bar} from "react-chartjs-2"
+
+
 
 class Hydration extends Component {
   constructor(){
@@ -39,6 +42,18 @@ this.percentAnimation = this.percentAnimation.bind(this)
 }
 
   render() {
+    let data = {
+      labels: ['Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration'],
+      datasets: [
+        {
+          label: 'Hydration',
+          backgroundColor: 'rgb(95, 197, 212)',
+          borderColor: 'rgb(95, 197, 212)',
+          borderWidth: 1,
+          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+        }
+      ]
+    }
     console.log(this.state.percent)
     return (
       <div className="Hydration">
@@ -75,6 +90,16 @@ this.percentAnimation = this.percentAnimation.bind(this)
                 <div className="Hydration_Goal_Reminder">
                     <h1>12oz to go</h1>
                   </div>
+                  <div className="chart">
+                    <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+                </div>
               </div>
             </div>
           </div>
