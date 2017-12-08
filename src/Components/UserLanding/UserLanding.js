@@ -12,20 +12,28 @@ import { getTodaySleep, getTodayActivity, getTodayNutrition, getTodayWeight, sav
 class UserLanding extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      
+    }
   }
 
   componentDidMount = () => {
     let date = moment().format('YYYY-MM-DD');
+    let rest = 'get';
     axios.get('/api/auth/me')
       .then(response => {
-        this.props.getTodaySleep(response.data.userData[0].user_id, date)
-        this.props.getTodayActivity(response.data.userData[0].user_id, date)
-        this.props.getTodayNutrition(response.data.userData[0].user_id, date)
-        this.props.getTodayWeight(response.data.userData[0].user_id)
+        let userID = response.data.userData[0].user_id;
+        this.props.getTodaySleep(userID, date, rest)
+        this.props.getTodayActivity(userID, date, rest)
+        this.props.getTodayNutrition(userID, date, rest)
+        this.props.getTodayWeight(userID, date, rest)
         this.props.saveUserData(response.data.userData[0])
-
-        axios.post(`/api/data/${response.data.userData[0].user_id}`)
-          .then(() => console.log('first user data hit'))
+        axios.post(`/api/data/getSinceLastLogin/${userID}/${response.data.userData[0].last_login}/post`)
+          .then(result => {
+            axios.post(`/api/data/updateLastLogin/${userID}/${date}`)
+              .then(res => console.log(res))
+          })
       })
   }
 
@@ -37,7 +45,9 @@ class UserLanding extends Component {
 
     let goalWeightDifference = Math.abs(userData.goal_starting_weight - userData.goal_weight);
     let currentWeightDifference = Math.abs(userData.user_weight - userData.goal_weight);
-  
+    
+    console.log(this.props)
+    
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">

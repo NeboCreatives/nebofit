@@ -1,1 +1,2 @@
-insert into weight (user_id, weight, body_fat, date) values ($1, $2, $3, $4)
+insert into weight (user_id, weight, date) values ($1, $2, $3)
+returning *;

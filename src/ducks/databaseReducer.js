@@ -18,8 +18,9 @@ const GET_TODAY_NUTRITION = 'GET_TODAY_NUTRITION';
 const GET_TODAY_WEIGHT = 'GET_TODAY_WEIGHT';
 const SAVE_USER_DATA = 'SAVE_USER_DATA';
 
-export const getTodaySleep = (userID, date) => {
-    const data = axios.get(`/api/data/getTodaySleep/${userID}/${date}`)
+
+export const getTodaySleep = (userID, date, rest) => {
+    const data = axios.get(`/api/data/getTodaySleep/${userID}/${date}/${rest}`)
         .then(result => result.data)
     return {
         type: GET_TODAY_SLEEP,
@@ -27,8 +28,8 @@ export const getTodaySleep = (userID, date) => {
     }
 }
 
-export const getTodayActivity = (userID, date) => {
-    const data = axios.get(`/api/data/getTodayActivity/${userID}/${date}`)
+export const getTodayActivity = (userID, date, rest) => {
+    const data = axios.get(`/api/data/getTodayActivity/${userID}/${date}/${rest}`)
         .then(result => result.data)
     return {
         type: GET_TODAY_ACTIVITY,
@@ -36,8 +37,8 @@ export const getTodayActivity = (userID, date) => {
     }
 }
 
-export const getTodayNutrition = (userID, date) => {
-    const data = axios.get(`/api/data/getTodayNutrition/${userID}/${date}`)
+export const getTodayNutrition = (userID, date, rest) => {
+    const data = axios.get(`/api/data/getTodayNutrition/${userID}/${date}/${rest}`)
         .then(result => result.data)
     return {
         type: GET_TODAY_NUTRITION,
@@ -45,21 +46,21 @@ export const getTodayNutrition = (userID, date) => {
     }
 }
 
-export const getTodayWeight = (userID) => {
-    const data = axios.get(`/api/data/getTodayWeight/${userID}`)
+export const getTodayWeight = (userID, date, rest) => {
+    const data = axios.get(`/api/data/getTodayWeight/${userID}/${date}/${rest}`)
         .then(result => result.data)
     return {
         type: GET_TODAY_WEIGHT,
         payload: data
     }
 }
+
 export const saveUserData = (userData) => {
     return {
         type: SAVE_USER_DATA,
         payload: userData
     }
 }
-
 
 export default function databaseReducer(state = initialState, action) {
     switch (action.type) {
