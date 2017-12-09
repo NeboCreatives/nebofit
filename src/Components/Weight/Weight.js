@@ -32,7 +32,8 @@ class Weight extends Component {
   }
 
   percentAnimation(){
-    if(this.state.percent < 98){
+    let weight = (Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))
+    if(this.state.percent < weight){
       this.setState({
         percent: ++this.state.percent
       })
@@ -48,7 +49,7 @@ class Weight extends Component {
       labels: ['Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight'],
       datasets: [
         {
-          label: 'Wieght',
+          label: 'Weight',
           backgroundColor: 'rgb(175, 94, 206)',
           borderColor: 'rgb(175, 94, 206)',
           borderWidth: 1,
@@ -78,7 +79,7 @@ class Weight extends Component {
               <div className="Weight_Chart">
                 <Circle
                   percent={this.state.percent}
-                  strokeWidth="6"
+                  strokeWidth="3"
                   strokeColor="#AF5ECE"
                   strokeLinecap="round"
                 />
