@@ -31,7 +31,8 @@ this.percentAnimation = this.percentAnimation.bind(this)
  }
 
  percentAnimation(){
-  if (this.state.percent < 72){
+  let hydration = ((Math.round(this.props.todayData.todayNutrition.water * 0.033814022558919)) / this.props.userData.goal_hydration) * 100;
+  if (this.state.percent < hydration){
      this.setState({
        percent: ++this.state.percent
 })

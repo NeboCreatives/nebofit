@@ -31,7 +31,8 @@ class Sleep extends Component {
   }
 
   percentAnimation(){
-    if(this.state.percent < 80){
+    let sleep = ((Math.round((this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100) / this.props.userData.goal_sleep) * 100;
+    if(this.state.percent < sleep){
       this.setState({
         percent: ++this.state.percent
       })
@@ -79,7 +80,7 @@ class Sleep extends Component {
               <div className="Sleep_Chart">
                 <Circle
                   percent={this.state.percent}
-                  strokeWidth="6"
+                  strokeWidth="3"
                   strokeColor="#7276E7"
                   strokeLinecap="round"
                 />

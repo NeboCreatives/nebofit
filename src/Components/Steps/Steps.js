@@ -32,7 +32,8 @@ class Steps extends Component {
   }
 
   percentAnimation(){
-    if(this.state.percent < 63){
+    let steps = ((Math.round((this.props.todayData.todayActivity.steps) * 100) / 100) / this.props.userData.goal_steps) * 100;
+    if(this.state.percent < steps){
       this.setState({
         percent: ++this.state.percent
       })
@@ -80,7 +81,7 @@ class Steps extends Component {
               <div className="Steps_Chart">
                 <Circle
                   percent={this.state.percent}
-                  strokeWidth="6"
+                  strokeWidth="3"
                   strokeColor="#92C94A"
                   strokeLinecap="round"
                 />

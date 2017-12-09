@@ -4,6 +4,8 @@ import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
+import {getTodayNutrition} from "../../ducks/databaseReducer"
+import { connect } from 'react-redux';
 
 
 class Nutrition extends Component {
@@ -29,7 +31,8 @@ class Nutrition extends Component {
   }
 
   percentAnimation(){
-    if(this.state.percent < 60){
+    let calories = ((this.props.todayData.todayNutrition.calories) / 2000) * 100;
+    if(this.state.percent < calories){
       this.setState({
         percent: ++this.state.percent
       })
@@ -74,14 +77,14 @@ class Nutrition extends Component {
               <div className="Nutrition_Chart">
                 <Circle
                   percent={this.state.percent}
-                  strokeWidth="6"
+                  strokeWidth="3"
                   strokeColor="#F4B036"
                   strokeLinecap="round"
                 />
 
                 <div className="Nutrition_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>7.2</p>
+                  <p>{typeof this.props.todayData.todayNutrition === 'undefined' ? 0 : this.props.todayData.todayNutrition.calories}</p>
                   <p>Cal</p>
                 </div>
                 <div className="Nutrition_Goal_Reminder">
@@ -106,4 +109,12 @@ class Nutrition extends Component {
   }
 }
 
-export default Nutrition;
+const mapStateToProps = (state) => {
+  const {todayData, userData} = state.databaseReducer;
+  return {
+    todayData,
+    userData
+  }
+}
+
+export default connect(mapStateToProps, {getTodayNutrition}) (Nutrition);
