@@ -4,6 +4,9 @@ import moment from 'moment';
 import { Circle } from 'rc-progress';
 import { Link } from "react-router-dom";
 import ScaleImg from "../../Assets/weight.png"
+import { connect } from 'react-redux';
+import { getTodayWeight } from "../../ducks/databaseReducer";
+import {Bar} from "react-chartjs-2"
 
 
 class Weight extends Component {
@@ -85,14 +88,23 @@ class Weight extends Component {
 
                 <div className="Weight_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>182</p>
+                  <p>{(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))}</p>
                   <p>lb</p>
                 </div>
 
                 <div className="Weight_Goal_Reminder">
                     <h1>You are 10 lbs away from your goal</h1>
                   </div>
-
+                  <div>
+                  <Bar
+                        data={data}
+                        width={600}
+                        height={300}
+                        options={{
+                          maintainAspectRatio: false
+                        }}
+                      />
+                  </div>
               </div>
             </div>
           </div>
@@ -102,4 +114,12 @@ class Weight extends Component {
   }
 }
     
-export default Weight;
+const mapStateToProps = (state) => {
+  const { todayData, userData } = state.databaseReducer;
+  return {
+    todayData,
+    userData,
+  };
+};
+
+export default connect(mapStateToProps, {getTodayWeight})(Weight);
