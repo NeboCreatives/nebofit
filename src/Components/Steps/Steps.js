@@ -45,14 +45,14 @@ class Steps extends Component {
 
     render() {
       let data = {
-        labels: ['Steps', 'Steps', 'Steps', 'Steps', 'Steps', 'Steps', 'Steps'],
+        labels: ['Steps'],
         datasets: [
           {
             label: 'Steps',
             backgroundColor: 'rgb(146, 201, 74)',
             borderColor: 'rgb(146, 201, 74)',
             borderWidth: 1,
-            data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+            data: [this.props.todayData.todayActivity.steps]
           }
         ]
       }
@@ -96,8 +96,8 @@ class Steps extends Component {
                     <div className="chart">
                     <Bar
                         data={data}
-                        width={600}
-                        height={300}
+                        width={5}
+                        height={100}
                         options={{
                           maintainAspectRatio: false
                         }}

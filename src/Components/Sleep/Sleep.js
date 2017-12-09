@@ -45,14 +45,14 @@ class Sleep extends Component {
 
   render() {
     let data = {
-      labels: ['Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep', 'Sleep'],
+      labels: ['Sleep'],
       datasets: [
         {
           label: 'Sleep',
           backgroundColor: 'rgb(114, 118, 231)',
           borderColor: 'rgb(114, 118, 231)',
           borderWidth: 1,
-          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+          data: [Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100]
         }
       ]
     }
@@ -97,8 +97,8 @@ class Sleep extends Component {
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={600}
-                        height={300}
+                        width={5}
+                        height={100}
                         options={{
                           maintainAspectRatio: false
                         }}

@@ -45,14 +45,14 @@ this.percentAnimation = this.percentAnimation.bind(this)
 
   render() {
     let data = {
-      labels: ['Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration', 'Hydration'],
+      labels: ['Hydration'],
       datasets: [
         {
           label: 'Hydration',
           backgroundColor: 'rgb(95, 197, 212)',
           borderColor: 'rgb(95, 197, 212)',
           borderWidth: 1,
-          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+          data: [(Math.round(this.props.todayData.todayNutrition.water*0.033814022558919))]
         }
       ]
     }
@@ -95,8 +95,8 @@ this.percentAnimation = this.percentAnimation.bind(this)
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={600}
-                        height={300}
+                        width={5}
+                        height={100}
                         options={{
                           maintainAspectRatio: false
                         }}
