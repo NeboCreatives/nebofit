@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import './Weight.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
-import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import ScaleImg from "../../Assets/weight.png"
-import {Bar} from "react-chartjs-2";
-import {getTodayWeight} from '../../ducks/databaseReducer';
 
 
 class Weight extends Component {
@@ -44,18 +41,6 @@ class Weight extends Component {
 
 
   render() {
-    let data = {
-      labels: ['Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight'],
-      datasets: [
-        {
-          label: 'Wieght',
-          backgroundColor: 'rgb(175, 94, 206)',
-          borderColor: 'rgb(175, 94, 206)',
-          borderWidth: 1,
-          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
-        }
-      ]
-    }
     return (
       <div className="Weight">
         <div className="Weight_Header">
@@ -65,7 +50,7 @@ class Weight extends Component {
           </div>
           </Link>
           <div>
-          <img src={ScaleImg} alt="scale img" className="Scale_Img"/>
+          <img src={ScaleImg} alt="scale img"/>
             <h1 className="Weight_Today">Weight</h1>
           </div>
           <div className='Weight_Header_Buffer'></div>
@@ -85,23 +70,14 @@ class Weight extends Component {
 
                 <div className="Weight_Chart_Details">
                 <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>{(Math.round(this.props.todayData.todayWeight.weight*2.20462262185))}</p>
+                  <p>182</p>
                   <p>lb</p>
                 </div>
 
                 <div className="Weight_Goal_Reminder">
                     <h1>You are 10 lbs away from your goal</h1>
                   </div>
-                  <div className="chart">
-                    <Bar
-                        data={data}
-                        width={600}
-                        height={300}
-                        options={{
-                          maintainAspectRatio: false
-                        }}
-                      />
-                </div>
+
               </div>
             </div>
           </div>
@@ -110,13 +86,5 @@ class Weight extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  const { todayData, userData} = state.databaseReducer;
-  return {
-    todayData,
-    userData
-  };
-};
-
-export default connect(mapStateToProps,{getTodayWeight})(Weight);
+    
+export default Weight;
