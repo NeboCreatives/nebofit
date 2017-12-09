@@ -44,14 +44,14 @@ class Nutrition extends Component {
 
   render() {
     let data = {
-      labels: ['Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition', 'Nutrition'],
+      labels: ['Nutrition'],
       datasets: [
         {
           label: 'Nutrition',
           backgroundColor: 'rgb(244, 176, 54)',
           borderColor: 'rgb(244, 176, 54)',
           borderWidth: 1,
-          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+          data: [typeof this.props.todayData.todayNutrition === 'undefined' ? 0 : this.props.todayData.todayNutrition.calories]
         }
       ]
     }
@@ -93,8 +93,8 @@ class Nutrition extends Component {
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={600}
-                        height={300}
+                        width={5}
+                        height={100}
                         options={{
                           maintainAspectRatio: false
                         }}

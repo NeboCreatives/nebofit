@@ -47,14 +47,14 @@ class Weight extends Component {
   render() {
    
     let data = {
-      labels: ['Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight', 'Weight'],
+      labels: ['Weight'],
       datasets: [
         {
           label: 'Weight',
           backgroundColor: 'rgb(175, 94, 206)',
           borderColor: 'rgb(175, 94, 206)',
           borderWidth: 1,
-          data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+          data: [(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))]
         }
       ]
     }
@@ -98,8 +98,8 @@ class Weight extends Component {
                   <div>
                   <Bar
                         data={data}
-                        width={600}
-                        height={300}
+                        width={5}
+                        height={100}
                         options={{
                           maintainAspectRatio: false
                         }}
