@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './Sleep.css';
 import moment from 'moment';
 import {Circle} from 'rc-progress';
-import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
 import {connect} from 'react-redux';
 import {getTodaySleep} from '../../ducks/databaseReducer';
@@ -70,7 +69,6 @@ class Sleep extends Component {
         }
       ]
     }
-    const date = moment().format('MMMM DD, YYYY');
     return (
       <div className="Sleep">
       <Hamburger/>
@@ -81,7 +79,6 @@ class Sleep extends Component {
             <h1 className="Sleep_Today">Sleep</h1>
           </div>
           <div className='Sleep_Header_Buffer'></div>
-          {/*<h1 className="Sleep_Date">{date}</h1>*/}
         </div>
         <div className="Sleep_Metrics">
           <div className="Sleep_Metric">

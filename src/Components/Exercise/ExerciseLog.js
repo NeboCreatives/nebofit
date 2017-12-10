@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getExercises, updateExercise, addWorkout, addToSets} from '../../ducks/exerciseReducer';
-
+import './Exercise.css'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -50,7 +50,7 @@ class ExerciseLog extends Component {
   //submit data to db and place onto the redux store
   handleAdd() {
     this.props.addWorkout();
-    this.props.addToSets(this.props.inputs,this.props.exercises[this.state.value]);
+    this.props.addToSets(this.props.inputs, this.props.exercises[this.state.value]);
 
     this.setState({
       exercise: '',
@@ -70,7 +70,7 @@ class ExerciseLog extends Component {
     });
 
     const exerciseCard = this.props.sets.map((exercise) => {
-      console.log(exercise)
+      console.log(exercise);
       return (
         <div> workout: {exercise.workout} </div>
       );
@@ -78,10 +78,14 @@ class ExerciseLog extends Component {
 
     console.log(this.props.sets);
     return (
-      <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+      <div className='ExerciesLog'>
         <div style={{display: 'flex'}}>
-          <DropDownMenu style={{width: '180px', marginLeft: '-15px'}} maxHeight={300} value={this.state.value}
-                        onChange={this.handleDropDown}>
+          <DropDownMenu
+            style={{width: '180px', marginLeft: '-15px'}}
+            maxHeight={300}
+            value={this.state.value}
+            onChange={this.handleDropDown}
+          >
             {exercises}
           </DropDownMenu>
 
@@ -126,7 +130,6 @@ class ExerciseLog extends Component {
         <button onClick={this.handleAdd}>
           Add
         </button>
-
         {exerciseCard}
       </div>
     );

@@ -4,7 +4,7 @@ import moment from 'moment';
 import {Circle} from 'rc-progress';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
   getTodaySleep,
   getTodayActivity,
@@ -14,8 +14,6 @@ import {
   updateUserLandingFlag,
   getAllData
 } from '../../ducks/databaseReducer';
-import Hamburger from "../Hamburger/Hamburger"
-
 
 class UserLanding extends Component {
   constructor(props) {
@@ -135,7 +133,6 @@ class UserLanding extends Component {
 
   caloriesAnimation() {
     let todayData = this.props.todayData;
-    let userData = this.props.userData;
     let calories = ((todayData.todayNutrition.calories) / 2000) * 100;
     if (this.state.caloriesPercent < calories) {
       this.setState({
