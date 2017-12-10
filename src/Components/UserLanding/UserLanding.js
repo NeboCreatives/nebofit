@@ -14,6 +14,8 @@ import {
   updateUserLandingFlag,
   getAllData
 } from '../../ducks/databaseReducer';
+import Drawer from "material-ui/Drawer";
+import MenuItem from "material-ui/MenuItem";
 
 class UserLanding extends Component {
   constructor(props) {
@@ -32,6 +34,7 @@ class UserLanding extends Component {
       hydrationPercent: 0,
       weightPercent: 0,
       workoutPercent: 0,
+      open: false
     };
     this.sleepAnimation = this.sleepAnimation.bind(this);
     this.stepsAnimation = this.stepsAnimation.bind(this);
@@ -171,6 +174,10 @@ class UserLanding extends Component {
     }
   }
 
+  handleToggle = () => this.setState({ open: !this.state.open });
+  
+    handleClose = () => this.setState({ open: false });
+
   render() {
     const date = moment().format('MMMM DD, YYYY');
 
@@ -180,8 +187,56 @@ class UserLanding extends Component {
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">
+        <div className="UserLanding_Buffer"></div>
+        <div classname="UserLanding_Center">
           <h1 className="UserLanding_Today">Today</h1>
           <h1 className="UserLanding_Date">{date}</h1>
+          </div>
+        <div className="Hamburger_Button">
+          <div className="menu-button" onClick={this.handleToggle}>
+            <div className="Hamburger_Div" />
+            <div className="Hamburger_Div" />
+            <div className="Hamburger_Div" />
+          </div>
+        </div>
+        </div>
+
+        <div>
+          <Drawer
+            docked={false}
+            width={200}
+            open={this.state.open}
+            openSecondary={true}
+            onRequestChange={open => this.setState({ open })}
+            containerClassName="drawer"
+          >
+            <Link to="/Profile" className="link">
+            <MenuItem onClick={this.handleClose} className="menu-item">
+                Profile
+            </MenuItem>
+            </Link>
+
+            <a href="#">
+              <MenuItem onClick={this.handleClose} className="menu-item">
+                Peak Performance
+              </MenuItem>
+            </a>
+            <a href="#s">
+              <MenuItem onClick={this.handleClose} className="menu-item">
+                Hello
+              </MenuItem>
+            </a>
+            <a href="#">
+              <MenuItem onClick={this.handleClose} className="menu-item">
+                Goals
+              </MenuItem>
+            </a>
+            <a href="#">
+              <MenuItem onClick={this.handleClose} className="menu-item">
+                Contact
+              </MenuItem>
+            </a>
+          </Drawer>
         </div>
 
         <div className="UserLanding_Metrics">
