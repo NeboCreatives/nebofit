@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getExercises, updateExercise, addWorkout, addToSets} from '../../ducks/exerciseReducer';
-import './Exercise.css'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
+import './ExerciseLog.css';
 
+import {Dropdown, Input, Button} from 'semantic-ui-react';
 
 class ExerciseLog extends Component {
   constructor() {
@@ -64,10 +63,10 @@ class ExerciseLog extends Component {
   render() {
 
     //populates exercise drop down menu with values from redux store
-    const exercises = [];
-    const exercisesList = this.props.exercises.map((item, index) => {
-      exercises.push(<MenuItem value={index} key={index} primaryText={item}/>);
-    });
+    // const exercises = [];
+    // const exercisesList = this.props.exercises.map((item, index) => {
+    //   exercises.push(<MenuItem value={index} key={index} primaryText={item}/>);
+    // });
 
     const exerciseCard = this.props.sets.map((exercise) => {
       console.log(exercise);
@@ -78,59 +77,67 @@ class ExerciseLog extends Component {
 
     console.log(this.props.sets);
     return (
-      <div className='ExerciesLog'>
-        <div style={{display: 'flex'}}>
-          <DropDownMenu
-            style={{width: '180px', marginLeft: '-15px'}}
-            maxHeight={300}
-            value={this.state.value}
-            onChange={this.handleDropDown}
-          >
-            {exercises}
-          </DropDownMenu>
+      <div className='ExerciseLog'>
+        <Dropdown
+          search selection
+          placeholder='Select Workout'
+          options={this.props.exercises}
+        />
 
-          <div style={{margin: '0px 6px 0px -15px'}}>SETS</div>
-          <input
+        <div className='ExerciseLog_Inputs'>
+          <div>SETS</div>
+          <Input
             ref='sets'
             value={this.state.sets}
             placeholder='0'
-            style={{borderColor: 'black', width: '25px'}}
+            size='mini'
+            style={{width: '36px'}}
             onChange={this.handleChange}
           />
-        </div>
 
-        <div style={{display: 'flex'}}>
-          <div style={{margin: '0 6px 0 6px'}}>WEIGHT</div>
-          <input
+          <div>WEIGHT</div>
+          <Input
             ref='weight'
             value={this.state.weight}
             placeholder='0'
-            style={{borderColor: 'black', width: '25px'}}
+            size='mini'
+            style={{width: '36px'}}
             onChange={this.handleChange}
           />
 
-          <div style={{margin: '0 6px 0 6px'}}>REPS</div>
-          <input
+          <div>REPS</div>
+          <Input
             ref='reps'
             value={this.state.reps}
             placeholder='0'
-            style={{borderColor: 'black', width: '25px'}}
+            size='mini'
+            style={{width: '36px'}}
             onChange={this.handleChange}
           />
 
-          <div style={{margin: '0 6px 0 6px'}}>RPE</div>
-          <input
+          <div>RPE</div>
+          <Input
             ref='rpe'
             value={this.state.rpe}
             placeholder='0'
-            style={{borderColor: 'black', width: '25px'}}
+            size='mini'
+            style={{width: '36px'}}
             onChange={this.handleChange}
           />
-        </div>
-        <button onClick={this.handleAdd}>
+
+        <Button
+          size='mini'
+          onClick={this.handleAdd}>
           Add
-        </button>
+        </Button>
+        </div>
         {exerciseCard}
+
+        <Button
+          size='mini'
+        >
+          Submit
+        </Button>
       </div>
     );
   }

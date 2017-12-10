@@ -1,9 +1,19 @@
 const initialState = {
   exercises: [
-    'benchpress',
-    'squats',
-    'pull-ups',
-    'sit-ups',
+    {
+      text: 'Bench Press',
+      value: 'Bench Press',
+    },
+    {
+      text: 'Squats',
+      value: 'Squats',
+    },{
+      text: 'Pull Ups',
+      value: 'Pull Ups',
+    },{
+      text: 'Dead lifts',
+      value: 'Dead lifts',
+    },
   ],
   inputs: [{
     workout: '',
