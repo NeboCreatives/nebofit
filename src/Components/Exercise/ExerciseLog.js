@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getExercises, updateExercise, addWorkout} from '../../ducks/exerciseReducer';
+import {getExercises, updateExercise, addWorkout, addToSets} from '../../ducks/exerciseReducer';
 
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -13,6 +13,10 @@ class ExerciseLog extends Component {
     this.state = {
       value: 1,
       exercise: '',
+      sets: '',
+      weight: '',
+      reps: '',
+      rpe: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -22,7 +26,7 @@ class ExerciseLog extends Component {
   handleDropDown = (event, index, value) => {
     this.setState({
       value: value,
-      exercise: '',
+      exercise: this.props.exercises[value],
     });
   };
 
@@ -33,17 +37,28 @@ class ExerciseLog extends Component {
     let reps = this.refs.reps.value;
     let rpe = this.refs.rpe.value;
 
+    this.setState({
+      sets: this.refs.sets.value,
+      weight: this.refs.weight.value,
+      reps: this.refs.reps.value,
+      rpe: this.refs.rpe.value,
+    });
+
     this.props.updateExercise({sets, weight, reps, rpe});
   }
 
   //submit data to db and place onto the redux store
   handleAdd() {
-    let workout = this.state.exercise;
-    let sets = this.refs.sets.value;
-    let weight = this.refs.weight.value;
-    let reps = this.refs.reps.value;
-    let rpe = this.refs.rpe.value;
     this.props.addWorkout();
+    this.props.addToSets(this.props.inputs,this.props.exercises[this.state.value]);
+
+    this.setState({
+      exercise: '',
+      sets: '',
+      weight: '',
+      reps: '',
+      rpe: '',
+    });
   }
 
   render() {
@@ -53,54 +68,78 @@ class ExerciseLog extends Component {
     const exercisesList = this.props.exercises.map((item, index) => {
       exercises.push(<MenuItem value={index} key={index} primaryText={item}/>);
     });
+
+    const exerciseCard = this.props.sets.map((exercise) => {
+      console.log(exercise)
+      return (
+        <div> workout: {exercise.workout} </div>
+      );
+    });
+
+    console.log(this.props.sets);
     return (
-      <div style={{display: 'flex', alignItems: 'center'}}>
-        <DropDownMenu style={{width: '200px'}} maxHeight={300} value={this.state.value} onChange={this.handleDropDown}>
-          {exercises}
-        </DropDownMenu>
+      <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+        <div style={{display: 'flex'}}>
+          <DropDownMenu style={{width: '180px', marginLeft: '-15px'}} maxHeight={300} value={this.state.value}
+                        onChange={this.handleDropDown}>
+            {exercises}
+          </DropDownMenu>
 
-        <div style={{margin: '0 6px 0 6px'}}>SETS</div>
-        <input
-          ref='sets'
-          placeholder='0'
-          onChange={this.handleChange}
-        />
+          <div style={{margin: '0px 6px 0px -15px'}}>SETS</div>
+          <input
+            ref='sets'
+            value={this.state.sets}
+            placeholder='0'
+            style={{borderColor: 'black', width: '25px'}}
+            onChange={this.handleChange}
+          />
+        </div>
 
-        <div style={{margin: '0 6px 0 6px'}}>WEIGHT</div>
-        <input
-          ref='weight'
-          placeholder='0'
-          onChange={this.handleChange}
-        />
+        <div style={{display: 'flex'}}>
+          <div style={{margin: '0 6px 0 6px'}}>WEIGHT</div>
+          <input
+            ref='weight'
+            value={this.state.weight}
+            placeholder='0'
+            style={{borderColor: 'black', width: '25px'}}
+            onChange={this.handleChange}
+          />
 
-        <div style={{margin: '0 6px 0 6px'}}>REPS</div>
-        <input
-          ref='reps'
-          placeholder='0'
-          onChange={this.handleChange}
-        />
+          <div style={{margin: '0 6px 0 6px'}}>REPS</div>
+          <input
+            ref='reps'
+            value={this.state.reps}
+            placeholder='0'
+            style={{borderColor: 'black', width: '25px'}}
+            onChange={this.handleChange}
+          />
 
-        <div style={{margin: '0 6px 0 6px'}}>RPE</div>
-        <input
-          ref='rpe'
-          placeholder='0'
-          onChange={this.handleChange}
-        />
+          <div style={{margin: '0 6px 0 6px'}}>RPE</div>
+          <input
+            ref='rpe'
+            value={this.state.rpe}
+            placeholder='0'
+            style={{borderColor: 'black', width: '25px'}}
+            onChange={this.handleChange}
+          />
+        </div>
         <button onClick={this.handleAdd}>
           Add
         </button>
+
+        {exerciseCard}
       </div>
     );
   }
 }
 
 const mapsStateToProps = (state) => {
-  const {exercises, inputs} = state.reducer;
-  console.log(exercises);
+  const {exercises, inputs, sets} = state.reducer;
   return {
     exercises,
     inputs,
+    sets,
   };
 };
 
-export default connect(mapsStateToProps, {getExercises, updateExercise, addWorkout})(ExerciseLog);
+export default connect(mapsStateToProps, {getExercises, updateExercise, addWorkout, addToSets})(ExerciseLog);
