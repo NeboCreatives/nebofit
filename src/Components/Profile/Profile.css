@@ -1,0 +1,36 @@
+.Profile {
+    background-color: #282C31;
+    min-height: 100vh;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    padding-top: 15px;
+}
+
+.Profile_Hr {
+    border: 1px solid #999999;
+    width: 250px;
+}
+
+.Avatar {
+    margin-top: 45px;
+}
+
+.Avatar_Img {
+    height: 33%;
+    width: 33%;
+}
+
+.Profile_Today {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: 100;
+        margin-top: 6px;
+        /*color: #7276E7;*/
+}
+
+.Profile_User_Name {
+    margin-top: 21px;
+    font-size: 36px;
+    font-weight: 100;
+}

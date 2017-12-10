@@ -13,6 +13,7 @@ import {
   saveUserData,
   updateUserLandingFlag,
 } from '../../ducks/databaseReducer';
+import Hamburger from "../Hamburger/Hamburger"
 
 
 class UserLanding extends Component {
