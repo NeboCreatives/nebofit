@@ -43,17 +43,30 @@ class Sleep extends Component {
     }
   }
 
+  
 
   render() {
+    let mapMinutes = this.props.allData.sleepData.map(night => {
+      return Math.round((night.total_minutes/60)*100)/100
+    })
+
+    let mapDays = this.props.allData.sleepData.map(night => {
+      return moment(night.date).format('dddd')
+    })
+    mapMinutes = mapMinutes.splice(0,7).reverse();
+    mapDays = mapDays.splice(0,7).reverse();
+
+    console.log(mapMinutes)
+    console.log(mapDays)
+
     let data = {
-      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      labels: mapDays,
       datasets: [
         {
-          label: 'Sleep',
-          backgroundColor: 'rgb(114, 118, 231)',
+          // backgroundColor: 'rgb(114, 118, 231)',
           borderColor: 'rgb(114, 118, 231)',
-          borderWidth: 1,
-          data: [Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100]
+          borderWidth: 3,
+          data: mapMinutes
         }
       ]
     }
@@ -95,11 +108,22 @@ class Sleep extends Component {
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={25}
-                        height={100}
+                        width={100}
+                        height={250}
                         options={{
-                          maintainAspectRatio: false
-                        }}
+                          maintainAspectRatio: false,
+                          scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                      display: false
+                    }
+                  }
+                        }
                       />
                </div>
               </div>
@@ -112,10 +136,11 @@ class Sleep extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {todayData, userData} = state.databaseReducer
+  const {todayData, userData, allData} = state.databaseReducer
   return {
     todayData,
-    userData
+    userData,
+    allData
   }
 }
 

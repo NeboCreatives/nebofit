@@ -44,15 +44,24 @@ class Nutrition extends Component {
   }
 
   render() {
+    let mapNutrition = this.props.allData.nutritionData.map(health => {
+      return  health.calories
+    })
+
+    let mapDays = this.props.allData.nutritionData.map(health => {
+      return moment(health.date).format('dddd')
+    })
+    mapNutrition = mapNutrition.splice(0,7).reverse();
+    mapDays = mapDays.splice(0,7).reverse();
+
     let data = {
-      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      labels: mapDays,
       datasets: [
         {
-          label: ['Nutrition'],
-          backgroundColor: 'rgb(244, 176, 54)',
-          borderColor: 'rgb(244, 176, 54)',
-          borderWidth: 1,
-          data: [typeof this.props.todayData.todayNutrition === 'undefined' ? 0 : this.props.todayData.todayNutrition.calories]
+          // backgroundColor: 'rgb(114, 118, 231)',
+          borderColor: 'rgb(244,176,54)',
+          borderWidth: 3,
+          data: mapNutrition
         }
       ]
     }
@@ -88,13 +97,24 @@ class Nutrition extends Component {
                     <h1>543 calories to go</h1>
                   </div>
                   <div className="chart">
-                    <Bar
+                  <Bar
                         data={data}
-                        width={25}
-                        height={100}
+                        width={100}
+                        height={250}
                         options={{
-                          maintainAspectRatio: false
-                        }}
+                          maintainAspectRatio: false,
+                          scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                      display: false
+                    }
+                  }
+                        }
                       />
                </div>
               </div>
@@ -107,10 +127,11 @@ class Nutrition extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {todayData, userData} = state.databaseReducer;
+  const {todayData, userData, allData} = state.databaseReducer;
   return {
     todayData,
-    userData
+    userData,
+    allData
   }
 }
 

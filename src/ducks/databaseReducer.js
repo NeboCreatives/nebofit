@@ -10,7 +10,13 @@ const initialState = {
         todayNutrition: {calories: 0},
         todayWeight: {weight: 0}
     },
-    userLandingFlag: false
+    userLandingFlag: false,
+    allData: {
+        sleepData: [{total_minutes: 0}],
+        activityData: [{steps: 0}],
+        nutritionData: [{calories: 0, water: 0}],
+        weightData: [{weight: 0}]
+    }
 }
 
 const GET_TODAY_SLEEP = 'GET_TODAY_SLEEP';

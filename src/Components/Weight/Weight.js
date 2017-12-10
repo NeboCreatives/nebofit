@@ -46,16 +46,24 @@ class Weight extends Component {
 
 
   render() {
+    let mapWeight = this.props.allData.weightData.map(scale => {
+      return (Math.round(scale.weight * 2.20462262185))
+    })
+
+    let mapDays = this.props.allData.weightData.map(scale => {
+      return moment(scale.date).format('dddd')
+    })
+    mapWeight = mapWeight.splice(0,7).reverse();
+    mapDays = mapDays.splice(0,7).reverse();
    
     let data = {
-      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      labels: mapDays,
       datasets: [
         {
-          label: 'Weight',
-          backgroundColor: 'rgb(175, 94, 206)',
-          borderColor: 'rgb(175, 94, 206)',
-          borderWidth: 1,
-          data: [(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))]
+          // backgroundColor: 'rgb(114, 118, 231)',
+          borderColor: 'rgb(175,94,206)',
+          borderWidth: 3,
+          data: mapWeight
         }
       ]
     }
@@ -95,11 +103,22 @@ class Weight extends Component {
                   <div>
                   <Bar
                         data={data}
-                        width={25}
-                        height={100}
+                        width={100}
+                        height={250}
                         options={{
-                          maintainAspectRatio: false
-                        }}
+                          maintainAspectRatio: false,
+                          scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                      display: false
+                    }
+                  }
+                        }
                       />
                   </div>
               </div>
@@ -112,10 +131,11 @@ class Weight extends Component {
 }
     
 const mapStateToProps = (state) => {
-  const { todayData, userData } = state.databaseReducer;
+  const { todayData, userData, allData } = state.databaseReducer;
   return {
     todayData,
     userData,
+    allData
   };
 };
 

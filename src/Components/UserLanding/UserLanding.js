@@ -179,6 +179,7 @@ class UserLanding extends Component {
 
     let todayData = this.props.todayData;
 
+    console.log(this.props.allData)
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">
