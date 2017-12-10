@@ -245,7 +245,7 @@ class UserLanding extends Component {
 
             <Link to="/UserLanding" className="link">
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Home
+                Today
               </MenuItem>
             </Link>
             <a href="#s">
