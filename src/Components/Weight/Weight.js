@@ -47,7 +47,7 @@ class Weight extends Component {
   render() {
    
     let data = {
-      labels: ['Weight'],
+      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       datasets: [
         {
           label: 'Weight',
@@ -98,7 +98,7 @@ class Weight extends Component {
                   <div>
                   <Bar
                         data={data}
-                        width={5}
+                        width={25}
                         height={100}
                         options={{
                           maintainAspectRatio: false

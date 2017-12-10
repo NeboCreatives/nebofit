@@ -45,7 +45,7 @@ this.percentAnimation = this.percentAnimation.bind(this)
 
   render() {
     let data = {
-      labels: ['Hydration'],
+      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       datasets: [
         {
           label: 'Hydration',
@@ -95,7 +95,7 @@ this.percentAnimation = this.percentAnimation.bind(this)
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={5}
+                        width={25}
                         height={100}
                         options={{
                           maintainAspectRatio: false
