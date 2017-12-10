@@ -7,6 +7,7 @@ import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
 import {Bar} from "react-chartjs-2";
 import { connect } from 'react-redux';
 import { getTodayActivity } from "../../ducks/databaseReducer";
+import Hamburger from "../Hamburger/Hamburger"
 
 class Steps extends Component {
 
@@ -61,12 +62,8 @@ class Steps extends Component {
 
     return (
       <div className="Steps">
+      <Hamburger/>
         <div className="Steps_Header">
-        <Link to="/UserLanding">
-          <div className='Back_Circle'>
-            <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
-          </div>
-          </Link>
           <div>
           <img src={StepsImg} alt="steps img" className="Steps_Img"/>
             <h1 className="Steps_Today">Steps</h1>

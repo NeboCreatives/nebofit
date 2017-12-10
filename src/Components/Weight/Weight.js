@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import ScaleImg from "../../Assets/weight.png"
 import { connect } from 'react-redux';
 import { getTodayWeight } from "../../ducks/databaseReducer";
-import {Bar} from "react-chartjs-2"
+import {Bar} from "react-chartjs-2";
+import Hamburger from "../Hamburger/Hamburger";
 
 
 class Weight extends Component {
@@ -61,14 +62,10 @@ class Weight extends Component {
 
     return (
       <div className="Weight">
+      <Hamburger/>
         <div className="Weight_Header">
-        <Link to="/UserLanding">
-          <div className='Back_Circle'>
-            <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
-          </div>
-          </Link>
           <div>
-          <img src={ScaleImg} alt="scale img"/>
+          <img src={ScaleImg} alt="scale img" className="Scale_Img"/>
             <h1 className="Weight_Today">Weight</h1>
           </div>
           <div className='Weight_Header_Buffer'></div>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
 import {connect} from 'react-redux';
 import {getTodayNutrition} from '../../ducks/databaseReducer';
+import Hamburger from "../Hamburger/Hamburger"
 
 
 class Hydration extends Component {
@@ -59,12 +60,8 @@ this.percentAnimation = this.percentAnimation.bind(this)
     console.log(this.state.percent)
     return (
       <div className="Hydration">
+      <Hamburger/>
         <div className="Hydration_Header">
-        <Link to="/UserLanding">
-          <div className='Back_Circle'>
-            <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
-          </div>
-          </Link>
           <div>
           <i className="fa fa-tint" aria-hidden="true"></i>
             <h1 className="Hydration_Today">Hydration</h1>

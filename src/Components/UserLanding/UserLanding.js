@@ -14,6 +14,7 @@ import {
   updateUserLandingFlag,
   getAllData
 } from '../../ducks/databaseReducer';
+import Hamburger from "../Hamburger/Hamburger"
 
 
 class UserLanding extends Component {

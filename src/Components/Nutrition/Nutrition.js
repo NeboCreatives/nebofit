@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
 import {getTodayNutrition} from "../../ducks/databaseReducer"
 import { connect } from 'react-redux';
+import Hamburger from "../Hamburger/Hamburger"
 
 
 class Nutrition extends Component {
@@ -57,12 +58,8 @@ class Nutrition extends Component {
     }
     return (
       <div className="Nutrition">
+      <Hamburger/>
         <div className="Nutrition_Header">
-        <Link to="/UserLanding">
-          <div className='Back_Circle'>
-            <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
-          </div>
-          </Link>
           <div>
           <i class="fa fa-cutlery" aria-hidden="true"></i>
             <h1 className="Nutrition_Today">Nutrition</h1>
