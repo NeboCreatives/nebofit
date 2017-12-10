@@ -1,0 +1,8 @@
+.ExerciseLog {
+    background-color: #282c31;
+    min-height: 100vh;
+    color: #ffffff;
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    padding-top: 15px;
+}
