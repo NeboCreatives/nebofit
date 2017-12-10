@@ -98,7 +98,7 @@ class Weight extends Component {
                 </div>
 
                 <div className="Weight_Goal_Reminder">
-                    <h1>You are 10 lbs away from your goal</h1>
+                    <h1>You are {Math.abs(this.props.userData.starting_weight - this.props.userData.goal_weight)} lbs away from your goal</h1>
                   </div>
                   <div>
                   <Bar

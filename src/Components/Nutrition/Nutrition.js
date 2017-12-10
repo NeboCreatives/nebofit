@@ -44,6 +44,7 @@ class Nutrition extends Component {
   }
 
   render() {
+    console.log(this.props.userData)
     let mapNutrition = this.props.allData.nutritionData.map(health => {
       return  health.calories
     })
@@ -94,7 +95,7 @@ class Nutrition extends Component {
                   <p>Cal</p>
                 </div>
                 <div className="Nutrition_Goal_Reminder">
-                    <h1>543 calories to go</h1>
+                  <h1>{this.props.userData.goal_calories - this.props.todayData.todayNutrition.calories} cals to go</h1>
                   </div>
                   <div className="chart">
                   <Bar

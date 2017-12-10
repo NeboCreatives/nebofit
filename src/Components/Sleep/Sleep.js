@@ -56,8 +56,6 @@ class Sleep extends Component {
     mapMinutes = mapMinutes.splice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
 
-    console.log(mapMinutes)
-    console.log(mapDays)
 
     let data = {
       labels: mapDays,
@@ -103,7 +101,7 @@ class Sleep extends Component {
                 </div>
 
                 <div className="Sleep_Goal_Reminder">
-                    <h1>Try to get .6 hrs more sleep tonight</h1>
+                    <h1>Need {this.props.userData.goal_sleep - Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100} More hours of sleep needed to reach goal</h1>
                   </div>
                   <div className="chart">
                     <Bar
