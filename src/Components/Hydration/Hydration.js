@@ -44,15 +44,26 @@ this.percentAnimation = this.percentAnimation.bind(this)
 }
 
   render() {
+    let mapWater = this.props.allData.nutritionData.map(dayData => {
+      return Math.round(dayData.water*0.033814022558919)
+    })
+
+    let mapDays = this.props.allData.nutritionData.map(dayData => {
+      return moment(dayData.date).format('dddd')
+    })
+    mapWater = mapWater.splice(0,7).reverse();
+    mapDays = mapDays.splice(0,7).reverse();
+
+    console.log(mapWater)
+
     let data = {
-      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      labels: mapDays,
       datasets: [
         {
-          label: 'Hydration',
-          backgroundColor: 'rgb(95, 197, 212)',
-          borderColor: 'rgb(95, 197, 212)',
-          borderWidth: 1,
-          data: [(Math.round(this.props.todayData.todayNutrition.water*0.033814022558919))]
+          // backgroundColor: 'rgb(114, 118, 231)',
+          borderColor: 'rgb(95,197,212)',
+          borderWidth: 3,
+          data: mapWater
         }
       ]
     }
@@ -93,13 +104,24 @@ this.percentAnimation = this.percentAnimation.bind(this)
                     <h1>12oz to go</h1>
                   </div>
                   <div className="chart">
-                    <Bar
+                  <Bar
                         data={data}
-                        width={25}
-                        height={100}
+                        width={100}
+                        height={250}
                         options={{
-                          maintainAspectRatio: false
-                        }}
+                          maintainAspectRatio: false,
+                          scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                      display: false
+                    }
+                  }
+                        }
                       />
                 </div>
               </div>
@@ -112,10 +134,11 @@ this.percentAnimation = this.percentAnimation.bind(this)
 }
 
 const mapStateToProps = (state) => {
-  const {todayData, userData} = state.databaseReducer
+  const {todayData, userData, allData} = state.databaseReducer
   return {
     todayData,
-    userData
+    userData,
+    allData
   }
 }
 
