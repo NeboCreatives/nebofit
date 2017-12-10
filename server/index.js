@@ -114,6 +114,7 @@ app.get(`/api/data/getTodayWeight/:id/:date/:rest`, fCtrl.getTodayWeight)
 app.get(`/api/data/getTodayNutrition/:id/:date/:rest`, fCtrl.getTodayNutrition)
 app.post(`/api/data/getSinceLastLogin/:id/:date/:rest`, fCtrl.getSinceLastLogin)
 app.post(`/api/data/updateLastLogin/:id/:date`, fCtrl.updateLastLogin)
+app.get(`/api/data/getAllData/:id`, fCtrl.getAllData)
 
 
 // launch the server

@@ -19,6 +19,7 @@ const GET_TODAY_NUTRITION = 'GET_TODAY_NUTRITION';
 const GET_TODAY_WEIGHT = 'GET_TODAY_WEIGHT';
 const SAVE_USER_DATA = 'SAVE_USER_DATA';
 const UPDATE_USER_LANDING_FLAG = 'UPDATE_USER_LANDING_FLAG';
+const GET_ALL_DATA = 'GET_ALL_DATA';
 
 
 export const getTodaySleep = (userID, date, rest) => {
@@ -71,6 +72,15 @@ export const updateUserLandingFlag = () => {
     }
 }
 
+export const getAllData = (userID) => {
+    const allData = axios.get(`/api/data/getAllData/${userID}`)
+        .then(result => result.data)
+    return {
+        type: GET_ALL_DATA,
+        payload: allData
+    }
+}
+
 export default function databaseReducer(state = initialState, action) {
     switch (action.type) {
         case GET_TODAY_SLEEP + '_FULFILLED':
@@ -85,6 +95,8 @@ export default function databaseReducer(state = initialState, action) {
             return Object.assign({}, state, {userData: action.payload})
         case UPDATE_USER_LANDING_FLAG:
             return Object.assign({}, state, {userLandingFlag: action.payload})
+        case GET_ALL_DATA + '_FULFILLED':
+            return Object.assign({}, state, {allData: action.payload})
         default:
             return state;
     }

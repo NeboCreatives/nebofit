@@ -169,6 +169,24 @@ module.exports = {
         const db = req.app.get('db');
         db.update_last_login([req.params.id, req.params.date])
             .then(returning => res.status(200).send(returning))
+    },
+
+    getAllData: (req, res) => {
+        const db = req.app.get('db');
+        db.get_all_activity([req.params.id])
+            .then(activityData => {
+                db.get_all_nutrition([req.params.id])
+                    .then(nutritionData => {
+                        db.get_all_sleep([req.params.id])
+                            .then(sleepData => {
+                                db.get_all_weight([req.params.id])
+                                    .then(weightData => {
+                                        let allData = {activityData, nutritionData, sleepData, weightData}
+                                        res.status(200).send(allData);
+                                    })
+                            })
+                    })
+            })
     }
 }
 

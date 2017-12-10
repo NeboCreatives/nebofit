@@ -12,6 +12,7 @@ import {
   getTodayWeight,
   saveUserData,
   updateUserLandingFlag,
+  getAllData
 } from '../../ducks/databaseReducer';
 
 
@@ -58,6 +59,8 @@ class UserLanding extends Component {
               axios.post(`/api/data/updateLastLogin/${userID}/${date}`)
                 .then(res => console.log(res));
             });
+  
+          this.props.getAllData(userID);    
         });
       this.props.updateUserLandingFlag();
     }
@@ -174,8 +177,6 @@ class UserLanding extends Component {
     const date = moment().format('MMMM DD, YYYY');
 
     let todayData = this.props.todayData;
-
-    console.log(this.props);
 
     return (
       <div className="UserLanding">
@@ -308,11 +309,12 @@ class UserLanding extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {todayData, userData, userLandingFlag} = state.databaseReducer;
+  const {todayData, userData, userLandingFlag, allData} = state.databaseReducer;
   return {
     todayData,
     userData,
     userLandingFlag,
+    allData
   };
 };
 
@@ -323,4 +325,5 @@ export default connect(mapStateToProps, {
   getTodayWeight,
   saveUserData,
   updateUserLandingFlag,
+  getAllData
 })(UserLanding);
