@@ -45,7 +45,7 @@ class Sleep extends Component {
 
   render() {
     let data = {
-      labels: ['Sleep'],
+      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       datasets: [
         {
           label: 'Sleep',
@@ -97,7 +97,7 @@ class Sleep extends Component {
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={5}
+                        width={25}
                         height={100}
                         options={{
                           maintainAspectRatio: false

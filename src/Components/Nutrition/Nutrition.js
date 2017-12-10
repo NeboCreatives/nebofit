@@ -44,10 +44,10 @@ class Nutrition extends Component {
 
   render() {
     let data = {
-      labels: ['Nutrition'],
+      labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       datasets: [
         {
-          label: 'Nutrition',
+          label: ['Nutrition'],
           backgroundColor: 'rgb(244, 176, 54)',
           borderColor: 'rgb(244, 176, 54)',
           borderWidth: 1,
@@ -93,7 +93,7 @@ class Nutrition extends Component {
                   <div className="chart">
                     <Bar
                         data={data}
-                        width={5}
+                        width={25}
                         height={100}
                         options={{
                           maintainAspectRatio: false
