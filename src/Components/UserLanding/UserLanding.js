@@ -136,7 +136,7 @@ class UserLanding extends Component {
   caloriesAnimation() {
     let todayData = this.props.todayData;
     let userData = this.props.userData;
-    let calories = ((todayData.todayNutrition.calories) / 2000) * 100;
+    let calories = ((todayData.todayNutrition.calories) / userData.goal_calories) * 100;
     if (this.state.caloriesPercent < calories) {
       this.setState({
         caloriesPercent: ++this.state.caloriesPercent,
