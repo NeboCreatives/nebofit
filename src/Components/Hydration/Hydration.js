@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './Hydration.css'
+import "../../Details.css";
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import {Bar} from "react-chartjs-2"
@@ -69,57 +69,65 @@ this.percentAnimation = this.percentAnimation.bind(this)
     }
     console.log(this.state.percent)
     return (
-      <div className="Hydration">
+      <div className="Details">
       <Hamburger/>
-        <div className="Hydration_Header">
+        <div className="Details_Header">
           <div>
           <i className="fa fa-tint" aria-hidden="true"></i>
-            <h1 className="Hydration_Today">Hydration</h1>
+            <h1 className="Details_Today">Hydration</h1>
           </div>
-          <div className='Hydration_Header_Buffer'></div>
+          <div className='Details_Header_Buffer'></div>
         </div>
-        <div className="Hydration_Metrics">
-          <div className="Hydration_Metric">
-            <div className="Hydration_Hydration">
-              <hr />
-              <h2>Today</h2>
-              <div className="Hydration_Chart">
-                <Circle
-                  percent={this.state.percent}
-                  strokeWidth="3"
-                  strokeColor="#5FC5D4"
-                  strokeLinecap="round"
-                />
 
-                <div className="Hydration_Chart_Details">
-                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>{(Math.round(this.props.todayData.todayNutrition.water*0.033814022558919))}</p>
-                  <p>oz</p>
-                </div>
-                <div className="Hydration_Goal_Reminder">
-                    <h1>{Math.round(this.props.userData.goal_hydration - this.props.todayData.todayNutrition.water * 0.033814022558919)} oz left</h1>
+        <hr />
+        <div className="Details_Main_Container">
+          <div className="Details_Metric">
+            <div className="Details_RC_Container">
+              <div className="Details_RC">
+                <h2>Today</h2>
+                <div className="Details_Chart">
+                  <Circle
+                    percent={this.state.percent}
+                    strokeWidth="3"
+                    strokeColor="rgb(95,197,212)"
+                    strokeLinecap="round"
+                  />
+                  <div className="Details_Chart_Details">
+                    <i className="fa fa-sort-asc" aria-hidden="true">
+                      {" "}
+                      +1
+                    </i>
+                    <p>{(Math.round(this.props.todayData.todayNutrition.water*0.033814022558919))}</p>
+                    <p>oz</p>
                   </div>
-                  <div className="chart">
-                  <Bar
-                        data={data}
-                        width={100}
-                        height={250}
-                        options={{
-                          maintainAspectRatio: false,
-                          scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
+                </div>
+                <div className="Details_Goal_Reminder">
+                  <h1>{Math.round(this.props.userData.goal_hydration - this.props.todayData.todayNutrition.water * 0.033814022558919)} oz left</h1>
+                </div>
+              </div>
+            </div>
+            <div className="Details_Chart_Container">
+              <div className="Details_ChartJS">
+                <Bar
+                  data={data}
+                  width={100}
+                  height="100%"
+                  options={{
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [
+                        {
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }
+                      ]
+                    },
                     legend: {
                       display: false
                     }
-                  }
-                        }
-                      />
-                </div>
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -128,6 +136,7 @@ this.percentAnimation = this.percentAnimation.bind(this)
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   const {todayData, userData, allData} = state.databaseReducer

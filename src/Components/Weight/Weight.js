@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './Weight.css'
+import "../../Details.css";
 import moment from 'moment';
 import { Circle } from 'rc-progress';
 import ScaleImg from "../../Assets/weight.png"
@@ -75,58 +75,64 @@ class Weight extends Component {
     }
 
     return (
-      <div className="Weight">
+      <div className="Details">
       <Hamburger/>
-        <div className="Weight_Header">
+        <div className="Details_Header">
           <div>
           <img src={ScaleImg} alt="scale img" className="Scale_Img"/>
-            <h1 className="Weight_Today">Weight</h1>
+            <h1 className="Details_Today">Weight</h1>
           </div>
-          <div className='Weight_Header_Buffer'></div>
+          <div className='Details_Header_Buffer'></div>
         </div>
-        <div className="Weight_Metrics">
-          <div className="Weight_Metric">
-            <div className="Weight_Weight">
-              <hr />
-              <h2>Today</h2>
-              <div className="Weight_Chart">
-                <Circle
-                  percent={this.state.percent}
-                  strokeWidth="3"
-                  strokeColor="#AF5ECE"
-                  strokeLinecap="round"
-                />
-
-                <div className="Weight_Chart_Details">
-                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>{(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))}</p>
-                  <p>lb</p>
-                </div>
-
-                <div className="Weight_Goal_Reminder">
-                    <h1>{Math.round((this.props.userData.goal_weight - this.props.todayData.todayWeight.weight) * 2.20462262185)} lb till goal reached </h1>
+        <hr />
+        <div className="Details_Main_Container">
+          <div className="Details_Metric">
+            <div className="Details_RC_Container">
+              <div className="Details_RC">
+                <h2>Today</h2>
+                <div className="Details_Chart">
+                  <Circle
+                    percent={this.state.percent}
+                    strokeWidth="3"
+                    strokeColor="rgb(175,94,206)"
+                    strokeLinecap="round"
+                  />
+                  <div className="Details_Chart_Details">
+                    <i className="fa fa-sort-asc" aria-hidden="true">
+                      {" "}
+                      +1
+                    </i>
+                    <p>{(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))}</p>
+                    <p>lb</p>
                   </div>
-                  <div className="chart">
-                  <Bar
-                        data={data}
-                        width={100}
-                        height={250}
-                        options={{
-                          maintainAspectRatio: false,
-                          scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
+                </div>
+                <div className="Details_Goal_Reminder">
+                  <h1>{Math.round((this.props.userData.goal_weight - this.props.todayData.todayWeight.weight) * 2.20462262185)} lb till goal reached </h1>                  
+                </div>
+              </div>
+            </div>
+            <div className="Details_Chart_Container">
+              <div className="Details_ChartJS">
+                <Bar
+                  data={data}
+                  width={100}
+                  height="100%"
+                  options={{
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [
+                        {
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }
+                      ]
+                    },
                     legend: {
                       display: false
                     }
-                  }
-                        }
-                      />
-                  </div>
+                  }}
+                />
               </div>
             </div>
           </div>
