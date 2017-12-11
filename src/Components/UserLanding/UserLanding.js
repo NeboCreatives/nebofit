@@ -209,13 +209,13 @@ class UserLanding extends Component {
       <div className="UserLanding">
         <div className="UserLanding_Header">
           <div className="UserLanding_Buffer" />
-          <div classname="UserLanding_Center">
+          <div className="UserLanding_Center">
             <h1 className="UserLanding_Today">Today</h1>
             <h1 className="UserLanding_Date">{date}</h1>
           </div>
           {/* //////////// 
-          Created a hamburger drop down for User_Landing page seperatately as
-          we did not need the back button from the nav bar componenet. When
+          Created a hamburger drop down for User_Landing page separately as
+          we did not need the back button from the nav bar component. When
           making changes to the hamburger button, please make edits to both the
           navbar component as well as the hamburger button on the User_Landing
           component 
