@@ -4,7 +4,8 @@ import axios from 'axios';
 import {getExercises, updateInputs, addWorkout, addToSets} from '../../ducks/exerciseReducer';
 import './ExerciseLog.css';
 import moment from 'moment';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Hamburger from '../Hamburger/Hamburger';
 
 import {Dropdown, Button} from 'semantic-ui-react';
 
@@ -51,34 +52,74 @@ class ExerciseLog extends Component {
 
   //submit data to db and place onto the redux store
   handleAdd() {
-    this.props.addWorkout();
-    this.props.addToSets(this.props.inputs, this.state.workout);
+    if (this.state.workout !== '' && this.state.sets !== '' && this.state.weight !== '' && this.state.reps !== '' && this.state.rpe !== '') {
+      this.props.addWorkout();
+      this.props.addToSets(this.props.inputs, this.state.workout);
 
-    this.setState({
-      workout: '',
-      sets: '',
-      weight: '',
-      reps: '',
-      rpe: '',
-    });
+      this.setState({
+        sets: '',
+        weight: '',
+        reps: '',
+        rpe: '',
+      });
+    }
   }
 
   handleSubmit = () => {
     axios.post(`/api/data/logLifts/${this.props.userData.user_id}`, {sets: this.props.sets});
-  }
+  };
 
   render() {
 
     const exerciseCard = this.props.sets.map((exercise, index) => {
       return (
-        <div key={index}> workout: {exercise.workout} </div>
+        <div key={index}>
+
+          <div>
+            Workout: {exercise.workout}
+          </div>
+
+
+          <div style={{display: 'flex', justifyContent: 'space-evenly', margin: '6px 6px'}}>
+
+
+            <div>
+              Sets: {exercise.sets}
+            </div>
+
+            <div>
+              Weight: {exercise.weight}
+            </div>
+
+            <div>
+              REPS: {exercise.reps}
+            </div>
+
+            <div>
+              RPE: {exercise.rpe}
+            </div>
+
+          </div>
+
+        </div>
       );
     });
 
     return (
       <div className='ExerciseLog'>
+        <Hamburger/>
+
+        <div className="ExerciseLog_Header">
+          <div>
+            <i className="fa fa-book" aria-hidden="true"></i>
+            <h1>Exercise Log</h1>
+          </div>
+          <hr className='ExerciseLog_HR'/>
+        </div>
+
 
         <Dropdown
+          style={{marginTop: '21px'}}
           search
           onChange={this.handleDropDown}
           placeholder='Select Workout'
@@ -89,9 +130,8 @@ class ExerciseLog extends Component {
           <div>SETS</div>
           <input
             ref='sets'
-            // value={this.state.sets}
+            value={this.state.sets}
             placeholder='0'
-            size='mini'
             style={{width: '36px'}}
             onChange={this.handleChange}
           />
@@ -99,9 +139,8 @@ class ExerciseLog extends Component {
           <div>WEIGHT</div>
           <input
             ref='weight'
-            // value={this.state.weight}
+            value={this.state.weight}
             placeholder='0'
-            size='mini'
             style={{width: '36px'}}
             onChange={this.handleChange}
           />
@@ -109,9 +148,8 @@ class ExerciseLog extends Component {
           <div>REPS</div>
           <input
             ref='reps'
-            // value={this.state.reps}
+            value={this.state.reps}
             placeholder='0'
-            size='mini'
             style={{width: '36px'}}
             onChange={this.handleChange}
           />
@@ -119,28 +157,29 @@ class ExerciseLog extends Component {
           <div>RPE</div>
           <input
             ref='rpe'
-            // value={this.state.rpe}
+            value={this.state.rpe}
             placeholder='0'
-            size='mini'
             style={{width: '36px'}}
             onChange={this.handleChange}
           />
 
           <Button
             size='mini'
-            onClick={this.handleAdd}>
+            style={{marginLeft: '3px', marginRight: '15px'}}
+            onClick={this.handleAdd}
+          >
             Add
           </Button>
         </div>
         {exerciseCard}
 
         <Link to="/UserLanding" className="link">
-        <Button
-          size='mini'
-          onClick={()=>this.handleSubmit()}
-        >
-          Submit
-        </Button>
+          <Button
+            size='mini'
+            onClick={() => this.handleSubmit()}
+          >
+            Submit
+          </Button>
         </Link>
       </div>
     );
@@ -150,7 +189,6 @@ class ExerciseLog extends Component {
 const mapsStateToProps = (state) => {
   const {exercises, inputs, sets} = state.reducer;
   const {userData} = state.databaseReducer;
-  console.log(userData);
   return {
     exercises,
     inputs,
