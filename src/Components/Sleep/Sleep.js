@@ -51,10 +51,13 @@ class Sleep extends Component {
 
     let mapDays = this.props.allData.sleepData.map(night => {
       return moment(night.date).format('dddd')
-    })
+    });
+    let averageSleep = Math.round(mapMinutes.slice(0,7).reverse().reduce((a,b) => a + b)/7);
+
     mapMinutes = mapMinutes.splice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
 
+    console.log(averageSleep)
 
     let data = {
       labels: mapDays,
@@ -127,6 +130,11 @@ class Sleep extends Component {
                     }
                   }}
                 />
+              </div>
+              <div>
+                <h1>
+                Weekly Sleep Average : {averageSleep}
+                </h1>
               </div>
             </div>
           </div>
