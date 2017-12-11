@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import "../../Details.css";
-import moment from "moment";
-import { Circle } from "rc-progress";
-import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
-import { Bar } from "react-chartjs-2";
-import { connect } from "react-redux";
-import { getTodayActivity } from "../../ducks/databaseReducer";
-import Hamburger from "../Hamburger/Hamburger";
+import React, {Component} from 'react';
+import '../../Details.css';
+import moment from 'moment';
+import {Circle} from 'rc-progress';
+import StepsImg from '../../Assets/footsteps-silhouette-variant.png';
+import {Bar} from 'react-chartjs-2';
+import {connect} from 'react-redux';
+import {getTodayActivity} from '../../ducks/databaseReducer';
+import Hamburger from '../Hamburger/Hamburger';
 
 class Steps extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Steps extends Component {
 
     this.state = {
       pulse: null,
-      percent: 0
+      percent: 0,
     };
 
     this.percentAnimation = this.percentAnimation.bind(this);
@@ -22,7 +22,7 @@ class Steps extends Component {
 
   componentDidMount() {
     this.setState({
-      pulse: setInterval(this.percentAnimation, 12)
+      pulse: setInterval(this.percentAnimation, 12),
     });
   }
 
@@ -38,7 +38,7 @@ class Steps extends Component {
       100;
     if (this.state.percent < steps) {
       this.setState({
-        percent: ++this.state.percent
+        percent: ++this.state.percent,
       });
     } else {
       this.killInterval();
@@ -52,21 +52,26 @@ class Steps extends Component {
     });
 
     let mapDays = this.props.allData.activityData.map(walk => {
-      return moment(walk.date).format("dddd");
+      return moment(walk.date).format('dddd');
     });
+
+    let weeklyTotal = mapSteps.slice(0, 7).reduce((a, b) => a + b);
+    let weeklyAvg = Math.round(mapSteps.slice(0,7).reduce((a,b) => a + b) / 7);
+
     mapSteps = mapSteps.splice(0, 7).reverse();
     mapDays = mapDays.splice(0, 7).reverse();
+
 
     let data = {
       labels: mapDays,
       datasets: [
         {
           // backgroundColor: 'rgb(146,201,74)',
-          borderColor: "rgb(146,201,74)",
+          borderColor: 'rgb(146,201,74)',
           borderWidth: 3,
-          data: mapSteps
-        }
-      ]
+          data: mapSteps,
+        },
+      ],
     };
 
     let stepsDifference =
@@ -74,15 +79,15 @@ class Steps extends Component {
 
     return (
       <div className="Details">
-        <Hamburger />
+        <Hamburger/>
         <div className="Details_Header">
           <div>
-            <img src={StepsImg} alt="steps img" className="Details_Img" />
+            <img src={StepsImg} alt="steps img" className="Details_Img"/>
             <h1 className="Details_Today">Steps</h1>
           </div>
-          <div className="Details_Header_Buffer" />
+          <div className="Details_Header_Buffer"/>
         </div>
-        <hr />
+        <hr/>
         <div className="Details_Main_Container">
           <div className="Details_Metric">
             <div className="Details_RC_Container">
@@ -97,7 +102,7 @@ class Steps extends Component {
                   />
                   <div className="Details_Chart_Details">
                     <i className="fa fa-sort-asc" aria-hidden="true">
-                      {" "}
+                      {' '}
                       +1
                     </i>
                     <p>
@@ -116,25 +121,29 @@ class Steps extends Component {
                 <Bar
                   data={data}
                   width={100}
-                  height="100%"
+                  height='100%'
                   options={{
                     maintainAspectRatio: false,
                     scales: {
                       yAxes: [
                         {
                           ticks: {
-                            beginAtZero: true
-                          }
-                        }
-                      ]
+                            beginAtZero: true,
+                          },
+                        },
+                      ],
                     },
                     legend: {
-                      display: false
-                    }
+                      display: false,
+                    },
                   }}
                 />
               </div>
             </div>
+          </div>
+          <div>
+            <div>{`Weekly Total: ${weeklyTotal.toLocaleString()}`}</div>
+            <div>{`Weekly Average: ${weeklyAvg}`}</div>
           </div>
         </div>
       </div>
@@ -143,12 +152,12 @@ class Steps extends Component {
 }
 
 const mapStateToProps = state => {
-  const { todayData, userData, allData } = state.databaseReducer;
+  const {todayData, userData, allData} = state.databaseReducer;
   return {
     todayData,
     userData,
-    allData
+    allData,
   };
 };
 
-export default connect(mapStateToProps, { getTodayActivity })(Steps);
+export default connect(mapStateToProps, {getTodayActivity})(Steps);
