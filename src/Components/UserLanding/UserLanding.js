@@ -149,12 +149,9 @@ class UserLanding extends Component {
 
   caloriesAnimation() {
     let todayData = this.props.todayData;
-<<<<<<< HEAD
+
     let userData = this.props.userData;
     let calories = ((todayData.todayNutrition.calories) / userData.goal_calories) * 100;
-=======
-    let calories = todayData.todayNutrition.calories / 2000 * 100;
->>>>>>> 2b06de569a3361803117471d66753076a9a2ae3c
     if (this.state.caloriesPercent < calories) {
       this.setState({
         caloriesPercent: ++this.state.caloriesPercent
@@ -253,11 +250,11 @@ class UserLanding extends Component {
                 Today
               </MenuItem>
             </Link>
-            <a href="#s">
+            <Link to="/ExerciseLog" className='link'>
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Peak Performance
+                Exercise Log
               </MenuItem>
-            </a>
+            </Link>
             <a href="#">
               <MenuItem onClick={this.handleClose} className="menu-item">
                 Goals
