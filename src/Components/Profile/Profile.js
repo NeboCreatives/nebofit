@@ -22,40 +22,55 @@ class Profile extends Component {
         <h1 className="Profile_User_Name">{`${this.props.userData.user_first_name} ${this.props.userData.user_last_name}`}</h1>
         </div>
 
-        <div>
-          GOALS
+        <div className="Profile_Goals">
+          MY GOALS
         </div>
 
         <Form size='tiny'>
           <div style={{display: 'flex', justifyContent: 'space-around'}}>
           <Form.Field>
-            <label>Sleep</label>
-            <input value={`${this.props.userData.goal_sleep}`}  />
+            <label className="Goal_Description">Sleep</label>
+            <input 
+            value={`${this.props.userData.goal_sleep}`}  
+            className="Goal_Input"
+            />
           </Form.Field>
           <Form.Field>
-            <label>Steps</label>
-            <input value={`${this.props.userData.goal_steps}`}/>
+            <label className="Goal_Description">Steps</label>
+            <input 
+            value={`${this.props.userData.goal_steps}`}
+            className="Goal_Input"
+            />
           </Form.Field>
           </div>
           <div style={{display: 'flex', justifyContent: 'space-around'}}>
           <Form.Field>
-            <label>Calories</label>
-            <input value={`${this.props.userData.goal_calories}`} />
+            <label className="Goal_Description">Calories</label>
+            <input 
+            value={`${this.props.userData.goal_calories}`}
+            className="Goal_Input"
+            />
           </Form.Field>
           <Form.Field>
-            <label>Hydration</label>
-            <input value={`${this.props.userData.goal_hydration}`} />
+            <label className="Goal_Description">Hydration</label>
+            <input 
+            value={`${this.props.userData.goal_hydration}`}
+            className="Goal_Input"
+            />
           </Form.Field>
           </div>
           <div style={{display:'flex', justifyContent: 'center',}}>
           <div style={{width : '176px'}}>
           <Form.Field>
-            <label>Weight</label>
-            <input value={`${this.props.userData.goal_weight}`} />
+            <label className="Goal_Description">Weight</label>
+            <input 
+            value={`${this.props.userData.goal_weight}`} 
+            className="Goal_Input"
+            />
           </Form.Field>
           </div>
           </div>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' className="Profile_Submit">Submit</Button>
         </Form>
 
       </div>

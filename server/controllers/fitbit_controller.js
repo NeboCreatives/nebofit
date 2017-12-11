@@ -187,6 +187,18 @@ module.exports = {
                             })
                     })
             })
+    },
+
+    updateGoals: (req, res) => {
+        const db = req.app.get('db');
+        db.update_goals([
+            req.params.id,
+            req.body.goal_weight, 
+            req.body.goal_sleep,
+            req.body.goal_steps,
+            req.body.goal_hydration,
+            req.body.goal_calories
+        ]).then(returning => res.status(200).send(returning))
     }
 }
 

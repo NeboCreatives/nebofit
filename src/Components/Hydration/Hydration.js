@@ -82,6 +82,7 @@ class Hydration extends Component {
         </div>
 
         <hr/>
+
         <div className="Details_Main_Container">
           <div className="Details_Metric">
             <div className="Details_RC_Container">
