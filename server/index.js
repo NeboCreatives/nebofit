@@ -113,9 +113,10 @@ app.get(`/api/data/getTodaySleep/:id/:date/:rest`, fCtrl.getTodaySleep)
 app.get(`/api/data/getTodayActivity/:id/:date/:rest`, fCtrl.getTodayActivity)
 app.get(`/api/data/getTodayWeight/:id/:date/:rest`, fCtrl.getTodayWeight)
 app.get(`/api/data/getTodayNutrition/:id/:date/:rest`, fCtrl.getTodayNutrition)
+app.get(`/api/data/getAllData/:id`, fCtrl.getAllData)
 app.post(`/api/data/getSinceLastLogin/:id/:date/:rest`, fCtrl.getSinceLastLogin)
 app.post(`/api/data/updateLastLogin/:id/:date`, fCtrl.updateLastLogin)
-app.get(`/api/data/getAllData/:id`, fCtrl.getAllData)
+app.put(`/api/data/updateGoals/:id`, fCtrl.updateGoals)
 
 //Exercise/lift log endpoints
 app.get(`/api/data/getAllLifts/:id`, lCtrl.logLift)
