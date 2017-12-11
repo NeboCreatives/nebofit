@@ -64,7 +64,7 @@ class UserLanding extends Component {
           .then(result => {
             axios
               .post(`/api/data/updateLastLogin/${userID}/${date}`)
-              .then(res => console.log(res));
+              // .then(res => console.log(res));
           });
 
         this.props.getAllData(userID);
@@ -205,7 +205,6 @@ class UserLanding extends Component {
 
     let todayData = this.props.todayData;
 
-    console.log(this.props.allData);
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">
