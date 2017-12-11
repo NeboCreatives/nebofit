@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getExercises, updateExercise, addWorkout, addToSets} from '../../ducks/exerciseReducer';
+import axios from 'axios';
+import {getExercises, updateInputs, addWorkout, addToSets} from '../../ducks/exerciseReducer';
 import './ExerciseLog.css';
 
-import {Dropdown, Input, Button} from 'semantic-ui-react';
+import {Dropdown, Button} from 'semantic-ui-react';
 
 class ExerciseLog extends Component {
   constructor() {
     super();
 
     this.state = {
-      value: 1,
-      exercise: '',
+      workout: '',
       sets: '',
       weight: '',
       reps: '',
@@ -19,17 +19,17 @@ class ExerciseLog extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleSubmit = this.handleSubmit(this);
   };
 
-//changes state to selected exercise in dropdown menu
-  handleDropDown = (event, index, value) => {
+//changes state to selected workout in dropdown menu
+  handleDropDown = (event, data) => {
     this.setState({
-      value: value,
-      exercise: this.props.exercises[value],
-    });
+      workout: data.value,
+    }, ()=> this.handleChange())
   };
 
-//updates values of exercise inputs in the redux store
+//updates values of workout inputs in the redux store
   handleChange() {
     let sets = this.refs.sets.value;
     let weight = this.refs.weight.value;
@@ -43,16 +43,16 @@ class ExerciseLog extends Component {
       rpe: this.refs.rpe.value,
     });
 
-    this.props.updateExercise({sets, weight, reps, rpe});
+    this.props.updateInputs({sets, weight, reps, rpe, workout: this.state.workout});
   }
 
   //submit data to db and place onto the redux store
   handleAdd() {
     this.props.addWorkout();
-    this.props.addToSets(this.props.inputs, this.props.exercises[this.state.value]);
+    this.props.addToSets(this.props.inputs, this.state.workout);
 
     this.setState({
-      exercise: '',
+      workout: '',
       sets: '',
       weight: '',
       reps: '',
@@ -60,35 +60,33 @@ class ExerciseLog extends Component {
     });
   }
 
+ handleSubmit(){
+
+ }
+
   render() {
 
-    //populates exercise drop down menu with values from redux store
-    // const exercises = [];
-    // const exercisesList = this.props.exercises.map((item, index) => {
-    //   exercises.push(<MenuItem value={index} key={index} primaryText={item}/>);
-    // });
-
-    const exerciseCard = this.props.sets.map((exercise) => {
-      console.log(exercise);
+    const exerciseCard = this.props.sets.map((exercise,index) => {
       return (
-        <div> workout: {exercise.workout} </div>
+        <div key={index} > workout: {exercise.workout} </div>
       );
     });
 
-    console.log(this.props.sets);
     return (
       <div className='ExerciseLog'>
+
         <Dropdown
-          search selection
+          search
+          onChange={this.handleDropDown}
           placeholder='Select Workout'
           options={this.props.exercises}
         />
 
         <div className='ExerciseLog_Inputs'>
           <div>SETS</div>
-          <Input
+          <input
             ref='sets'
-            value={this.state.sets}
+            // value={this.state.sets}
             placeholder='0'
             size='mini'
             style={{width: '36px'}}
@@ -96,9 +94,9 @@ class ExerciseLog extends Component {
           />
 
           <div>WEIGHT</div>
-          <Input
+          <input
             ref='weight'
-            value={this.state.weight}
+            // value={this.state.weight}
             placeholder='0'
             size='mini'
             style={{width: '36px'}}
@@ -106,9 +104,9 @@ class ExerciseLog extends Component {
           />
 
           <div>REPS</div>
-          <Input
+          <input
             ref='reps'
-            value={this.state.reps}
+            // value={this.state.reps}
             placeholder='0'
             size='mini'
             style={{width: '36px'}}
@@ -116,9 +114,9 @@ class ExerciseLog extends Component {
           />
 
           <div>RPE</div>
-          <Input
+          <input
             ref='rpe'
-            value={this.state.rpe}
+            // value={this.state.rpe}
             placeholder='0'
             size='mini'
             style={{width: '36px'}}
@@ -135,6 +133,7 @@ class ExerciseLog extends Component {
 
         <Button
           size='mini'
+          onClick={this.handleSubmit}
         >
           Submit
         </Button>
@@ -152,4 +151,4 @@ const mapsStateToProps = (state) => {
   };
 };
 
-export default connect(mapsStateToProps, {getExercises, updateExercise, addWorkout, addToSets})(ExerciseLog);
+export default connect(mapsStateToProps, {getExercises, updateInputs, addWorkout, addToSets})(ExerciseLog);

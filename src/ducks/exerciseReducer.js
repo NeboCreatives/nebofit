@@ -37,7 +37,7 @@ export const getExercises = (exercises) => {
   };
 };
 
-export const updateExercise = (inputs) => {
+export const updateInputs = (inputs) => {
   return {
     type: UPDATE_INPUTS,
     payload: inputs,
