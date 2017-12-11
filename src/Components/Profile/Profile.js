@@ -5,7 +5,29 @@ import {connect} from 'react-redux';
 import {Form, Button} from 'semantic-ui-react';
 
 class Profile extends Component {
+constructor(props){
+  super(props);
 
+this.state = {
+  sleep: '',
+  steps: '',
+  calories: '',
+  hydration: '',
+  weight: '',
+}
+}
+
+componentDidMount(){
+    this.refs.sleep.value = this.props.userData.goal_sleep
+    this.refs.steps.value = this.props.userData.goal_steps
+    this.refs.calories.value = this.props.userData.goal_calories
+    this.refs.hydration.value= this.props.userData.goal_hydration
+    this.refs.weight.value= this.props.userData.goal_weight
+}
+
+handleSubmit = () => {
+  console.log(this.refs.sleep.value)
+}
 
   render() {
     return (
@@ -31,14 +53,14 @@ class Profile extends Component {
           <Form.Field>
             <label className="Goal_Description">Sleep</label>
             <input 
-            value={`${this.props.userData.goal_sleep}`}  
+            ref='sleep' 
             className="Goal_Input"
             />
           </Form.Field>
           <Form.Field>
             <label className="Goal_Description">Steps</label>
             <input 
-            value={`${this.props.userData.goal_steps}`}
+            ref='steps'
             className="Goal_Input"
             />
           </Form.Field>
@@ -47,14 +69,14 @@ class Profile extends Component {
           <Form.Field>
             <label className="Goal_Description">Calories</label>
             <input 
-            value={`${this.props.userData.goal_calories}`}
+            ref='calories'
             className="Goal_Input"
             />
           </Form.Field>
           <Form.Field>
             <label className="Goal_Description">Hydration</label>
             <input 
-            value={`${this.props.userData.goal_hydration}`}
+            ref='hydration'
             className="Goal_Input"
             />
           </Form.Field>
@@ -64,13 +86,17 @@ class Profile extends Component {
           <Form.Field>
             <label className="Goal_Description">Weight</label>
             <input 
-            value={`${this.props.userData.goal_weight}`} 
+            ref='weight'
             className="Goal_Input"
             />
           </Form.Field>
           </div>
           </div>
-          <Button type='submit' className="Profile_Submit">Submit</Button>
+          <Button type='submit' className="Profile_Submit"
+          onClick={this.handleSubmit}
+          >
+          Submit
+          </Button>
         </Form>
 
       </div>
