@@ -16,13 +16,13 @@ module.exports = {
 
     logLifts: (req, res) => {
         const db = req.app.get('db');
-        let liftArr = req.body.lifts;
+        let liftArr = req.body.sets;
 
         for(let i=0; i<liftArr.length; i++){
             db.log_lift([
                 req.params.id, 
                 liftArr[i].date, 
-                liftArr[i].lift, 
+                liftArr[i].workout,
                 liftArr[i].reps, 
                 liftArr[i].sets, 
                 liftArr[i].weight, 

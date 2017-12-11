@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import {getExercises, updateInputs, addWorkout, addToSets} from '../../ducks/exerciseReducer';
 import './ExerciseLog.css';
+import moment from 'moment';
+import {Link} from 'react-router-dom'
 
 import {Dropdown, Button} from 'semantic-ui-react';
 
@@ -11,6 +13,7 @@ class ExerciseLog extends Component {
     super();
 
     this.state = {
+      date: moment().format('YYYY-MM-DD'),
       workout: '',
       sets: '',
       weight: '',
@@ -19,14 +22,13 @@ class ExerciseLog extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.handleSubmit = this.handleSubmit(this);
   };
 
 //changes state to selected workout in dropdown menu
   handleDropDown = (event, data) => {
     this.setState({
       workout: data.value,
-    }, ()=> this.handleChange())
+    }, () => this.handleChange());
   };
 
 //updates values of workout inputs in the redux store
@@ -36,6 +38,7 @@ class ExerciseLog extends Component {
     let reps = this.refs.reps.value;
     let rpe = this.refs.rpe.value;
 
+
     this.setState({
       sets: this.refs.sets.value,
       weight: this.refs.weight.value,
@@ -43,7 +46,7 @@ class ExerciseLog extends Component {
       rpe: this.refs.rpe.value,
     });
 
-    this.props.updateInputs({sets, weight, reps, rpe, workout: this.state.workout});
+    this.props.updateInputs({sets, weight, reps, rpe, workout: this.state.workout, date: this.state.date});
   }
 
   //submit data to db and place onto the redux store
@@ -60,15 +63,15 @@ class ExerciseLog extends Component {
     });
   }
 
- handleSubmit(){
-
- }
+  handleSubmit = () => {
+    axios.post(`/api/data/logLifts/${this.props.userData.user_id}`, {sets: this.props.sets});
+  }
 
   render() {
 
-    const exerciseCard = this.props.sets.map((exercise,index) => {
+    const exerciseCard = this.props.sets.map((exercise, index) => {
       return (
-        <div key={index} > workout: {exercise.workout} </div>
+        <div key={index}> workout: {exercise.workout} </div>
       );
     });
 
@@ -123,20 +126,22 @@ class ExerciseLog extends Component {
             onChange={this.handleChange}
           />
 
-        <Button
-          size='mini'
-          onClick={this.handleAdd}>
-          Add
-        </Button>
+          <Button
+            size='mini'
+            onClick={this.handleAdd}>
+            Add
+          </Button>
         </div>
         {exerciseCard}
 
+        <Link to="/UserLanding" className="link">
         <Button
           size='mini'
-          onClick={this.handleSubmit}
+          onClick={()=>this.handleSubmit()}
         >
           Submit
         </Button>
+        </Link>
       </div>
     );
   }
@@ -144,10 +149,13 @@ class ExerciseLog extends Component {
 
 const mapsStateToProps = (state) => {
   const {exercises, inputs, sets} = state.reducer;
+  const {userData} = state.databaseReducer;
+  console.log(userData);
   return {
     exercises,
     inputs,
     sets,
+    userData,
   };
 };
 
