@@ -97,9 +97,9 @@ class Weight extends Component {
                 </div>
 
                 <div className="Weight_Goal_Reminder">
-                    <h1>You are 10 lbs away from your goal</h1>
+                    <h1>{Math.round(this.props.userData.goal_weight - this.props.todayData.todayWeight.weight * 2.20462262185)} lb till goal reached </h1>
                   </div>
-                  <div>
+                  <div className="chart">
                   <Bar
                         data={data}
                         width={100}

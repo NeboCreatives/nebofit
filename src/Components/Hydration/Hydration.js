@@ -97,7 +97,7 @@ this.percentAnimation = this.percentAnimation.bind(this)
                   <p>oz</p>
                 </div>
                 <div className="Hydration_Goal_Reminder">
-                    <h1>12oz to go</h1>
+                    <h1>{Math.round(this.props.userData.goal_hydration - this.props.todayData.todayNutrition.water * 0.033814022558919)} oz left</h1>
                   </div>
                   <div className="chart">
                   <Bar
