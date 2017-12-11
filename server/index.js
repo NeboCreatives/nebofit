@@ -10,6 +10,7 @@ const cors = require('cors')
 const moment = require('moment');
 
 const fCtrl = require('./controllers/fitbit_controller');
+const lCtrl = require('./controllers/lifts_controller');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -105,7 +106,7 @@ app.get("/logout", function(req, res) {
 })
 
 
-//endpoints
+//Endpoints
 app.get(`/api/auth/me`, fCtrl.authMe)
 app.post(`/api/data/:id`, fCtrl.firstLoginDataRequest)
 app.get(`/api/data/getTodaySleep/:id/:date/:rest`, fCtrl.getTodaySleep)
@@ -115,6 +116,12 @@ app.get(`/api/data/getTodayNutrition/:id/:date/:rest`, fCtrl.getTodayNutrition)
 app.post(`/api/data/getSinceLastLogin/:id/:date/:rest`, fCtrl.getSinceLastLogin)
 app.post(`/api/data/updateLastLogin/:id/:date`, fCtrl.updateLastLogin)
 app.get(`/api/data/getAllData/:id`, fCtrl.getAllData)
+
+//Exercise/lift log endpoints
+app.get(`/api/data/getAllLifts/:id`, lCtrl.logLift)
+app.post(`/api/data/logLift/:id`, lCtrl.logLift)
+app.post(`/api/data/logLifts/:id`, lCtrl.logLifts)
+app.post(`/api/data/updateLift/:liftid`, lCtrl.updateLift)
 
 
 // launch the server
