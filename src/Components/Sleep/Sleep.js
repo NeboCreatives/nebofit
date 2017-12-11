@@ -78,7 +78,7 @@ class Sleep extends Component {
           </div>
           <div className='Details_Header_Buffer'></div>
         </div>
-
+        <hr />
         <div className="Details_Main_Container">
           <div className="Details_Metric">
             <div className="Details_RC_Container">
