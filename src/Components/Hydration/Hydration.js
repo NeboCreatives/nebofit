@@ -78,7 +78,6 @@ this.percentAnimation = this.percentAnimation.bind(this)
           </div>
           <div className='Details_Header_Buffer'></div>
         </div>
-
         <hr />
         <div className="Details_Main_Container">
           <div className="Details_Metric">

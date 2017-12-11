@@ -7,6 +7,23 @@
     padding-top: 15px;
 }
 
+.fa-moon-o {
+    color: rgb(114, 118, 231);
+}
+
+.fa-cutlery {
+    color: rgb(244,176,54);
+}
+
+.fa-tint {
+    color: rgb(95,197,212);
+}
+
+.Scale_Img {
+    width: 16px;
+    height: 16px;
+}
+
 hr {
     border: 1px solid #999999;
     width: 70%;
