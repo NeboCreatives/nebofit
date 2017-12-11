@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../Details.css";
-import moment from 'moment';
+import moment, { weekdays } from 'moment';
 import { Circle } from 'rc-progress';
 import {Bar} from "react-chartjs-2"
 import {getTodayNutrition} from "../../ducks/databaseReducer"
@@ -43,16 +43,19 @@ class Nutrition extends Component {
   }
 
   render() {
-    console.log(this.props.userData)
+   
     let mapNutrition = this.props.allData.nutritionData.map(health => {
       return  health.calories
     })
 
     let mapDays = this.props.allData.nutritionData.map(health => {
       return moment(health.date).format('dddd')
-    })
-    mapNutrition = mapNutrition.splice(0,7).reverse();
+    });
+    let averageCalories = Math.round(mapNutrition.slice(0,7).reduce((a,b) => a + b)/7);
+    mapNutrition = mapNutrition.slice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
+
+    console.log(averageCalories);
 
     let data = {
       labels: mapDays,
@@ -125,6 +128,11 @@ class Nutrition extends Component {
                     }
                   }}
                 />
+              </div>
+              <div>
+                <h1>
+                Weekly Calories Average :{averageCalories}
+                </h1>
               </div>
             </div>
           </div>
