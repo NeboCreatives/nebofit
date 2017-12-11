@@ -231,7 +231,7 @@ class UserLanding extends Component {
         <div>
           <Drawer
             docked={false}
-            width={200}
+            width={250}
             open={this.state.open}
             openSecondary={true}
             onRequestChange={open => this.setState({ open })}
@@ -279,7 +279,7 @@ class UserLanding extends Component {
                         ? 0
                         : this.state.sleepPercent
                     }
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#7276E7"
                     strokeLinecap="round"
                   />
@@ -308,7 +308,7 @@ class UserLanding extends Component {
                         ? 0
                         : this.state.stepsPercent
                     }
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#92C94A"
                     strokeLinecap="round"
                   />
@@ -335,7 +335,7 @@ class UserLanding extends Component {
                         ? 0
                         : this.state.caloriesPercent
                     }
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#F4B036"
                     strokeLinecap="round"
                   />
@@ -361,7 +361,7 @@ class UserLanding extends Component {
                         ? 0
                         : this.state.hydrationPercent
                     }
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#5FC5D4"
                     strokeLinecap="round"
                   />
@@ -389,7 +389,7 @@ class UserLanding extends Component {
                         ? 0
                         : this.state.weightPercent
                     }
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#AF5ECE"
                     strokeLinecap="round"
                   />
@@ -414,7 +414,7 @@ class UserLanding extends Component {
                 <div className="UserLanding_Chart">
                   <Circle
                     percent="46"
-                    strokeWidth="6"
+                    strokeWidth="4"
                     strokeColor="#ED7078"
                     strokeLinecap="round"
                   />

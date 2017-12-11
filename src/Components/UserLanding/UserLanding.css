@@ -17,7 +17,7 @@
 }
 
 hr {
-border: 1px solid #999999;
+    border: 1px solid #999999;
 }
 
 .UserLanding_Metric {
@@ -73,4 +73,50 @@ border: 1px solid #999999;
     color: #999999;
 }
 
+
+@media(min-width: 1000px){
+    .UserLanding_Today {
+        font-size: 33px;
+    }
+
+    .UserLanding_Date {
+        font-size: 18px;
+    }
+
+    
+    hr {
+        margin-top: 30px;
+    }
+
+    .UserLanding_Metrics {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .UserLanding_Metric {
+        max-width: 1150px;
+    }
+
+    .UserLanding_Metric h2 {
+        font-size: 21px;
+    }
+
+    .UserLanding_Chart {
+        width: 300px;
+        height: 300px;
+        margin: 9px 0 9px 0;
+        position: relative;
+    }
+
+    .UserLanding_Chart_Details p:nth-of-type(1) {
+        font-size: 55px;
+        font-weight: 200;
+    }
+
+    .UserLanding_Chart_Details p:nth-of-type(2) {
+        font-size: 21px;
+        margin-top: 5px;
+    }
+}
 
