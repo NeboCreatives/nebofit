@@ -1,30 +1,50 @@
 .Home {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)),
-    url("../../Assets/imageedit_192_8660205882.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  height: 100vh;
-  font-family: 'Lato', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url("../../Assets/home-mobile.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
 }
 
 a {
     text-decoration: none;
 }
 
+.Logo_Container {
+    padding-top: 15px;
+}
+
 .Logo {
     color: #d8d8d8;
-    font-size: 61px;
-    padding-top: 72px;
-    font-weight: 500;
+    font-size: 82px;
+    font-weight: 300;
     letter-spacing: 2px;
+}
+
+.Logo_Bottom {
+    color: #d8d8d8;
+    font-size: 82px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-top: 10px;
 }
 
 .Tagline {
     color: #d8d8d8;
     font-size: 24px;
-    padding-top: 300px;
     font-weight: 100;
     letter-spacing: 2px;
+}
+
+.Buttons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
 }
 
 .Button_Login {
@@ -32,18 +52,56 @@ a {
     color: #d8d8d8;
     width: 120px;
     height: 50px;
-    margin: 60px auto 0 auto;
     border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Button_Login p {
-    padding-top: 13%;
     font-weight: 300;
 }
 
-.Button_Login :hover {
+.Button_Login:hover {
     text-decoration: none;
-    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.2);
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
+  }
+
+  @media(min-width: 550px) {
+      .Home {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+        url("../../Assets/home-desktop-thirds.jpg");
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh;
+      }
+
+      .Logo {
+          font-size: 150px;
+      }
+
+      .Logo_Bottom {
+          font-size: 150px;
+      }
+
+      .Buttons {
+
+      }
+
+      .Button_Login {
+        width: 200px;
+        height: 75px;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Button_Login p {
+        font-size: 21px;
+        font-weight: 500;
+    }
+
   }
