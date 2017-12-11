@@ -6,3 +6,9 @@
     text-transform: uppercase;
     padding-top: 15px;
 }
+
+.ExerciseLog_Inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
