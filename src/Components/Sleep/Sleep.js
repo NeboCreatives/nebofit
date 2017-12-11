@@ -98,7 +98,7 @@ class Sleep extends Component {
                 </div>
 
                 <div className="Sleep_Goal_Reminder">
-                    <h1>{((this.props.userData.goal_sleep) - this.props.todayData.todaySleep.total_minutes / 60)} more hrs to reach goal</h1>
+                    <h1>{Math.round((this.props.userData.goal_sleep - this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100} more hrs to reach goal</h1>
                   </div>
                   <div className="chart">
                     <Bar
