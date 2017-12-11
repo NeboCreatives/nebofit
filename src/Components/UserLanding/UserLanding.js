@@ -248,11 +248,11 @@ class UserLanding extends Component {
                 Today
               </MenuItem>
             </Link>
-            <a href="#s">
+            <Link to="/ExerciseLog" className='link'>
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Peak Performance
+                Exercise Log
               </MenuItem>
-            </a>
+            </Link>
             <a href="#">
               <MenuItem onClick={this.handleClose} className="menu-item">
                 Goals
