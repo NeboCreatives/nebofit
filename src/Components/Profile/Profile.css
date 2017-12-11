@@ -13,12 +13,13 @@
 }
 
 .Avatar {
-    margin-top: 45px;
+    margin-top: 30px;
 }
 
 .Avatar_Img {
     height: 33%;
     width: 33%;
+    border-radius: 50%;
 }
 
 .Profile_Today {
@@ -33,4 +34,26 @@
     margin-top: 21px;
     font-size: 36px;
     font-weight: 100;
+}
+
+.Profile_Goals {
+    margin-top: 27px;
+    font-weight: 300;
+}
+
+.Goal_Description {
+    color: #ffffff !important;
+    margin-top: 20px !important;
+    text-transform: uppercase !important;
+    font-weight: 100 !important;
+}
+
+.Profile_Submit {
+    margin-top: 27px !important;
+}
+
+.Goal_Input {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    color: #999999 !important;
+    margin-top: 3px !important;
 }
