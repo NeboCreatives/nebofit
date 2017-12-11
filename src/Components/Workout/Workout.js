@@ -62,7 +62,7 @@ class Workout extends Component {
         <div className="Details_Header">
           <div>
             <img src={StepsImg} alt="steps img" className="Details_Img" />
-            <h1 className="Details_Today">Steps</h1>
+            <h1 className="Details_Today">Workout</h1>
           </div>
           <div className="Details_Header_Buffer" />
         </div>
