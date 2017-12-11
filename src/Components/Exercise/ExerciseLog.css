@@ -9,6 +9,21 @@
 
 .ExerciseLog_Inputs {
     display: flex;
-    justify-content: center;
+    justify-content: center space-evenly;
     align-items: center;
+    margin: 6px 0 6px 0;
+}
+
+.fa-book {
+    margin-bottom: 6px;
+    color: #0f8b8d;
+}
+
+input {
+    text-align: center;
+}
+
+.ExerciseLog_HR {
+    border: 1px solid #999999;
+    width: 250px;
 }

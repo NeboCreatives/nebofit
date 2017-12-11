@@ -19,9 +19,11 @@
 
 a {
   text-decoration: none;
-  color: #9999
+  color: #999999;
 }
 
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+a:hover{
+  text-decoration: none !important;
+  color: #999999;
+}
 

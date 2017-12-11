@@ -32,7 +32,14 @@ class Weight extends Component {
   }
 
   percentAnimation(){
-    let weight = (Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))
+    let userData = this.props.userData;
+    let goalWeightDifference = Math.abs(
+      userData.starting_weight - userData.goal_weight
+    );
+    let currentWeightDifference = Math.abs(
+      userData.user_weight - userData.goal_weight
+    );
+    let weight = (1 - currentWeightDifference / goalWeightDifference) * 100;
     if(this.state.percent < weight){
       this.setState({
         percent: ++this.state.percent
@@ -97,7 +104,7 @@ class Weight extends Component {
                 </div>
 
                 <div className="Weight_Goal_Reminder">
-                    <h1>{Math.round(this.props.userData.goal_weight - this.props.todayData.todayWeight.weight * 2.20462262185)} lb till goal reached </h1>
+                    <h1>{Math.round((this.props.userData.goal_weight - this.props.todayData.todayWeight.weight) * 2.20462262185)} lb till goal reached </h1>
                   </div>
                   <div className="chart">
                   <Bar
