@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import './Workout.css'
-import { Circle } from 'rc-progress';
-import { Link } from "react-router-dom";
-import {Bar} from "react-chartjs-2"
+import "../../Details.css";
+import moment from "moment";
+import { Circle } from "rc-progress";
+import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
+import { Bar } from "react-chartjs-2";
+import { connect } from "react-redux";
+import { getTodayActivity } from "../../ducks/databaseReducer";
+import Hamburger from "../Hamburger/Hamburger";
 
 
 class Workout extends Component {
@@ -53,50 +57,64 @@ class Workout extends Component {
       ]
     }
     return (
-      <div className="Workout">
-        <div className="Workout_Header">
-        <Link to="/UserLanding">
-          <div className='Back_Circle'>
-            <i className="fa fa-angle-left fa-2x" aria-hidden="true" style={{ margin: '0px 3px 2px 0' }}></i>
-          </div>
-          </Link>
+      <div className="Details">
+        <Hamburger />
+        <div className="Details_Header">
           <div>
-          <i className="fa fa-heartbeat" aria-hidden="true"></i>
-            <h1 className="Workout_Today">Workout</h1>
+            <img src={StepsImg} alt="steps img" className="Details_Img" />
+            <h1 className="Details_Today">Workout</h1>
           </div>
-          <div className='Workout_Header_Buffer'></div>
+          <div className="Details_Header_Buffer" />
         </div>
-        <div className="Workout_Metrics">
-          <div className="Workout_Metric">
-            <div className="Workout_Workout">
-              <hr />
-              <h2>Today</h2>
-              <div className="Workout_Chart">
-                <Circle
-                  percent="29"
-                  strokeWidth="6"
-                  strokeColor="#ED7078"
-                  strokeLinecap="round"
-                />
-
-                <div className="Workout_Chart_Details">
-                <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>3</p>
-                  <p>per week</p>
-                </div>
-                <div className="Workout_Goal_Reminder">
-                    <h1>You are 2 workouts away from your goal</h1>
+        <hr />
+        <div className="Details_Main_Container">
+          <div className="Details_Metric">
+            <div className="Details_RC_Container">
+              <div className="Details_RC">
+                <h2>Today</h2>
+                <div className="Details_Chart">
+                  <Circle
+                    percent={this.state.percent}
+                    strokeWidth="3"
+                    strokeColor="#92C94A"
+                    strokeLinecap="round"
+                  />
+                  <div className="Details_Chart_Details">
+                    <i className="fa fa-sort-asc" aria-hidden="true">
+                      {" "}
+                      +1
+                    </i>
+                    <p></p>
+                    <p>Steps</p>
                   </div>
-                  <div className="chart">
-                    <Bar
-                        data={data}
-                        width={600}
-                        height={300}
-                        options={{
-                          maintainAspectRatio: false
-                        }}
-                      />
-               </div>
+                </div>
+                <div className="Details_Goal_Reminder">
+                  <h1 className='Detail_Goal_Difference'>steps to go</h1>
+                </div>
+              </div>
+            </div>
+            <div className="Details_Chart_Container">
+              <div className="Details_ChartJS">
+                <Bar
+                  data={data}
+                  width={100}
+                  height="100%"
+                  options={{
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [
+                        {
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }
+                      ]
+                    },
+                    legend: {
+                      display: false
+                    }
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -106,4 +124,13 @@ class Workout extends Component {
   }
 }
 
-export default Workout;
+const mapStateToProps = state => {
+  const { todayData, userData, allData } = state.databaseReducer;
+  return {
+    todayData,
+    userData,
+    allData
+  };
+};
+
+export default connect(mapStateToProps, { getTodayActivity })(Workout);

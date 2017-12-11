@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Sleep.css';
+import "../../Details.css";
 import moment from 'moment';
 import {Circle} from 'rc-progress';
 import {Bar} from "react-chartjs-2"
@@ -68,59 +68,65 @@ class Sleep extends Component {
       ]
     }
     return (
-      <div className="Sleep">
+      <div className="Details">
       <Hamburger/>
-        <div className="Sleep_Header">
+        <div className="Details_Header">
 
           <div>
           <i className="fa fa-moon-o" aria-hidden="true"></i>
-            <h1 className="Sleep_Today">Sleep</h1>
+            <h1 className="Details_Today">Sleep</h1>
           </div>
-          <div className='Sleep_Header_Buffer'></div>
+          <div className='Details_Header_Buffer'></div>
         </div>
-        <div className="Sleep_Metrics">
-          <div className="Sleep_Metric">
-            <div className="Sleep_Sleep">
-              <hr/>
-              <h2>Today</h2>
-              <div className="Sleep_Chart">
-                <Circle
-                  percent={this.state.percent}
-                  strokeWidth="3"
-                  strokeColor="#7276E7"
-                  strokeLinecap="round"
-                />
 
-                <div className="Sleep_Chart_Details">
-                  <i className="fa fa-sort-asc" aria-hidden="true">  +1</i>
-                  <p>{Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100}</p>
-                  <p>hrs</p>
-                </div>
-
-                <div className="Sleep_Goal_Reminder">
-                    <h1>{Math.round((this.props.userData.goal_sleep - this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100} more hrs to reach goal</h1>
+        <div className="Details_Main_Container">
+          <div className="Details_Metric">
+            <div className="Details_RC_Container">
+              <div className="Details_RC">
+                <h2>Today</h2>
+                <div className="Details_Chart">
+                  <Circle
+                    percent={this.state.percent}
+                    strokeWidth="3"
+                    strokeColor="rgb(114, 118, 231)"
+                    strokeLinecap="round"
+                  />
+                  <div className="Details_Chart_Details">
+                    <i className="fa fa-sort-asc" aria-hidden="true">
+                      {" "}
+                      +1
+                    </i>
+                    <p>{Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100}</p>
+                    <p>Hrs</p>
                   </div>
-                  <div className="chart">
-                    <Bar
-                        data={data}
-                        width={100}
-                        height={250}
-                        options={{
-                          maintainAspectRatio: false,
-                          scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
+                </div>
+                <div className="Details_Goal_Reminder">
+                  <h1>{Math.round((this.props.userData.goal_sleep - this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100} more hrs to reach goal</h1>
+                </div>
+              </div>
+            </div>
+            <div className="Details_Chart_Container">
+              <div className="Details_ChartJS">
+                <Bar
+                  data={data}
+                  width={100}
+                  height="100%"
+                  options={{
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [
+                        {
+                          ticks: {
+                            beginAtZero: true
+                          }
+                        }
+                      ]
+                    },
                     legend: {
                       display: false
                     }
-                  }
-                        }
-                      />
-               </div>
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -129,6 +135,7 @@ class Sleep extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   const {todayData, userData, allData} = state.databaseReducer

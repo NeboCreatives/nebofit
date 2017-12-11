@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Steps.css";
+import "../../Details.css";
 import moment from "moment";
 import { Circle } from "rc-progress";
 import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
@@ -73,29 +73,29 @@ class Steps extends Component {
       this.props.userData.goal_steps - this.props.todayData.todayActivity.steps;
 
     return (
-      <div className="Steps">
+      <div className="Details">
         <Hamburger />
-        <div className="Steps_Header">
+        <div className="Details_Header">
           <div>
-            <img src={StepsImg} alt="steps img" className="Steps_Img" />
-            <h1 className="Steps_Today">Steps</h1>
+            <img src={StepsImg} alt="steps img" className="Details_Img" />
+            <h1 className="Details_Today">Steps</h1>
           </div>
-          <div className="Steps_Header_Buffer" />
+          <div className="Details_Header_Buffer" />
         </div>
         <hr />
-        <div className="Steps_Main_Container">
-          <div className="Steps_Metric">
-            <div className="Steps_RC_Container">
-              <div className="Steps_RC">
+        <div className="Details_Main_Container">
+          <div className="Details_Metric">
+            <div className="Details_RC_Container">
+              <div className="Details_RC">
                 <h2>Today</h2>
-                <div className="Steps_Chart">
+                <div className="Details_Chart">
                   <Circle
                     percent={this.state.percent}
                     strokeWidth="3"
                     strokeColor="#92C94A"
                     strokeLinecap="round"
                   />
-                  <div className="Steps_Chart_Details">
+                  <div className="Details_Chart_Details">
                     <i className="fa fa-sort-asc" aria-hidden="true">
                       {" "}
                       +1
@@ -106,13 +106,13 @@ class Steps extends Component {
                     <p>Steps</p>
                   </div>
                 </div>
-                <div className="Steps_Goal_Reminder">
-                  <h1 className='Step_Goal_Difference'>{stepsDifference.toLocaleString()} steps to go</h1>
+                <div className="Details_Goal_Reminder">
+                  <h1 className='Detail_Goal_Difference'>{stepsDifference.toLocaleString()} steps to go</h1>
                 </div>
               </div>
             </div>
-            <div className="Steps_Chart_Container">
-              <div className="Steps_ChartJS">
+            <div className="Details_Chart_Container">
+              <div className="Details_ChartJS">
                 <Bar
                   data={data}
                   width={100}
