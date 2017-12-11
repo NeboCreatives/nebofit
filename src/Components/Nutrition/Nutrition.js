@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import './Nutrition.css'
 import moment from 'moment';
 import { Circle } from 'rc-progress';
-import { Link } from "react-router-dom";
 import {Bar} from "react-chartjs-2"
 import {getTodayNutrition} from "../../ducks/databaseReducer"
 import { connect } from 'react-redux';

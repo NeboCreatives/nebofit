@@ -55,14 +55,14 @@ class Hamburger extends Component {
             </MenuItem>
             </Link>
 
-            <a href="#">
+            <Link to="/UserLanding" className="link">
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Peak Performance
+                Today
               </MenuItem>
-            </a>
+              </Link>
             <a href="#s">
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Hello
+               Peak Performance
               </MenuItem>
             </a>
             <a href="#">

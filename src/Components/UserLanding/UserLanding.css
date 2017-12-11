@@ -7,6 +7,15 @@
     padding-top: 15px;
 }
 
+.UserLanding_Header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.UserLanding_Buffer {
+    width: 48px;
+}
+
 hr {
 border: 1px solid #999999;
 }
