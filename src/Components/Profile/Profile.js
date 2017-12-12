@@ -110,6 +110,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
+
   const {userData} = state.databaseReducer;
   console.log(userData);
   return {

@@ -34,6 +34,7 @@ module.exports = {
 
     getAllLifts: (req, res) => {
         const db = req.app.get('db');
+        console.log(req.params.id)
         db.get_all_lifts([req.params.id])
             .then(allLifts => res.status(200).send(allLifts))        
     },

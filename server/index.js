@@ -119,7 +119,7 @@ app.post(`/api/data/updateLastLogin/:id/:date`, fCtrl.updateLastLogin)
 app.put(`/api/data/updateGoals/:id`, fCtrl.updateGoals)
 
 //Exercise/lift log endpoints
-app.get(`/api/data/getAllLifts/:id`, lCtrl.logLift)
+app.get(`/api/data/getAllLifts/:id`, lCtrl.getAllLifts)
 app.post(`/api/data/logLift/:id`, lCtrl.logLift)
 app.post(`/api/data/logLifts/:id`, lCtrl.logLifts)
 app.post(`/api/data/updateLift/:liftid`, lCtrl.updateLift)

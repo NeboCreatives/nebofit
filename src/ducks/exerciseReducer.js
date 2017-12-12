@@ -1,20 +1,7 @@
+import axios from 'axios';
+
 const initialState = {
-  exercises: [
-    {
-      text: 'Bench Press',
-      value: 'Bench Press',
-    },
-    {
-      text: 'Squats',
-      value: 'Squats',
-    },{
-      text: 'Pull Ups',
-      value: 'Pull Ups',
-    },{
-      text: 'Dead lifts',
-      value: 'Dead lifts',
-    },
-  ],
+  exercises: [{text: 'BENCH PRESS', value: 'BENCH PRESS'}, {text: 'SQUAT', value: 'SQUAT'}, {text: 'DEADLIFT', value: 'DEADLIFT'}],
   inputs: [{
     workout: '',
     sets: 0,
@@ -23,19 +10,19 @@ const initialState = {
     rpe: 0,
   }],
   sets: [],
+  allLifts: []
 };
 
-const GET_EXERCISES = 'GET_EXERCISES';
 const UPDATE_INPUTS = 'UPDATE_INPUTS';
 const ADD_WORKOUT = 'ADD_WORKOUT';
 const ADD_TO_SETS = 'ADD_TO_SETS';
+const GET_ALL_LIFTS = 'GET_ALL_LIFTS';
 
-export const getExercises = (exercises) => {
-  return {
-    type: GET_EXERCISES,
-    payload: exercises,
-  };
-};
+// sortArray = (shortArr, newExercises) => {
+//   for(let i=0; i<shortArr.length; i++){
+//     if(shortArr )
+//   }
+// }
 
 export const updateInputs = (inputs) => {
   return {
@@ -53,18 +40,23 @@ export const addWorkout = (add) => {
 
 export const addToSets = (inputs, workout) => {
   let temp = {...inputs, workout};
-  console.log(temp);
   return {
     type: ADD_TO_SETS,
     payload: temp,
   };
 };
 
+export const getAllLifts = (userID) => {
+  const data = axios.get(`/api/data/getAllLifts/${userID}`)
+    .then(result => result.data)
+  return {
+    type: GET_ALL_LIFTS,
+    payload: data,
+  }
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_EXERCISES + '_FULLFILLED':
-      return Object.assign({}, state, {exercises: action.payload});
-
     case UPDATE_INPUTS:
       return Object.assign({}, state, {inputs: action.payload});
 
@@ -73,6 +65,22 @@ export default function reducer(state = initialState, action) {
 
     case ADD_TO_SETS:
       return Object.assign({}, state, {sets: [...state.sets, action.payload]});
+
+    case GET_ALL_LIFTS + '_FULFILLED':
+      let shortArr = ['BENCH PRESS', 'SQUAT', 'DEADLIFT'];
+      let newExercises = state.exercises;
+      for(let i=0; i<action.payload.length; i++){
+        if(!shortArr.includes(action.payload[i].lift)){
+          newExercises.push({text: action.payload[i].lift.toUpperCase(), value: action.payload[i].lift.toUpperCase()})
+          shortArr.push(action.payload[i].lift)
+        }
+      }
+      newExercises.sort((a, b) => {
+        if(a.text < b.text) return -1;
+        if(a.text > b.text) return 1;
+        return 0;
+      })
+      return Object.assign({}, state, {allLifts: action.payload, exercises: newExercises});
 
     default:
       return state;
