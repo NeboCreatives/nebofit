@@ -254,14 +254,9 @@ class UserLanding extends Component {
                 Exercise Log
               </MenuItem>
             </Link>
-            <a href="#">
+            <a href="http://localhost:8080/logout">
               <MenuItem onClick={this.handleClose} className="menu-item">
-                Goals
-              </MenuItem>
-            </a>
-            <a href="#">
-              <MenuItem onClick={this.handleClose} className="menu-item">
-                Contact
+                Logout
               </MenuItem>
             </a>
           </Drawer>

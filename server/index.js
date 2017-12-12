@@ -102,7 +102,7 @@ app.get("/logout", function(req, res) {
     req.session.authorized = false;
     req.session.access_token = null;
     req.session.save();
-    res.redirect("/");  
+    res.redirect("http://localhost:3000/");  
 })
 
 
