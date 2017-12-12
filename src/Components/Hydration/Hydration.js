@@ -56,8 +56,6 @@ class Hydration extends Component {
     mapWater = mapWater.splice(0, 7).reverse();
     mapDays = mapDays.splice(0, 7).reverse();
 
-    console.log(weeklyWater);
-
     let data = {
       labels: mapDays,
       datasets: [
