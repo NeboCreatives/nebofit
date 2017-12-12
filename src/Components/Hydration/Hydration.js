@@ -69,7 +69,6 @@ class Hydration extends Component {
         },
       ],
     };
-    console.log(this.state.percent);
     return (
       <div className="Details">
         <Hamburger/>

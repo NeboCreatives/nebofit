@@ -14,6 +14,7 @@ import {
   updateUserLandingFlag,
   getAllData
 } from "../../ducks/databaseReducer";
+import { getAllLifts } from '../../ducks/exerciseReducer';
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 
@@ -64,10 +65,9 @@ class UserLanding extends Component {
           .then(result => {
             axios
               .post(`/api/data/updateLastLogin/${userID}/${date}`)
-              // .then(res => console.log(res));
           });
-
         this.props.getAllData(userID);
+        this.props.getAllLifts(userID);
       });
       this.props.updateUserLandingFlag();
     }
@@ -204,7 +204,7 @@ class UserLanding extends Component {
     const date = moment().format("MMMM DD, YYYY");
 
     let todayData = this.props.todayData;
-
+    
     return (
       <div className="UserLanding">
         <div className="UserLanding_Header">
@@ -455,5 +455,6 @@ export default connect(mapStateToProps, {
   getTodayWeight,
   saveUserData,
   updateUserLandingFlag,
-  getAllData
+  getAllData,
+  getAllLifts
 })(UserLanding);

@@ -106,7 +106,6 @@ handleSubmit = () => {
 
 const mapStateToProps = (state) => {
   const {userData} = state.databaseReducer
-  console.log(userData)
   return {
     userData
   }
