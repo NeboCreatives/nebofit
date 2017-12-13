@@ -42,6 +42,14 @@ class Nutrition extends Component {
     }
   }
 
+  differenceTern(nutritionDifference){
+    if (nutritionDifference > 0){
+      return `${nutritionDifference} calories to go`
+    } else {
+      return `${nutritionDifference} over your goal`
+    }
+  }
+
   render() {
    
     let mapNutrition = this.props.allData.nutritionData.map(health => {
@@ -55,7 +63,7 @@ class Nutrition extends Component {
     mapNutrition = mapNutrition.slice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
 
-    console.log(averageCalories);
+    let nutritionDifference = this.props.userData.goal_calories - this.props.todayData.todayNutrition.calories
 
     let data = {
       labels: mapDays,
@@ -101,7 +109,7 @@ class Nutrition extends Component {
                   </div>
                 </div>
                 <div className="Details_Goal_Reminder">
-                  <h1>{this.props.userData.goal_calories - this.props.todayData.todayNutrition.calories} calories left</h1>                  
+                  <h1>{nutritionDifference}</h1>                  
                 </div>
               </div>
             </div>

@@ -42,6 +42,15 @@ class Sleep extends Component {
     }
   }
 
+  differenceTern(sleepDifference){
+    if (sleepDifference > 0){
+      return `${sleepDifference} hrs left to reach goal`
+    } else{
+        return `${Math.round(sleepDifference)} hrs over your goal`
+    }
+  }
+
+
   
 
   render() {
@@ -57,7 +66,7 @@ class Sleep extends Component {
     mapMinutes = mapMinutes.splice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
 
-    console.log(averageSleep)
+    let sleepDifference = Math.round((this.props.userData.goal_sleep - this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100
 
     let data = {
       labels: mapDays,
@@ -104,7 +113,7 @@ class Sleep extends Component {
                   </div>
                 </div>
                 <div className="Details_Goal_Reminder">
-                  <h1>{Math.round((this.props.userData.goal_sleep - this.props.todayData.todaySleep.total_minutes / 60) * 100) / 100} more hrs to reach goal</h1>
+                  <h1>{this.differenceTern(sleepDifference)}</h1>
                 </div>
               </div>
             </div>
