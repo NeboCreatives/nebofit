@@ -17,8 +17,8 @@
 }
 
 .Avatar_Img {
-    height: 33%;
-    width: 33%;
+    height: 120px;
+    width: 120px;
     border-radius: 50%;
 }
 
@@ -41,6 +41,13 @@
     font-weight: 300;
 }
 
+.Profile_Input {
+    display: flex;
+    justify-content: space-around;
+    max-width: 400px;
+    margin: auto;
+}
+
 .Goal_Description {
     color: #ffffff !important;
     margin-top: 20px !important;
@@ -56,4 +63,32 @@
     background-color: rgba(0, 0, 0, 0.3) !important;
     color: #999999 !important;
     margin-top: 3px !important;
+}
+
+
+@media(min-width: 1000px) {
+    .Avatar_Img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        margin-top: 15px;
+    }
+
+    .Profile_User_Name {
+        margin-top: 30px;
+        font-size: 42px;
+        font-weight: 100;
+    }
+
+    .Profile_Goals {
+        margin: 60px 0 30px 0;
+        font-weight: 300;
+        font-size: 18px;
+    }
+
+    
+    .Profile_Submit {
+        margin-top: 60px !important;
+    }
+
 }
