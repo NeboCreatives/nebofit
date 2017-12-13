@@ -19,6 +19,7 @@ class Hydration extends Component {
 
     this.percentAnimation = this.percentAnimation.bind(this);
     this.differenceTern = this.differenceTern.bind(this);
+    this.icon = this.icon.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,24 @@ class Hydration extends Component {
       return `${waterDifference} oz to go`
     } else {
       return `${Math.abs(waterDifference)} oz over your goal`
+    }
+  }
+
+  icon(mapWater){
+    if(mapWater[mapWater.length-1] >= mapWater[mapWater.length-2]){
+      return (
+        <i className="fa fa-sort-asc" aria-hidden="true">
+          {" "}
+           {mapWater[mapWater.length-1] - mapWater[mapWater.length-2]}
+        </i>
+      )
+    } else {
+      return (
+        <i className="fa fa-sort-desc" aria-hidden="true">
+          {" "}
+           {mapWater[mapWater.length-2] - mapWater[mapWater.length-1]}
+        </i>
+      )
     }
   }
 
@@ -102,11 +121,8 @@ class Hydration extends Component {
                     strokeLinecap="round"
                   />
                   <div className="Details_Chart_Details">
-                    <i className="fa fa-sort-asc" aria-hidden="true">
-                      {' '}
-                      +1
-                    </i>
-                    <p>{(Math.round(this.props.todayData.todayNutrition.water * 0.033814022558919))}</p>
+                    {this.icon(mapWater)}
+                    <p>{mapWater[mapWater.length-1]}</p>
                     <p>oz</p>
                   </div>
                 </div>

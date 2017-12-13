@@ -19,6 +19,7 @@ class Steps extends Component {
 
     this.percentAnimation = this.percentAnimation.bind(this);
     this.differenceTern = this.differenceTern.bind(this);
+    this.icon = this.icon.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +53,24 @@ class Steps extends Component {
       return `${stepsDifference.toLocaleString()} steps to go`
     } else {
       return `${Math.abs(stepsDifference).toLocaleString()} steps over your goal`
+    }
+  }
+
+  icon(mapSteps){
+    if(mapSteps[mapSteps.length-1] >= mapSteps[mapSteps.length-2]){
+      return (
+        <i className="fa fa-sort-asc" aria-hidden="true">
+          {" "}
+           {(mapSteps[mapSteps.length-1] - mapSteps[mapSteps.length-2]).toLocaleString()}
+        </i>
+      )
+    } else {
+      return (
+        <i className="fa fa-sort-desc" aria-hidden="true">
+          {" "}
+           {(mapSteps[mapSteps.length-2] - mapSteps[mapSteps.length-1]).toLocaleString()}
+        </i>
+      )
     }
   }
 
@@ -110,10 +129,7 @@ class Steps extends Component {
                     strokeLinecap="round"
                   />
                   <div className="Details_Chart_Details">
-                    <i className="fa fa-sort-asc" aria-hidden="true">
-                      {' '}
-                      +1
-                    </i>
+                    {this.icon(mapSteps)}
                     <p>
                       {this.props.todayData.todayActivity.steps.toLocaleString()}
                     </p>

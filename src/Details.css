@@ -7,6 +7,14 @@
     padding-top: 15px;
 }
 
+.fa-sort-asc {
+    color: #92C94A;
+}
+
+.fa-sort-desc {
+    color: #ED7078;
+}
+
 .fa-moon-o {
     color: rgb(114, 118, 231);
 }

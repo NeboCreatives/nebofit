@@ -20,6 +20,7 @@ class Weight extends Component {
     }
     this.percentAnimation = this.percentAnimation.bind(this)
     this.differenceTern = this.differenceTern.bind(this)
+    this.icon = this.icon.bind(this)
   }
 
   componentDidMount() {
@@ -65,6 +66,24 @@ class Weight extends Component {
       } else {
         return `${Math.abs(weightDifference)} lbs to go`
       }
+    }
+  }
+
+  icon(mapWeight){
+    if(mapWeight[mapWeight.length-1] >= mapWeight[mapWeight.length-2]){
+      return (
+        <i className="fa fa-sort-asc" aria-hidden="true">
+          {" "}
+           {mapWeight[mapWeight.length-1] - mapWeight[mapWeight.length-2]}
+        </i>
+      )
+    } else {
+      return (
+        <i className="fa fa-sort-desc" aria-hidden="true">
+          {" "}
+           {mapWeight[mapWeight.length-2] - mapWeight[mapWeight.length-1]}
+        </i>
+      )
     }
   }
 
@@ -120,10 +139,7 @@ class Weight extends Component {
                     strokeLinecap="round"
                   />
                   <div className="Details_Chart_Details">
-                    <i className="fa fa-sort-asc" aria-hidden="true">
-                      {" "}
-                      +1
-                    </i>
+                    {this.icon(mapWeight)}
                     <p>{(Math.round(this.props.todayData.todayWeight.weight * 2.20462262185))}</p>
                     <p>lb</p>
                   </div>
