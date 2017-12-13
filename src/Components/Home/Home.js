@@ -16,7 +16,6 @@ class Home extends Component {
           <div className="Button_Login" ><p>LOGIN</p></div>
         </a>
         </div>
-
       </div>
     );
   }

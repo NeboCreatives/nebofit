@@ -19,6 +19,7 @@ class Weight extends Component {
       percent: 0
     }
     this.percentAnimation = this.percentAnimation.bind(this)
+    this.differenceTern = this.differenceTern.bind(this)
   }
 
   componentDidMount() {
@@ -50,6 +51,23 @@ class Weight extends Component {
     }
   }
 
+  differenceTern(weightDifference){
+    let losing = '';
+    if(this.props.userData.goal_weight > this.props.userData.starting_weight){
+      if(weightDifference > 0){
+        return `${weightDifference} lbs to go`
+      } else {
+        return `${Math.abs(weightDifference)} lbs past your goal`
+      }
+    } else {
+      if(weightDifference > 0){
+        return `${weightDifference} lbs past your goal`
+      } else {
+        return `${Math.abs(weightDifference)} lbs to go`
+      }
+    }
+  }
+
 
   render() {
     let mapWeight = this.props.allData.weightData.map(scale => {
@@ -63,6 +81,8 @@ class Weight extends Component {
 
     mapWeight = mapWeight.splice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
+
+    let weightDifference = Math.round((this.props.userData.goal_weight - this.props.todayData.todayWeight.weight) * 2.20462262185)
    
     let data = {
       labels: mapDays,
@@ -109,7 +129,7 @@ class Weight extends Component {
                   </div>
                 </div>
                 <div className="Details_Goal_Reminder">
-                  <h1>{Math.round((this.props.userData.goal_weight - this.props.todayData.todayWeight.weight) * 2.20462262185)} lb till goal reached </h1>                  
+                  <h1>{this.differenceTern(weightDifference)}</h1>                  
                 </div>
               </div>
             </div>
