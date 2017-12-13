@@ -52,7 +52,8 @@ class Profile extends Component {
         </div>
 
         <Form size='tiny'>
-          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <div className="Profile_Input">
+          <div>
             <Form.Field>
               <label className="Goal_Description">Sleep</label>
               <input
@@ -68,7 +69,7 @@ class Profile extends Component {
               />
             </Form.Field>
           </div>
-          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <div>
             <Form.Field>
               <label className="Goal_Description">Calories</label>
               <input
@@ -83,6 +84,7 @@ class Profile extends Component {
                 className="Goal_Input"
               />
             </Form.Field>
+          </div>
           </div>
           <div style={{display: 'flex', justifyContent: 'center',}}>
             <div style={{width: '176px'}}>
