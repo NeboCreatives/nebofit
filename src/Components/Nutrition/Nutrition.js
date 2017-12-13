@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../Details.css";
-import moment, { weekdays } from 'moment';
+import moment from 'moment';
 import { Circle } from 'rc-progress';
 import {Bar} from "react-chartjs-2"
 import {getTodayNutrition} from "../../ducks/databaseReducer"

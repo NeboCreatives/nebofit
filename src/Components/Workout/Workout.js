@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../Details.css";
-import moment from "moment";
 import { Circle } from "rc-progress";
 import StepsImg from "../../Assets/footsteps-silhouette-variant.png";
 import { Bar } from "react-chartjs-2";
