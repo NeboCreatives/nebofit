@@ -18,7 +18,7 @@ class Hydration extends Component {
     };
 
     this.percentAnimation = this.percentAnimation.bind(this);
-
+    this.differenceTern = this.differenceTern.bind(this);
   }
 
   componentDidMount() {
@@ -39,9 +39,16 @@ class Hydration extends Component {
       });
     } else {
       this.killInterval();
-      console.log(this.state.pulse);
     }
 
+  }
+
+  differenceTern(waterDifference){
+    if(waterDifference > 0){
+      return `${waterDifference} oz to go`
+    } else {
+      return `${Math.abs(waterDifference)} oz over your goal`
+    }
   }
 
   render() {
@@ -55,6 +62,8 @@ class Hydration extends Component {
     let weeklyAvg = Math.round(mapWater.slice(0, 7).reduce((a, b) => a + b) / 7);
     mapWater = mapWater.splice(0, 7).reverse();
     mapDays = mapDays.splice(0, 7).reverse();
+
+    let waterDifference = Math.round(this.props.userData.goal_hydration - this.props.todayData.todayNutrition.water * 0.033814022558919)
 
     let data = {
       labels: mapDays,
@@ -102,8 +111,7 @@ class Hydration extends Component {
                   </div>
                 </div>
                 <div className="Details_Goal_Reminder">
-                  <h1>{Math.round(this.props.userData.goal_hydration - this.props.todayData.todayNutrition.water * 0.033814022558919)} oz
-                    left</h1>
+                  <h1>{this.differenceTern(waterDifference)}</h1>
                 </div>
               </div>
             </div>

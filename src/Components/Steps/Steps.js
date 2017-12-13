@@ -18,6 +18,7 @@ class Steps extends Component {
     };
 
     this.percentAnimation = this.percentAnimation.bind(this);
+    this.differenceTern = this.differenceTern.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,14 @@ class Steps extends Component {
     } else {
       this.killInterval();
       console.log(this.state.pulse);
+    }
+  }
+
+  differenceTern(stepsDifference){
+    if(stepsDifference > 0){
+      return `${stepsDifference.toLocaleString()} steps to go`
+    } else {
+      return `${Math.abs(stepsDifference).toLocaleString()} steps over your goal`
     }
   }
 
@@ -112,7 +121,7 @@ class Steps extends Component {
                   </div>
                 </div>
                 <div className="Details_Goal_Reminder">
-                  <h1 className='Detail_Goal_Difference'>{stepsDifference.toLocaleString()} steps to go</h1>
+                  <h1 className='Detail_Goal_Difference'>{this.differenceTern(stepsDifference)}</h1>
                 </div>
               </div>
             </div>
