@@ -17,6 +17,7 @@ const UPDATE_INPUTS = 'UPDATE_INPUTS';
 const ADD_WORKOUT = 'ADD_WORKOUT';
 const ADD_TO_SETS = 'ADD_TO_SETS';
 const GET_ALL_LIFTS = 'GET_ALL_LIFTS';
+const UPDATE_SETS = 'UPDATE_SETS';
 
 // sortArray = (shortArr, newExercises) => {
 //   for(let i=0; i<shortArr.length; i++){
@@ -52,6 +53,14 @@ export const getAllLifts = (userID) => {
   return {
     type: GET_ALL_LIFTS,
     payload: data,
+  }
+}
+
+export const updateSets = (index, editedSet) => {
+  //state.sets[index] = editedSet;
+  return {
+    type: UPDATE_SETS,
+    payload: editedSet,
   }
 }
 
