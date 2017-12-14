@@ -18,6 +18,8 @@ class Nutrition extends Component {
       percent: 0
     }
     this.percentAnimation = this.percentAnimation.bind(this)
+    this.icon = this.icon.bind(this);
+    
   }
 
   componentDidMount() {
@@ -47,6 +49,24 @@ class Nutrition extends Component {
       return `${nutritionDifference} calories to go`
     } else {
       return `${nutritionDifference} over your goal`
+    }
+  }
+
+  icon(mapNutrition){
+    if(mapNutrition[mapNutrition.length-1] >= mapNutrition[mapNutrition.length-2]){
+      return (
+        <i className="fa fa-sort-asc" aria-hidden="true">
+          {" "}
+           {mapNutrition[mapNutrition.length-1] - mapNutrition[mapNutrition.length-2]}
+        </i>
+      )
+    } else {
+      return (
+        <i className="fa fa-sort-desc" aria-hidden="true">
+          {" "}
+           {mapNutrition[mapNutrition.length-2] - mapNutrition[mapNutrition.length-1]}
+        </i>
+      )
     }
   }
 
@@ -100,10 +120,7 @@ class Nutrition extends Component {
                     strokeLinecap="round"
                   />
                   <div className="Details_Chart_Details">
-                    <i className="fa fa-sort-asc" aria-hidden="true">
-                      {" "}
-                      +1
-                    </i>
+                    {this.icon(mapNutrition)}
                     <p>{typeof this.props.todayData.todayNutrition === 'undefined' ? 0 : this.props.todayData.todayNutrition.calories}</p>
                     <p>Cal</p>
                   </div>
