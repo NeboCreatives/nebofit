@@ -9,11 +9,20 @@ class ExerciseCard extends Component {
 
     this.state = {
       open: false,
+      workout: ''
     };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.updateSets = this.updateSets.bind(this);
 
+  }
+
+  handleDropDown = (event, data) => {
+    this.setState(
+      {
+        workout: data.value,
+      });
   }
 
   closeModal = () => {
@@ -28,8 +37,25 @@ class ExerciseCard extends Component {
     });
   };
 
-  updateSets = (index, editedSet) => {
-    //this.props.updateSets(index, editedSet);
+  updateSets = (index) => {
+    let sets = !this.refs.sets.value ? this.props.exercise.sets : this.refs.sets.value
+    let weight = !this.refs.weight.value ? this.props.exercise.weight : this.refs.weight.value
+    let reps = !this.refs.reps.value ? this.props.exercise.reps : this.refs.reps.value
+    let rpe = !this.refs.rpe.value ? this.props.exercise.rpe : this.refs.rpe.value
+    let workout = !this.state.workout ? this.props.exercise.workout : this.state.workout
+    
+    let editedSet = {
+      workout,
+      sets,
+      weight,
+      reps,
+      rpe,
+    }
+
+    let newSets = [...this.props.sets];
+    newSets[index] = editedSet;
+
+    this.props.updateSets(index, newSets);
     this.closeModal()
   };
 
@@ -67,7 +93,7 @@ class ExerciseCard extends Component {
               onChange={this.handleDropDown}
               placeholder="Select Workout"
               options={this.props.exercises}
-              defaultSearchQuery={this.props.sets[index].workout}
+              defaultValue={this.props.sets[index].workout}
             />
 
             <div className="ExerciseLog_Inputs">

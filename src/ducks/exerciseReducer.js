@@ -19,11 +19,14 @@ const ADD_TO_SETS = 'ADD_TO_SETS';
 const GET_ALL_LIFTS = 'GET_ALL_LIFTS';
 const UPDATE_SETS = 'UPDATE_SETS';
 
-// sortArray = (shortArr, newExercises) => {
-//   for(let i=0; i<shortArr.length; i++){
-//     if(shortArr )
-//   }
-// }
+function sortArray(newExercises){
+  newExercises.sort((a, b) => {
+    if(a.text < b.text) return -1;
+    if(a.text > b.text) return 1;
+    return 0;
+  })
+  return newExercises;
+}
 
 export const updateInputs = (inputs) => {
   return {
@@ -32,10 +35,11 @@ export const updateInputs = (inputs) => {
   };
 };
 
-export const addWorkout = (add) => {
+export const addWorkout = (workout) => {
+  let newWorkout = {text: workout, value: workout}
   return {
     type: ADD_WORKOUT,
-    payload: add,
+    payload: newWorkout,
   };
 };
 
@@ -56,11 +60,10 @@ export const getAllLifts = (userID) => {
   }
 }
 
-export const updateSets = (index, editedSet) => {
-  //state.sets[index] = editedSet;
+export const updateSets = (index, newSets) => {
   return {
     type: UPDATE_SETS,
-    payload: editedSet,
+    payload: newSets,
   }
 }
 
@@ -70,7 +73,9 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {inputs: action.payload});
 
     case ADD_WORKOUT:
-      return Object.assign({}, state, {add: action.payload});
+      let newWorkout = [... state.exercises, action.payload];
+      newWorkout = sortArray(newWorkout);
+      return Object.assign({}, state, {exercises: newWorkout});
 
     case ADD_TO_SETS:
       return Object.assign({}, state, {sets: [...state.sets, action.payload]});
@@ -84,13 +89,11 @@ export default function reducer(state = initialState, action) {
           shortArr.push(action.payload[i].lift)
         }
       }
-      newExercises.sort((a, b) => {
-        if(a.text < b.text) return -1;
-        if(a.text > b.text) return 1;
-        return 0;
-      })
+      newExercises = sortArray(newExercises)
       return Object.assign({}, state, {allLifts: action.payload, exercises: newExercises});
 
+    case UPDATE_SETS:
+      return Object.assign({}, state, {sets: action.payload})
     default:
       return state;
   }
