@@ -61,14 +61,14 @@ class Steps extends Component {
       return (
         <i className="fa fa-sort-asc" aria-hidden="true">
           {" "}
-           {(mapSteps[mapSteps.length-1] - mapSteps[mapSteps.length-2]).toLocaleString()}
+           <div className='icon_numbers'>{(mapSteps[mapSteps.length-1] - mapSteps[mapSteps.length-2]).toLocaleString()}</div>
         </i>
       )
     } else {
       return (
         <i className="fa fa-sort-desc" aria-hidden="true">
           {" "}
-           {(mapSteps[mapSteps.length-2] - mapSteps[mapSteps.length-1]).toLocaleString()}
+          <div className='icon_numbers'>{(mapSteps[mapSteps.length-2] - mapSteps[mapSteps.length-1]).toLocaleString()}</div>
         </i>
       )
     }
