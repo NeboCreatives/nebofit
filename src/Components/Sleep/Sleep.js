@@ -18,6 +18,8 @@ class Sleep extends Component {
       percent: 0
     }
     this.percentAnimation = this.percentAnimation.bind(this)
+    this.icon = this.icon.bind(this);
+    
   }
 
   componentDidMount() {
@@ -50,7 +52,23 @@ class Sleep extends Component {
     }
   }
 
-
+  icon(mapMinutes){
+    if(mapMinutes[mapMinutes.length-1] >= mapMinutes[mapMinutes.length-2]){
+      return (
+        <i className="fa fa-sort-asc" aria-hidden="true">
+          {" "}
+           {Math.round((mapMinutes[mapMinutes.length-1] - mapMinutes[mapMinutes.length-2])*100)/100}
+        </i>
+      )
+    } else {
+      return (
+        <i className="fa fa-sort-desc" aria-hidden="true">
+          {" "}
+           {Math.round((mapMinutes[mapMinutes.length-2] - mapMinutes[mapMinutes.length-1])*1000)/1000}
+        </i>
+      )
+    }
+  }
   
 
   render() {
@@ -104,10 +122,7 @@ class Sleep extends Component {
                     strokeLinecap="round"
                   />
                   <div className="Details_Chart_Details">
-                    <i className="fa fa-sort-asc" aria-hidden="true">
-                      {" "}
-                      +1
-                    </i>
+                    {this.icon(mapMinutes)}
                     <p>{Math.round((this.props.todayData.todaySleep.total_minutes/60)*100)/100}</p>
                     <p>Hrs</p>
                   </div>
