@@ -29,7 +29,7 @@ class ExerciseLog extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-
+    this.handleAddWorkout = this.handleAddWorkout.bind(this);
   }
 
   //changes state to selected workout in dropdown menu
@@ -93,6 +93,10 @@ class ExerciseLog extends Component {
     });
   };
 
+  handleAddWorkout = (e, { value }) => {
+    this.props.addWorkout(value.toUpperCase())
+  }
+
 
   render() {
     const exerciseCard = this.props.sets.map((exercise, index)=> {
@@ -121,9 +125,13 @@ class ExerciseLog extends Component {
         <Dropdown
           style={{marginTop: '21px'}}
           search
+          selection
+          allowAdditions
+          onAddItem={this.handleAddWorkout}
           onChange={this.handleDropDown}
           placeholder="Select Workout"
           options={this.props.exercises}
+          className='ExerciseLog_Dropdown'
         />
 
         <div className="ExerciseLog_Inputs">
