@@ -8,11 +8,33 @@
 }
 
 .ExerciseLog_Inputs {
-    display: flex;
-    justify-content: center space-evenly;
-    align-items: center;
-    margin: 6px 0 6px 0;
+    margin: 6px auto;
+    width: 300px;
 }
+
+.Input_Flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.User_Input_Description {
+    color: #999999;
+}
+
+input, select, textarea{
+    color: #999999 !important;
+    text-align: center;
+}
+
+
+.User_Number_Input {
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 9px 0 21px 0;
+    border: none;
+    border-radius: 3px;
+}
+
+
 
 .fa-book {
     margin-bottom: 6px;
@@ -26,4 +48,45 @@
 
 .ExerciseLog_Dropdown {
     width: 200px;
+    margin: 21px;
+
+}
+
+/* ////// Workout Selector ////// */
+#root > div > div > div.ui.search.selection.dropdown.ExerciseLog_Dropdown {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+#root > div > div > div.ui.search.selection.dropdown.ExerciseLog_Dropdown > i {
+    color: #999999 !important;
+}
+
+#root > div > div > div.ui.search.selection.dropdown.ExerciseLog_Dropdown > div.text {
+    color: #999999 !important;
+}
+
+#root > div > div > div.ui.active.visible.search.selection.dropdown.ExerciseLog_Dropdown > div.menu.transition.visible {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    color: #999999 !important;
+}
+
+#root > div > div > div.ui.active.visible.search.selection.dropdown.ExerciseLog_Dropdown > div.menu.transition.visible > div.selected.item {
+    color: #999999 !important;
+}
+
+#root > div > div > div.ui.active.visible.search.selection.dropdown.ExerciseLog_Dropdown > div.menu.transition.visible > div {
+    color: #999999 !important;
+}
+
+.Add_Button {
+    margin: 9px 0 15px 0 !important;
+}
+
+.Add_HR {
+    width: 100%;
+    margin-bottom: 21px;
+}
+
+.Exercise_Submit_Button {
+    margin: 18px 0 18px 0 !important;
 }

@@ -11,7 +11,6 @@ import ExerciseCard from './ExerciseCard'
 import moment from 'moment';
 import {Link} from 'react-router-dom';
 import Hamburger from '../Hamburger/Hamburger';
-
 import {Dropdown, Button} from 'semantic-ui-react';
 
 
@@ -123,7 +122,6 @@ class ExerciseLog extends Component {
         </div>
 
         <Dropdown
-          style={{marginTop: '21px'}}
           search
           selection
           allowAdditions
@@ -135,54 +133,71 @@ class ExerciseLog extends Component {
         />
 
         <div className="ExerciseLog_Inputs">
-          <div>SETS</div>
+
+        <div className="Input_Flex">
+          <div className="Sets_Div">
+          <div className="User_Input_Description">SETS</div>
           <input
             ref="sets"
             value={this.state.sets}
-            placeholder="0"
-            style={{width: '36px'}}
+            style={{width: '51px' ,height: "24px"}}
             onChange={this.handleChange}
+            className="User_Number_Input"
           />
+          </div>
 
-          <div>WEIGHT</div>
+          <div className="Weight_Div">
+          <div className="User_Input_Description">WEIGHT</div>
           <input
             ref="weight"
             value={this.state.weight}
-            placeholder="0"
-            style={{width: '36px'}}
+            style={{width: '51px' ,height: "24px"}}
             onChange={this.handleChange}
+            className="User_Number_Input"
           />
+          </div>
 
-          <div>REPS</div>
+        
+          <div className="Reps_Div">
+          <div className="User_Input_Description">REPS</div>
           <input
             ref="reps"
             value={this.state.reps}
-            placeholder="0"
-            style={{width: '36px'}}
+            style={{width: '51px' ,height: "24px"}}
             onChange={this.handleChange}
+            className="User_Number_Input"
           />
+          </div>
 
-          <div>RPE</div>
+          <div className="RPE_Div">
+          <div className="User_Input_Description">RPE</div>
           <input
             ref="rpe"
             value={this.state.rpe}
-            placeholder="0"
-            style={{width: '36px'}}
+            style={{width: '51px' ,height: "24px"}}
             onChange={this.handleChange}
+            className="User_Number_Input"
           />
+          </div>
+          </div>
 
           <Button
             size="mini"
-            style={{marginLeft: '3px', marginRight: '15px'}}
             onClick={this.handleAdd}
+            className="Add_Button"
           >
             Add
           </Button>
         </div>
+        <hr className="Add_HR"/>
         {exerciseCard}
 
         <Link to="/UserLanding" className="link">
-          <Button size="mini" onClick={() => this.handleSubmit()}>
+          <Button 
+          size="small" 
+          onClick={() => this.handleSubmit()}
+          className="Exercise_Submit_Button"
+          >
             Submit
           </Button>
         </Link>

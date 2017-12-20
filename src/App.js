@@ -9,7 +9,6 @@ import UserLanding from "./Components/UserLanding/UserLanding"
 import Nutrition from "./Components/Nutrition/Nutrition"
 import Sleep from "./Components/Sleep/Sleep"
 import Hydration from './Components/Hydration/Hydration'
-import Exercise from "./Components/Exercise/Exercise"
 import Weight from "./Components/Weight/Weight"
 import Analysis from "./Components/Analysis/Analysis"
 import Profile from "./Components/Profile/Profile"
@@ -28,7 +27,6 @@ class App extends Component {
         <Route path="/Nutrition" component={Nutrition} />
         <Route path="/Sleep" component={Sleep} />
         <Route path="/Hydration" component={Hydration} />
-        <Route path="/Exercise" component={Exercise} />
         <Route path="/ExerciseLog" component={ExerciseLog}/>
         <Route path="/Weight" component={Weight} />
         <Route path="/Workout" component={Workout} />
