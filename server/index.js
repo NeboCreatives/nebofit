@@ -8,17 +8,23 @@ const process = require("process");
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const moment = require('moment');
+require('dotenv').config();
+
 
 const fCtrl = require('./controllers/fitbit_controller');
 const lCtrl = require('./controllers/lifts_controller');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(__dirname + './../build'));
 
-const CLIENT_ID = '22CFSG';
-const CLIENT_SECRET = 'ffb7405c22f3c71b44ddf53c408f093d';
-const SESSION_SECRET = 'ytrhcyftrtrsedthrdyu';
-const CALLBACK_URL = 'http://localhost:8080/callback';
+
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const BACKEND_URL = process.env.BACKEND_URL;
 
 
 // initialize the Fitbit API client
@@ -27,10 +33,11 @@ const client = new FitbitApiClient(CLIENT_ID, CLIENT_SECRET);
 
 // Use the session middleware
 
-massive('postgres://ahqvwbzkaxiylb:2483305b5edb7da64f1e4dbc63dc98c91cc70c6998d3fbb9fbb78e98206a608e@ec2-54-163-249-237.compute-1.amazonaws.com:5432/d8dl2c3o4vsdt?ssl=true').then( (db) => {
+massive(process.env.CONNECTION_STRING)
+.then( (db) => {
     console.log('Connected to Heroku')
     app.set('db', db);
-})
+}).catch(err=>console.log(err))
 
 
 app.use(session({
@@ -77,7 +84,7 @@ app.get("/callback", function (req, res) {
                                 req.session.authorized = true;
                                 req.session.access_token = result.access_token;
                                 req.session.save();
-                                res.redirect("http://localhost:3000/UserLanding");
+                                res.redirect(`${FRONTEND_URL}/UserLanding`);
                             })
                             .catch(err => console.log(err))
                         } else {
@@ -87,7 +94,7 @@ app.get("/callback", function (req, res) {
                                     req.session.authorized = true;
                                     req.session.access_token = result.access_token;
                                     req.session.save();
-                                    res.redirect("http://localhost:3000/UserLanding");
+                                    res.redirect(`${FRONTEND_URL}/UserLanding`);
                                 })
                         }
                     })
@@ -102,7 +109,7 @@ app.get("/logout", function(req, res) {
     req.session.authorized = false;
     req.session.access_token = null;
     req.session.save();
-    res.redirect("http://localhost:3000/");  
+    res.redirect(process.env.FRONTEND_URL);  
 })
 
 
@@ -125,5 +132,5 @@ app.put(`/api/data/updateLift/:liftid`, lCtrl.updateLift)
 
 
 // launch the server
-const PORT = 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
