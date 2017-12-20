@@ -275,7 +275,7 @@ class UserLanding extends Component {
                 Exercise Log
               </MenuItem>
             </Link>
-            <a href="http://localhost:8080/logout">
+            <a href={process.env.REACT_APP_LOGOUT}>
               <MenuItem onClick={this.handleClose} className="menu-item">
                 Logout
               </MenuItem>
