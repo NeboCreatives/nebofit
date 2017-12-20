@@ -96,7 +96,7 @@ class Weight extends Component {
     let mapDays = this.props.allData.weightData.map(scale => {
       return moment(scale.date).format('dddd')
     });
-    let averageWeight = Math.round(mapWeight.slice(0,7).reverse().reduce((a,b) => a + b)/7);
+    let weeklyAvg = Math.round(mapWeight.slice(0,7).reverse().reduce((a,b) => a + b)/7);
 
     mapWeight = mapWeight.splice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
@@ -173,12 +173,12 @@ class Weight extends Component {
                 />
               </div>
               <div>
-                <h1>
-                Weekly Weight Average : {averageWeight}
-                </h1>
               </div>
             </div>
           </div>
+        </div>
+        <div>
+            <div className="Weekly_Avg">{`Weekly Average: ${weeklyAvg} Lbs`}</div>
         </div>
       </div>
     );

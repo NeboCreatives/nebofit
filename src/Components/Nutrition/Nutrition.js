@@ -79,7 +79,7 @@ class Nutrition extends Component {
     let mapDays = this.props.allData.nutritionData.map(health => {
       return moment(health.date).format('dddd')
     });
-    let averageCalories = Math.round(mapNutrition.slice(0,7).reduce((a,b) => a + b)/7);
+    let weeklyAvg = Math.round(mapNutrition.slice(0,7).reduce((a,b) => a + b)/7);
     mapNutrition = mapNutrition.slice(0,7).reverse();
     mapDays = mapDays.splice(0,7).reverse();
 
@@ -154,12 +154,12 @@ class Nutrition extends Component {
                 />
               </div>
               <div>
-                <h1>
-                Weekly Calories Average :{averageCalories}
-                </h1>
               </div>
             </div>
           </div>
+        </div>
+        <div>
+            <div className="Weekly_Avg">{`Weekly Average: ${weeklyAvg} Cals`}</div>
         </div>
       </div>
     );

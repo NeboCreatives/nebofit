@@ -158,7 +158,7 @@ class Hydration extends Component {
           </div>
         </div>
         <div>
-            <div className="Weekly_Avg">{`Weekly Average: ${weeklyAvg}`}</div>
+            <div className="Weekly_Avg">{`Weekly Average: ${weeklyAvg} oz`}</div>
         </div>
       </div>
     );
