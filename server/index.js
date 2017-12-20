@@ -108,7 +108,6 @@ app.get("/logout", function(req, res) {
 
 //Endpoints
 app.get(`/api/auth/me`, fCtrl.authMe)
-app.post(`/api/data/:id`, fCtrl.firstLoginDataRequest)
 app.get(`/api/data/getTodaySleep/:id/:date/:rest`, fCtrl.getTodaySleep)
 app.get(`/api/data/getTodayActivity/:id/:date/:rest`, fCtrl.getTodayActivity)
 app.get(`/api/data/getTodayWeight/:id/:date/:rest`, fCtrl.getTodayWeight)
@@ -122,7 +121,7 @@ app.put(`/api/data/updateGoals/:id`, fCtrl.updateGoals)
 app.get(`/api/data/getAllLifts/:id`, lCtrl.getAllLifts)
 app.post(`/api/data/logLift/:id`, lCtrl.logLift)
 app.post(`/api/data/logLifts/:id`, lCtrl.logLifts)
-app.post(`/api/data/updateLift/:liftid`, lCtrl.updateLift)
+app.put(`/api/data/updateLift/:liftid`, lCtrl.updateLift)
 
 
 // launch the server
