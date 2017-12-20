@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const initialState = {
   exercises: [{text: 'BENCH PRESS', value: 'BENCH PRESS'}, {text: 'SQUAT', value: 'SQUAT'}, {text: 'DEADLIFT', value: 'DEADLIFT'}],
@@ -10,7 +11,8 @@ const initialState = {
     rpe: 0,
   }],
   sets: [],
-  allLifts: []
+  allLifts: [],
+  weekLifts: []
 };
 
 const UPDATE_INPUTS = 'UPDATE_INPUTS';
@@ -26,6 +28,33 @@ function sortArray(newExercises){
     return 0;
   })
   return newExercises;
+}
+
+function mapLifts(allLifts){
+  let mappedWeekLifts = [];
+  let mappedDayLifts = [];
+  let reduced = 0;
+  let date = moment().format('YYYY-MM-DD');
+
+  for(let i=0; i<7; i++){
+    allLifts.map(lift => {
+      if(lift.date === date){
+        mappedDayLifts.push(lift.lbs_per_rpe)
+        return lift.lbs_per_rpe
+      }
+    })
+    let length = mappedDayLifts.length;
+    if(mappedDayLifts.length !== 0){
+      reduced = Math.round((mappedDayLifts.reduce((total, num) => total + num)/length)*100)/100;
+      mappedWeekLifts.push(reduced)   
+    } else {
+      mappedWeekLifts.push(0);
+    }
+    reduced = 0;
+    mappedDayLifts = [];
+    date = moment(date).subtract(1, 'days').format('YYYY-MM-DD');
+  }
+  return mappedWeekLifts.reverse();
 }
 
 export const updateInputs = (inputs) => {
@@ -73,7 +102,7 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {inputs: action.payload});
 
     case ADD_WORKOUT:
-      let newWorkout = [... state.exercises, action.payload];
+      let newWorkout = [...state.exercises, action.payload];
       newWorkout = sortArray(newWorkout);
       return Object.assign({}, state, {exercises: newWorkout});
 
@@ -90,10 +119,12 @@ export default function reducer(state = initialState, action) {
         }
       }
       newExercises = sortArray(newExercises)
-      return Object.assign({}, state, {allLifts: action.payload, exercises: newExercises});
+      let thisWeekLifts = mapLifts(action.payload);
+      return Object.assign({}, state, {allLifts: action.payload, exercises: newExercises, weekLifts: thisWeekLifts});
 
     case UPDATE_SETS:
       return Object.assign({}, state, {sets: action.payload})
+
     default:
       return state;
   }
