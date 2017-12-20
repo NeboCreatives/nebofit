@@ -116,7 +116,7 @@ class ExerciseLog extends Component {
         <div className="ExerciseLog_Header">
           <div>
             <i className="fa fa-book" aria-hidden="true"/>
-            <h1>Exercise Log</h1>
+            <h1 className="Details_Log">Exercise Log</h1>
           </div>
           <hr className="ExerciseLog_HR"/>
         </div>
