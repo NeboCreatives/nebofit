@@ -84,7 +84,7 @@ app.get("/callback", function (req, res) {
                                 req.session.authorized = true;
                                 req.session.access_token = result.access_token;
                                 req.session.save();
-                                res.redirect(`${FRONTEND_URL}/UserLanding`);
+                                res.redirect(`/UserLanding`);
                             })
                             .catch(err => console.log(err))
                         } else {
@@ -94,7 +94,7 @@ app.get("/callback", function (req, res) {
                                     req.session.authorized = true;
                                     req.session.access_token = result.access_token;
                                     req.session.save();
-                                    res.redirect(`${FRONTEND_URL}/UserLanding`);
+                                    res.redirect(`/UserLanding`);
                                 })
                         }
                     })
@@ -130,7 +130,11 @@ app.post(`/api/data/logLift/:id`, lCtrl.logLift)
 app.post(`/api/data/logLifts/:id`, lCtrl.logLifts)
 app.put(`/api/data/updateLift/:liftid`, lCtrl.updateLift)
 
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
+
 
 // launch the server
-const PORT = process.env.PORT;
+const PORT = 8082;
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
