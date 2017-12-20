@@ -42,7 +42,7 @@ class UserLanding extends Component {
     this.caloriesAnimation = this.caloriesAnimation.bind(this);
     this.hydrationAnimation = this.hydrationAnimation.bind(this);
     this.weightAnimation = this.weightAnimation.bind(this);
-    // this.workoutAnimation = this.workoutAnimation.bind(this);
+    this.workoutAnimation = this.workoutAnimation.bind(this);
   }
 
   componentDidMount = () => {
@@ -84,8 +84,8 @@ class UserLanding extends Component {
       stepsPulse: setInterval(this.stepsAnimation, 12),
       caloriesPulse: setInterval(this.caloriesAnimation, 12),
       hydrationPulse: setInterval(this.hydrationAnimation, 12),
-      weightPulse: setInterval(this.weightAnimation, 12)
-      // workoutPulse: setInterval(this.workoutAnimation, 12),
+      weightPulse: setInterval(this.weightAnimation, 12),
+      workoutPulse: setInterval(this.workoutAnimation, 12)
     });
   }
 
@@ -196,6 +196,27 @@ class UserLanding extends Component {
     }
   }
 
+  workoutAnimation() {
+    let count = 0;
+    let averageRPE = 0;
+    for(let i=0; i<this.props.weekLifts.length; i++){
+      if(this.props.weekLifts[i] > 0){
+        count++;
+        averageRPE += this.props.weekLifts[i]
+      }
+    }
+    averageRPE /= count;
+    let workout = (this.props.weekLifts[6] / averageRPE)*100;
+    if (this.state.workoutPercent < workout) {
+      this.setState({
+        workoutPercent: ++this.state.workoutPercent
+      });
+    } else {
+      this.killWorkoutInterval();
+    }
+  }
+
+ 
   handleToggle = () => this.setState({ open: !this.state.open });
 
   handleClose = () => this.setState({ open: false });
@@ -363,11 +384,7 @@ class UserLanding extends Component {
                   />
                   <div className="UserLanding_Chart_Details">
                     <p>
-                      {typeof todayData.todayNutrition === "undefined"
-                        ? 0
-                        : Math.round(
-                            todayData.todayNutrition.water * 0.033814022558919
-                          )}
+                      {typeof todayData.todayNutrition === "undefined" ? 0 : Math.round(todayData.todayNutrition.water * 0.033814022558919 )}
                     </p>
                     <p>oz</p>
                   </div>
@@ -409,14 +426,20 @@ class UserLanding extends Component {
                 <h2>Workouts</h2>
                 <div className="UserLanding_Chart">
                   <Circle
-                    percent="46"
+                    percent={
+                      typeof this.props.weekLifts === "undefined"
+                        ? 0
+                        : this.state.workoutPercent
+                    }
                     strokeWidth="4"
                     strokeColor="#ED7078"
                     strokeLinecap="round"
                   />
                   <div className="UserLanding_Chart_Details">
-                    <p>4</p>
-                    <p>per week</p>
+                    <p>{typeof this.props.weekLifts === "undefined"
+                        ? 0
+                        : this.props.weekLifts[6]}</p>
+                    <p>lbs per RPE</p>
                   </div>
                 </div>
               </div>
@@ -433,13 +456,15 @@ const mapStateToProps = state => {
     todayData,
     userData,
     userLandingFlag,
-    allData
+    allData,
   } = state.databaseReducer;
+  const { weekLifts } = state.reducer
   return {
     todayData,
     userData,
     userLandingFlag,
-    allData
+    allData,
+    weekLifts
   };
 };
 

@@ -143,6 +143,11 @@ hr {
     height: 16px;
 }
 
+.Workout_icon {
+    width: 24px;
+    height: 16px;
+}
+
 .Details_Chart_Container {
     height: calc(100vh - 475px);
     width: 75%;
