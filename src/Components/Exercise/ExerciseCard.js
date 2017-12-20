@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Dropdown, Button, Modal} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {updateSets} from '../../ducks/exerciseReducer';
+import "./ExerciseCard.css";
 
 class ExerciseCard extends Component {
   constructor() {
@@ -63,24 +64,27 @@ class ExerciseCard extends Component {
     const {exercise, index} = this.props;
     return (
       <div>
-        <div>Workout: {exercise.workout}</div>
+        <div className="Workout_Name">Workout: {exercise.workout}</div>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            margin: '6px 6px',
-          }}
-        >
-          <div>Sets: {exercise.sets}</div>
+        <div>
 
-          <div>Weight: {exercise.weight}</div>
+        <div className="Exercise_Cards">
+        <div className="Workout_Numbers">Sets: {exercise.sets}</div>
 
-          <div>REPS: {exercise.reps}</div>
+        <div className="Workout_Numbers">Weight: {exercise.weight}</div>
 
-          <div>RPE: {exercise.rpe}</div>
+        <div className="Workout_Numbers">REPS: {exercise.reps}</div>
 
-          <Button onClick={this.openModal}>edit</Button>
+        <div className="Workout_Numbers">RPE: {exercise.rpe}</div>
+        </div>
+         
+
+          <Button 
+          onClick={this.openModal}
+          size="mini"
+          className="Edit_Button"
+          >Edit</Button>
+          <hr className="Exercise_Cards_HR"/>
 
           <Modal open={this.state.open} onClose={this.closeModal}>
             <Modal.Header>
@@ -88,7 +92,7 @@ class ExerciseCard extends Component {
             </Modal.Header>
 
             <Dropdown
-              style={{marginTop: '21px'}}
+              style={{marginTop: '42px', marginBottom: "42px"}}
               search
               onChange={this.handleDropDown}
               placeholder="Select Workout"
@@ -96,38 +100,47 @@ class ExerciseCard extends Component {
               defaultValue={this.props.sets[index].workout}
             />
 
-            <div className="ExerciseLog_Inputs">
+            <div className="Edit_Log_Inputs">
+            <div className="Edit_Each">
               <div>SETS</div>
               <input
                 ref="sets"
                 placeholder={this.props.sets[index].sets}
                 style={{width: '36px'}}
                 onChange={this.handleChange}
+                className="Edit_Input"
               />
-
+            </div>
+            <div className="Edit_Each">
               <div>WEIGHT</div>
               <input
                 ref="weight"
                 placeholder={this.props.sets[index].weight}
                 style={{width: '36px'}}
                 onChange={this.handleChange}
+                className="Edit_Input"
               />
-
+              </div>
+            <div className="Edit_Each">
               <div>REPS</div>
               <input
                 ref="reps"
                 placeholder={this.props.sets[index].reps}
                 style={{width: '36px'}}
                 onChange={this.handleChange}
+                className="Edit_Input"
               />
-
+              </div>
+            <div className="Edit_Each">
               <div>RPE</div>
               <input
                 ref="rpe"
                 placeholder={this.props.sets[index].rpe}
                 style={{width: '36px'}}
                 onChange={this.handleChange}
+                className="Edit_Input"
               />
+              </div>
             </div>
 
             <Modal.Actions>

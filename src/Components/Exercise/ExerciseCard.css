@@ -1,0 +1,48 @@
+.Exercise_Cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Exercise_Cards_HR {
+    width: 100%;
+}
+
+.Workout_Name {
+    color: #999999;
+    margin-bottom: 24px;
+    margin-top: 24px;
+}
+
+.Workout_Numbers {
+    color: #999999;
+    margin-bottom: 30px;
+}
+
+.Edit_Button {
+    margin-bottom: 15px !important;
+}
+
+body > div.ui.page.modals.dimmer.transition.visible.active > div {
+    font-family: lato;
+    text-align: center;
+}
+
+.Edit_Input {
+    color: #999999;
+}
+
+input, select, textarea{
+    color: #999999;
+    text-align: center;
+}
+
+.Edit_Log_Inputs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 42px;
+}
+
+.Modal_Buttons {
+    display: flex;
+    justify-content: space-around;
+}
