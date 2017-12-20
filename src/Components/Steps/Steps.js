@@ -166,11 +166,11 @@ class Steps extends Component {
               </div>
             </div>
           </div>
-          <div>
-            <div>{`Weekly Total: ${weeklyTotal.toLocaleString()}`}</div>
-            <div>{`Weekly Average: ${weeklyAvg}`}</div>
-          </div>
         </div>
+        <div>
+            <div>{`Weekly Total: ${weeklyTotal.toLocaleString()} steps`}</div>
+            <div>{`Weekly Average: ${weeklyAvg} steps`}</div>
+          </div>
       </div>
     );
   }
