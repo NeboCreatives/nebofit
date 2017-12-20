@@ -23,16 +23,20 @@ function getSleep(req, res, todayDate, rest){
                             fitbitSleepData.data.sleep[0].efficiency, 
                             todayDate
                         ]).then(returning => rest === 'get' ? res.status(200).send(returning) : null)
+                        .catch(err => res.status(400).send(err))
                     } else {
                         db.update_today_sleep([
                             fitbitSleepData.data.summary.totalMinutesAsleep, 
                             fitbitSleepData.data.sleep[0].efficiency, 
                             req.params.id, 
                             todayDate
-                        ]).then(returning =>  rest === 'get' ? res.status(200).send(returning) : null)   
+                        ]).then(returning =>  rest === 'get' ? res.status(200).send(returning) : null)
+                        .catch(err => res.status(400).send(err))   
                     }
                 })
+                .catch(err => res.status(400).send(err))
         })
+        .catch(err => res.status(400).send(err))
 }
 
 function getWeight(req, res, todayDate, rest){
@@ -58,6 +62,7 @@ function getWeight(req, res, todayDate, rest){
                     }
                 })
         })
+        .catch(err => res.status(400).send(err))
 }
 
 function getActivity(req, res, todayDate, rest) {
@@ -85,6 +90,7 @@ function getActivity(req, res, todayDate, rest) {
                     }
                 })
         })
+        .catch(err => res.status(400).send(err))
 }
 
 function getNutrition(req, res, todayDate, rest) {
@@ -117,6 +123,7 @@ function getNutrition(req, res, todayDate, rest) {
                     }
                 })
         })
+        .catch(err => res.status(400).send(err))
 }
 
 module.exports = {
@@ -126,10 +133,6 @@ module.exports = {
         } else {
             return res.status(200).send(false)            
         }
-    },
-
-    firstLoginDataRequest: (req, res) => {
-
     },
 
     getTodaySleep: (req, res) => {

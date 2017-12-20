@@ -3,6 +3,7 @@
 module.exports = {
     logLift: (req, res) => {
         const db = req.app.get('db');
+        let lbsPerRPE = (req.body.weight * req.body.reps * req.body.sets) / req.body.rpe;
         db.log_lift([
                     req.params.id, 
                     req.body.date, 
@@ -10,7 +11,8 @@ module.exports = {
                     req.body.reps, 
                     req.body.sets, 
                     req.body.weight, 
-                    req.body.rpe
+                    req.body.rpe,
+                    lbsPerRPE
         ]).then(returning => res.status(200).send(returning))
     },
 
@@ -37,7 +39,6 @@ module.exports = {
 
     getAllLifts: (req, res) => {
         const db = req.app.get('db');
-        console.log(req.params.id)
         db.get_all_lifts([req.params.id])
             .then(allLifts => res.status(200).send(allLifts))        
     },
