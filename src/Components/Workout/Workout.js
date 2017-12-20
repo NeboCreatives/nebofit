@@ -16,7 +16,8 @@ class Workout extends Component {
 
     this.state = {
       pulse: null,
-      percent: 0
+      percent: 0,
+      weeklyAvg: 0
     }
     this.percentAnimation = this.percentAnimation.bind(this)
     this.differenceTern = this.differenceTern.bind(this);    
@@ -25,7 +26,17 @@ class Workout extends Component {
   }
 
   componentDidMount() {
+    let count = 0;
+    let averageRPE = 0;
+    for(let i=0; i<this.props.weekLifts.length; i++){
+      if(this.props.weekLifts[i] > 0){
+        count++;
+        averageRPE += this.props.weekLifts[i]
+      }
+    }
+    averageRPE /= count;
     this.setState({
+      weeklyAvg: averageRPE,
       pulse: setInterval(this.percentAnimation, 12)
     })
   }
@@ -174,6 +185,9 @@ class Workout extends Component {
               </div>
             </div>          
           </div>
+        </div>
+        <div>
+            <div className="Weekly_Avg">{`Weekly Average: ${this.state.weeklyAvg} lbs per RPE`}</div>
         </div>
       </div>
     );
