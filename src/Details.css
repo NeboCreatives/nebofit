@@ -163,7 +163,7 @@ hr {
     }
 
     .Details_Main_Container {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 180px);
         width: 100%;
         display: flex;
         justify-content: center;
@@ -227,5 +227,9 @@ hr {
     .Details_ChartJS {
         height: 80%;
         width: 80%;
+    }
+
+    .Weekly_Avg {
+        padding-bottom: 50px;
     }
 }
