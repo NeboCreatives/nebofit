@@ -1,2 +1,0 @@
-const UserLanding = require('./UserLanding');
-

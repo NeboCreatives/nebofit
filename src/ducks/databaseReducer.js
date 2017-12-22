@@ -87,7 +87,6 @@ export const getAllData = (userID) => {
 };
 
 export const updateGoals = (goals) => {
-  console.log('hit it')
   return {
     type: UPDATE_GOALS,
     payload: goals,

@@ -22,7 +22,6 @@ module.exports = {
 
         for(let i=0; i<liftArr.length; i++){
             let lbsPerRPE = (liftArr[i].weight * liftArr[i].reps * liftArr[i].sets) / liftArr[i].rpe;
-            console.log(lbsPerRPE)
             db.log_lift([
                 req.params.id, 
                 liftArr[i].date, 
