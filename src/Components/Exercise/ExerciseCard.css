@@ -41,8 +41,3 @@ input, select, textarea{
     justify-content: space-around;
     margin-bottom: 42px;
 }
-
-.Modal_Buttons {
-    display: flex;
-    justify-content: space-around;
-}
