@@ -32,7 +32,6 @@ const FitbitApiClient = require("fitbit-node");
 const client = new FitbitApiClient(CLIENT_ID, CLIENT_SECRET);
 
 // Use the session middleware
-
 massive(process.env.CONNECTION_STRING)
 .then( (db) => {
     console.log('Connected to Heroku')
@@ -60,8 +59,10 @@ app.get("/callback", function (req, res) {
         axios.get('https://api.fitbit.com/1/user/-/profile.json', {headers: {Authorization: `Bearer ${result.access_token}`}})
             .then( profileData => {
                 const db = app.get('db');
+                // Check if there is a user with that fitbit id in the user table
                 db.find_user([profileData.data.user.encodedId])
                     .then(user => {
+                        // If no user, create user and redirect
                         if(!user[0]){
                             console.log('no user found')
                             db.create_user([
@@ -88,6 +89,7 @@ app.get("/callback", function (req, res) {
                             })
                             .catch(err => console.log(err))
                         } else {
+                            // If there is a user, update the access token and redirect
                             db.update_access_token([result.access_token, user[0].auth_id])
                                 .then(returnedData => {
                                     req.session.userData = returnedData;

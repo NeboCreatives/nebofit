@@ -1,6 +1,7 @@
 
 
 module.exports = {
+    //Logs a single lift
     logLift: (req, res) => {
         const db = req.app.get('db');
         let lbsPerRPE = (req.body.weight * req.body.reps * req.body.sets) / req.body.rpe;
@@ -16,6 +17,7 @@ module.exports = {
         ]).then(returning => res.status(200).send(returning))
     },
 
+    // Logs lifts from an array
     logLifts: (req, res) => {
         const db = req.app.get('db');
         let liftArr = req.body.sets;
@@ -36,12 +38,14 @@ module.exports = {
        res.status(200).send(liftArr)
     },
 
+    // Returns all lifts from that user
     getAllLifts: (req, res) => {
         const db = req.app.get('db');
         db.get_all_lifts([req.params.id])
             .then(allLifts => res.status(200).send(allLifts))        
     },
 
+    // Updates a lift already in database
     updateLift: (req, res) => {
         const db = req.app.get('db');
         db.update_lift([

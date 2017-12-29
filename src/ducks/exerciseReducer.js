@@ -21,6 +21,7 @@ const ADD_TO_SETS = 'ADD_TO_SETS';
 const GET_ALL_LIFTS = 'GET_ALL_LIFTS';
 const UPDATE_SETS = 'UPDATE_SETS';
 
+// Sorts the exercises array alphabetically 
 function sortArray(newExercises){
   newExercises.sort((a, b) => {
     if(a.text < b.text) return -1;
@@ -30,6 +31,7 @@ function sortArray(newExercises){
   return newExercises;
 }
 
+// Returns the lift data for the last week
 function mapLifts(allLifts){
   let mappedWeekLifts = [];
   let mappedDayLifts = [];
@@ -110,6 +112,7 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {sets: [...state.sets, action.payload]});
 
     case GET_ALL_LIFTS + '_FULFILLED':
+      // Updates allLifts, exercises, and weekLifts in redux store
       let shortArr = ['BENCH PRESS', 'SQUAT', 'DEADLIFT'];
       let newExercises = state.exercises;
       for(let i=0; i<action.payload.length; i++){

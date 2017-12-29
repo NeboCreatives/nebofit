@@ -3,6 +3,7 @@ const moment = require('moment');
 
 let userData = {};
 
+// Function to find the activity total and return distance
 function getDistance(distances){
     for(let j=0; j<distances.length; j++){
         if(distances[j].activity === 'total')
@@ -10,6 +11,7 @@ function getDistance(distances){
     }
 }
 
+// Function to get sleep data for date sent in. Only res.send when getting a single day
 function getSleep(req, res, todayDate, rest){
     const db = req.app.get('db');
     axios.get(`https://api.fitbit.com/1.2/user/-/sleep/date/${todayDate}.json`, {headers: {Authorization: `Bearer ${req.session.access_token}`}})
@@ -39,6 +41,7 @@ function getSleep(req, res, todayDate, rest){
         .catch(err => res.status(400).send(err))
 }
 
+// Function to get weight data for date sent in. Only res.send when getting a single day
 function getWeight(req, res, todayDate, rest){
     const db = req.app.get('db');
     let oneMonth = moment(todayDate).subtract(1, 'month').format("YYYY-MM-DD")
@@ -65,6 +68,7 @@ function getWeight(req, res, todayDate, rest){
         .catch(err => res.status(400).send(err))
 }
 
+// Function to get activity data for date sent in. Only res.send when getting a single day
 function getActivity(req, res, todayDate, rest) {
     const db = req.app.get('db');
     axios.get(`https://api.fitbit.com/1/user/-/activities/date/${todayDate}.json`, {headers: {Authorization: `Bearer ${req.session.access_token}`}})
@@ -93,6 +97,7 @@ function getActivity(req, res, todayDate, rest) {
         .catch(err => res.status(400).send(err))
 }
 
+// Function to get nutrition data for date sent in. Only res.send when getting a single day
 function getNutrition(req, res, todayDate, rest) {
     const db = req.app.get('db');
     axios.get(`https://api.fitbit.com/1/user/-/foods/log/date/${todayDate}.json`, {headers: {Authorization: `Bearer ${req.session.access_token}`}})
@@ -152,6 +157,7 @@ module.exports = {
         getNutrition(req, res, req.params.date, req.params.rest);
     },
 
+    // Finds the date of the last login and loops through get functions until current day reached
     getSinceLastLogin: (req, res) => {
         let todayDate = moment().format('YYYY-MM-DD');
         let lastLoginDate = req.params.date;
@@ -168,12 +174,14 @@ module.exports = {
         res.status(200).send('success');
     },
 
+    // Updates the last login date to current day
     updateLastLogin: (req, res) => {
         const db = req.app.get('db');
         db.update_last_login([req.params.id, req.params.date])
             .then(returning => res.status(200).send(returning))
     },
 
+    // res.send all data for that user
     getAllData: (req, res) => {
         const db = req.app.get('db');
         db.get_all_activity([req.params.id])
@@ -192,6 +200,7 @@ module.exports = {
             })
     },
 
+    //Updates the goals for that user
     updateGoals: (req, res) => {
         const db = req.app.get('db');
         db.update_goals([
