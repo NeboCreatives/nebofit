@@ -1,4 +1,5 @@
 NeboFit
+
 A full-stack website for fitness enthusiasts. Gathers data from the Fitbit API and user input to track and display using custom data visualizations. 
 
 Video Walkthrough:
