@@ -1,4 +1,4 @@
-NeboFit - <a href="nebofitness.com">nebofitness.com</a>
+NeboFit - <a href="http://nebofitness.com">nebofitness.com</a>
 
 A full-stack website for fitness enthusiasts. Gathers data from the Fitbit API and user input to track and display using custom data visualizations. 
 
